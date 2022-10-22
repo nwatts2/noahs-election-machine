@@ -362,7 +362,7 @@ function HouseTracker ({page, resultsRecords, resultsYear, setResultsRecords, ra
     return (
         <>
             {page === 'CALLSIM' &&
-                <div className='mapButtons'>
+                <div className='houseCallButtons'>
                     <button onClick={() => {autoCallRaces('ALL')}}>CALL ALL RACES</button>
                     <button onClick={() => {autoCallRaces('SOLID')}}>CALL SOLID</button>
                     <button onClick={() => {autoCallRaces('LIKELY')}}>CALL LIKELY</button>

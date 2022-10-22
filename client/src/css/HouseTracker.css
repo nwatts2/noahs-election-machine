@@ -33,6 +33,39 @@
     width:100%;
 }
 
+.houseCallButtons {
+    display:flex;
+    flex-flow:row nowrap;
+    align-items:center;
+    justify-content:center;
+    height:auto;
+    width:13%;
+    margin:10px 0px 20px 0px;
+    padding:5px;
+}
+
+.houseCallButtons button {
+    background-color:transparent;
+    border:3px solid white;
+    border-radius:30px;
+    color:white;
+    padding:10px;
+    margin:5px;
+    height:auto;
+    min-width:fit-content;
+    width:90%;
+    font-family:'Trebuchet MS';
+    font-size:1.2rem;
+    font-weight:bold;
+    opacity: 1;
+    transition: all .2s;
+}
+
+.houseCallButtons button:hover {
+    opacity:.7;
+    transition: all .2s;
+}
+
 .graphSection {
     width:30%;
     height:100%;
