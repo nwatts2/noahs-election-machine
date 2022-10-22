@@ -1,0 +1,105 @@
+.row {
+    display:flex;
+    flex-flow:row nowrap;
+}
+
+.houseTracker {
+    width:70%;
+    border:3px solid white;
+    border-radius:5px;
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding:10px;
+}
+
+.houseTracker h2 {
+    background:none;
+    text-decoration:underline;
+    text-align:center;
+    margin:0;
+}
+
+.houseTracker h3 {
+    font-family:'Trebuchet MS';
+    text-decoration:none;
+    font-size:1.2rem;
+
+}
+
+.houseTracker span {
+    margin:10px 0px;
+    text-align:center;
+    width:100%;
+}
+
+.graphSection {
+    width:30%;
+    height:100%;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.graphSection h3 {
+    margin:20px 0px;
+}
+
+.graph {
+    width:100%;
+}
+
+.infoSection {
+    width:69%;
+    height:100%;
+    display:flex;
+    flex-flow: column nowrap;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.houseButtonSection {
+    display:flex;
+    flex-flow:row wrap;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.houseButton {
+    width:20%;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:center;
+}
+
+.houseButton label {
+    color:white;
+    background-color:black;
+    border:3px solid white;
+    border-radius:5px;
+    font-size:1rem;
+    padding:1px;
+    margin:2px;
+    opacity: 1;
+    transition: opacity .2s;
+    text-align:center;
+    width:85%;
+}
+
+.houseButton label:hover {
+    opacity: .7;
+    transition: opacity .2s;
+}
+
+.houseButton input[type='radio'] {
+    display:none;
+}
+
+/*.houseButton .candidateDemocratic:checked+label {
+    background-color:rgba(0, 71, 255, 1);
+}
+
+.houseButton .candidateRepublican:checked+label {
+    background-color:rgb(253, 3, 83);
+}*/

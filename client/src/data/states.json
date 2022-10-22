@@ -1,0 +1,252 @@
+[
+ {
+   "stateAbbr": "AL",
+   "state": "Alabama",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "AK",
+   "state": "Alaska",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "AZ",
+   "state": "Arizona",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "AR",
+   "state": "Arkansas",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "CA",
+   "state": "California",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "CO",
+   "state": "Colorado",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "CT",
+   "state": "Connecticut",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "DE",
+   "state": "Delaware",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "FL",
+   "state": "Florida",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "GA",
+   "state": "Georgia",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "HI",
+   "state": "Hawaii",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "ID",
+   "state": "Idaho",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "IL",
+   "state": "Illinois",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "IN",
+   "state": "Indiana",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "IA",
+   "state": "Iowa",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "KS",
+   "state": "Kansas",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "KY",
+   "state": "Kentucky",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "LA",
+   "state": "Louisiana",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "ME",
+   "state": "Maine",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "MD",
+   "state": "Maryland",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "MA",
+   "state": "Massachusetts",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "MI",
+   "state": "Michigan",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "MN",
+   "state": "Minnesota",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "MS",
+   "state": "Mississippi",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "MO",
+   "state": "Missouri",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "MT",
+   "state": "Montana",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "NE",
+   "state": "Nebraska",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "NV",
+   "state": "Nevada",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "NH",
+   "state": "New Hampshire",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "NJ",
+   "state": "New Jersey",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "NM",
+   "state": "New Mexico",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "NY",
+   "state": "New York",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "NC",
+   "state": "North Carolina",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "ND",
+   "state": "North Dakota",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "OH",
+   "state": "Ohio",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "OK",
+   "state": "Oklahoma",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "OR",
+   "state": "Oregon",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "PA",
+   "state": "Pennsylvania",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "RI",
+   "state": "Rhode Island",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "SC",
+   "state": "South Carolina",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "SD",
+   "state": "South Dakota",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "TN",
+   "state": "Tennessee",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "TX",
+   "state": "Texas",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "UT",
+   "state": "Utah",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "VT",
+   "state": "Vermont",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "VA",
+   "state": "Virginia",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "WA",
+   "state": "Washington",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "WV",
+   "state": "West Virginia",
+   "hasElection": false
+ },
+ {
+   "stateAbbr": "WI",
+   "state": "Wisconsin",
+   "hasElection": true
+ },
+ {
+   "stateAbbr": "WY",
+   "state": "Wyoming",
+   "hasElection": false
+ }
+]

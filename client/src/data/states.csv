@@ -1,0 +1,51 @@
+stateAbbr,state,hasElection
+AL,Alabama,TRUE
+AK,Alaska,TRUE
+AZ,Arizona,TRUE
+AR,Arkansas,TRUE
+CA,California,TRUE
+CO,Colorado,TRUE
+CT,Connecticut,TRUE
+DE,Delaware,FALSE
+FL,Florida,TRUE
+GA,Georgia,TRUE
+HI,Hawaii,TRUE
+ID,Idaho,TRUE
+IL,Illinois,TRUE
+IN,Indiana,TRUE
+IA,Iowa,TRUE
+KS,Kansas,TRUE
+KY,Kentucky,TRUE
+LA,Louisiana,TRUE
+ME,Maine,FALSE
+MD,Maryland,TRUE
+MA,Massachusetts,FALSE
+MI,Michigan,FALSE
+MN,Minnesota,FALSE
+MS,Mississippi,FALSE
+MO,Missouri,TRUE
+MT,Montana,FALSE
+NE,Nebraska,FALSE
+NV,Nevada,TRUE
+NH,New Hampshire,TRUE
+NJ,New Jersey,FALSE
+NM,New Mexico,FALSE
+NY,New York,TRUE
+NC,North Carolina,TRUE
+ND,North Dakota,TRUE
+OH,Ohio,TRUE
+OK,Oklahoma,TRUE
+OR,Oregon,TRUE
+PA,Pennsylvania,TRUE
+RI,Rhode Island,FALSE
+SC,South Carolina,TRUE
+SD,South Dakota,TRUE
+TN,Tennessee,FALSE
+TX,Texas,FALSE
+UT,Utah,TRUE
+VT,Vermont,TRUE
+VA,Virginia,FALSE
+WA,Washington,TRUE
+WV,West Virginia,FALSE
+WI,Wisconsin,TRUE
+WY,Wyoming,FALSE

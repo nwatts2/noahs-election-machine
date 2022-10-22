@@ -1,0 +1,68 @@
+.contactPage {
+    width:60%
+}
+
+.contactPage form {
+    display:flex;
+    flex-flow:column nowrap;
+    width:100%;
+    box-shadow:0px 0px 10px grey;
+    border-radius:10px;
+    padding:50px 20px;
+    margin:20px;
+    border-bottom: 5px solid white;
+    background:linear-gradient(to bottom right, rgba(253, 3, 83, .05), rgba(0, 71, 255, .05));
+}
+
+.contactPage p {
+    width:85%;
+    box-shadow:none;
+    border-top:3px solid white;
+    border-bottom:3px solid white;
+    background-image:linear-gradient(to right, transparent 2%,  rgba(36, 36, 37, .45) 15% 85%, transparent 98%);
+}
+
+.contactPage label {
+    padding:10px;
+    font-family:"Courier New";
+    font-weight:bold;
+    font-size:1.5rem;
+}
+
+.contactPage input, .contactPage textarea {
+    background-color: rgba(36, 36, 37, .95);
+    border:none;
+    border-radius:20px;
+    color:white;
+    padding:10px;
+    margin:0px 0px 20px 0px;
+    font-size:1.2rem;
+}
+
+.contactPage .buttonContainer {
+    border-radius:20px;
+    background:linear-gradient(to right, rgb(253, 3, 83), rgba(0, 71, 255, 1));
+    width:50%;
+    min-width:fit-content;
+    height:auto;
+    padding:5px;
+    margin:10px;
+    align-self:center;
+    opacity:1;
+    transition:all .2s;
+}
+
+.contactPage .buttonContainer:hover {
+    opacity:.7;
+    transition:all .2s;
+}
+
+.contactPage .buttonContainer button {
+    background-color:rgba(36, 36, 37, .95);
+    font-family:'Courier New';
+    font-weight:bold;
+    font-size:1.5rem;
+    border:none;
+    border-radius:20px;
+    width:100%;
+}
