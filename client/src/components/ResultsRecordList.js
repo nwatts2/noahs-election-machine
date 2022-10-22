@@ -418,7 +418,7 @@ export default function ResultsRecordList(props) {
             <div>
                 <span className={styles.spanText}>Showing Results for</span>
                 <select ref={stateSelect} value={currentState} onChange={(e) => {updateState(e)}}>
-                    {props.page === 'LIVE' || props.page === 'CALLSIM' &&
+                    {(props.page === 'LIVE' || props.page === 'CALLSIM') &&
                         <option>Top Races</option>
                     }
                     {neededStates.map((state) => {

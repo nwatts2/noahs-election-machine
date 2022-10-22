@@ -1,4 +1,4 @@
-const Popup = ({ resultsYear, page, raceRecords, resultsRecords, mode, state, mouseposition}) => {
+const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode, state, mouseposition}) => {
     let title = '-', raceInfo = '-', favoriteStatement;
     const tableTitle = `${resultsYear} ${mode} ELECTION RESULTS`;
     let thisRace = {}, separatedState = '', district = '';
@@ -13,7 +13,7 @@ const Popup = ({ resultsYear, page, raceRecords, resultsRecords, mode, state, mo
             if (x.year === resultsYear && x.type === mode && x.state === separatedState && Number(x.district) === Number(district.slice(0, district.length - 2))) {thisRace = x; break;}
 
         } else {
-            if (x.year === resultsYear && x.type === mode && x.state === state) {thisRace = x; break;}
+            if (x.year === resultsYear && x.type === mode && x.state === state && x.isSpecial === isSpecial) {thisRace = x; break;}
         }
     }
 
@@ -21,7 +21,7 @@ const Popup = ({ resultsYear, page, raceRecords, resultsRecords, mode, state, mo
 
     if (mode === 'HOUSE') {
         for (let x of resultsRecords) {
-            if (x.year === resultsYear && x.state === separatedState && x.district === district && x.type === mode) {
+            if (x.year === resultsYear && x.state === separatedState && x.district === district && x.type === mode && x.isSpecial === isSpecial) {
                 if (thisRace.margin < 0 && x.caucus === 'Republican' && typeof favorite.state === 'undefined') {
                     favorite = x;
                 } else if (thisRace.margin >= 0 && x.caucus === 'Democratic' && typeof favorite.state === 'undefined') {
@@ -34,7 +34,7 @@ const Popup = ({ resultsYear, page, raceRecords, resultsRecords, mode, state, mo
 
     } else {
         for (let x of resultsRecords) {
-            if (x.year === resultsYear && x.state === state && x.type === mode) {
+            if (x.year === resultsYear && x.state === state && x.type === mode && x.isSpecial === isSpecial) {
                 if (thisRace.margin < 0 && x.caucus === 'Republican' && typeof favorite.state === 'undefined') {
                     favorite = x;
                 } else if (thisRace.margin >= 0 && x.caucus === 'Democratic' && typeof favorite.state === 'undefined') {
@@ -100,7 +100,7 @@ const Popup = ({ resultsYear, page, raceRecords, resultsRecords, mode, state, mo
 
         if (mode === 'GOVERNOR' || mode === 'SENATE') {
             resultsRecords.map((record) => {
-                if (record.type === mode && record.state === state && record.year === resultsYear) {
+                if (record.type === mode && record.state === state && record.year === resultsYear && record.isSpecial === isSpecial) {
                     names.push(record.name);
                     parties.push(record.party);
                     votes.push(record.vote !== '' ? record.vote : '-');
