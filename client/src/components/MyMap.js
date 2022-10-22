@@ -419,7 +419,6 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, setSenateCount,
                 updateState(currentState);
             } else if (currentState.ratingRank === 0 && currentState.called === '') {
                 if (currentState.margin > 0) {
-                    window.alert(currentState.margin);
                     target.style.fill = calledDemColor;
                     currentState.called = 'Democratic';
                 } else {
