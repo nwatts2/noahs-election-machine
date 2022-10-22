@@ -24,7 +24,7 @@ const CallSimulator = () => {
     useEffect(() => {
         async function getRecords() {
             if (isLoading === false) {setIsLoading(true)}
-            const candidatesResponse = await fetch(`http://localhost:3001/candidatesRecord/`);
+            const candidatesResponse = await fetch(`/candidatesRecord/`);
 
             if (!candidatesResponse.ok) {
                 const message = `An error occurred: ${candidatesResponse.statusText}`;
@@ -48,7 +48,7 @@ const CallSimulator = () => {
 
         async function getResults() {
             if (isLoading === false) {setIsLoading(true)}
-            const resultsResponse = await fetch(`http://localhost:3001/resultsRecord/`);
+            const resultsResponse = await fetch(`/resultsRecord/`);
 
             if (!resultsResponse.ok) {
                 const message = `An error occurred: ${resultsResponse.statusText}`;
@@ -76,7 +76,7 @@ const CallSimulator = () => {
 
         async function getRaces() {
             if (isLoading === false) {setIsLoading(true)}
-            const racesResponse = await fetch(`http://localhost:3001/racesRecord/`);
+            const racesResponse = await fetch(`/racesRecord/`);
 
             if (!racesResponse.ok) {
                 const message = `An error occurred: ${racesResponse.statusText}`;
