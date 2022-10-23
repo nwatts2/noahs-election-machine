@@ -130,7 +130,7 @@ function HouseButton ({resultsYear, updateHouseWidget, setUpdateHouseWidget, pag
     );
 }
 
-function HouseTracker ({page, resultsRecords, resultsYear, setResultsRecords, raceRecords, houseCount, setHouseCount, updateHouseWidget, setUpdateHouseWidget}) {
+function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecords, raceRecords, houseCount, setHouseCount, updateHouseWidget, setUpdateHouseWidget}) {
     const [graphData, setGraphData] = useState([
         {value: houseCount[0], party: 'DEMS'}, 
         {value: (435 - houseCount[0] - houseCount[1]), party: ''},

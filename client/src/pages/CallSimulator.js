@@ -182,7 +182,7 @@ const CallSimulator = () => {
                 <button onClick={() => {setMode('GOVERNOR')}}>GOVERNORS</button>
             </div>
             {mode === 'HOUSE' &&
-                <HouseTracker resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} page={page} resultsRecords={simulatedResults} setResultsRecords={setSimulatedResults} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
+                <HouseTracker mode={mode} resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} page={page} resultsRecords={simulatedResults} setResultsRecords={setSimulatedResults} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
             }
             {mode !== 'HOUSE' &&
                 <MyMap page={page} isLoading={isLoading} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={simulatedResults} setSenateCount={setSenateCount} setGovCount={setGovCount} mode={mode} setMode={setMode}/>

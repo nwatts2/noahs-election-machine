@@ -30,6 +30,7 @@ const PastResults = () => {
 
     useEffect(() => {
         async function getRecords() {
+
             if (isLoading === false) {setIsLoading(true)}
             const candidatesResponse = await fetch(`/candidatesRecord/`);
 
@@ -75,7 +76,9 @@ const PastResults = () => {
                 }*/
 
                 if (x._id === 'seatHeldHistory') {
-                    setSeatHistory(x);
+                    if (!seatHistory['2020']) {
+                        setSeatHistory(x);
+                    }
                 } else {
                     resultsRecords.push(x);
                 } 
@@ -83,6 +86,7 @@ const PastResults = () => {
 
             setResultsRecords(resultsRecords);
 
+            updateCount();
         }
 
         async function convertRacesToResults () {
@@ -137,7 +141,8 @@ const PastResults = () => {
             }
 
             setRaceRecords(races);
-            updateCount();
+
+            return;
 
         }
 
@@ -192,13 +197,11 @@ const PastResults = () => {
 
         getRecords();
         getResults();
-
-        if (resultsYear === 2022) {getRaces()}
-        else {convertRacesToResults()}
+        convertRacesToResults();   
 
         return;
 
-    }, [mode, resultsYear]);
+    }, [mode, resultsYear, seatHistory]);
 
     function rankSort(array) {
         const length = array.length;
