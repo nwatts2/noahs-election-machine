@@ -40,6 +40,11 @@ path {pointer-events: auto;}
     text-decoration:underline;
 }
 
+.mapButtons h3 {
+    text-decoration:none;
+    text-align:center;
+}
+
 .mapButtons button {
     background-color:transparent;
     border:3px solid white;
@@ -60,4 +65,56 @@ path {pointer-events: auto;}
 .mapButtons button:hover {
     opacity:.7;
     transition: all .2s;
+}
+
+.map svg {
+    width:1000px;
+}
+
+@media screen and (max-width: 480px) {
+    .seatBreakdown {
+        width:100%;
+        display:flex;
+        flex-flow:row nowrap;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .map {
+        display:flex;
+        flex-flow:column nowrap;
+        width:100%;
+        height:auto;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .mapContainer {
+        width:100%;
+        overflow-x:auto;
+    }
+
+    .map svg {
+        width: 200%;
+        align-self:flex-start;
+    }
+    
+    .mapButtons {
+        flex-flow:row wrap;
+        align-items:center;
+        justify-content:center;
+        width:100%;
+        margin:10px 0px 10px 0px;
+        padding:5px;
+    }
+    
+    .left, .right {align-self:center}
+    
+    .mapButtons button {
+        padding:5px;
+        margin:5px;
+        min-width:fit-content;
+        width:13%;
+        font-size:0.8rem;
+    }
 }

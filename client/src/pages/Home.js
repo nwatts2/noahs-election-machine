@@ -178,10 +178,10 @@ const Home = () => {
                 {mode === 'SENATE' &&
                     <p>
                         &emsp; The U.S. senate elections are shaping up to be an interesting deviation from the typical
-                        midterm year. Since Democrats control both chambers of Congress along with the White House, Republicans would
-                        normally be expected to reclaim the senate. Oddly enough, so far, it looks like the Democrats are expected
-                        to retain control. This is largely due to the selection of weak GOP candidates across several key swing states, hurting
-                        the party's chances of taking back the chamber.<br /><br />&emsp;As it stands, the GOP's keys to the senate will be through Nevada and Georgia,
+                        midterm year. Since Democrats control the White House, Republicans would
+                        normally be expected to reclaim the senate. However, the Democrats have a shot at retaining control, despite the pendulum starting to swing back in favor of Republicans
+                        over the last couple weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across several key swing states.
+                        <br /><br />&emsp;As it stands, the GOP's keys to the senate will be through Nevada and Georgia,
                         assuming the Democrats are able to pick up a seat in Pennsylvania, which they are favored to do at time of writing.
                     </p>
                 } {mode === 'GOVERNOR' &&
@@ -197,7 +197,8 @@ const Home = () => {
                         &emsp; The 2022 U.S. House of Representatives elections are much more in line with what we would expect for a midterm year
                         when compared to the senate and governorships. Republicans are favored to take back the house this November, primarily due to 
                         the national environment, along with recent redistricting wins in key states.<br /><br />&emsp;Still, this is not set in stone, and
-                        there are plenty of tight races that Democrats have a shot at winning in states like New York, Arizona, and California.
+                        there are plenty of tight races that Democrats have a shot at winning in states like New York, Arizona, and California, although a Democratic house is seeming more unlikely
+                        as we get closer to election day.
                     </p>
                 }
             </div>
@@ -210,7 +211,7 @@ const Home = () => {
                 <HouseTracker page={page} resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} resultsRecords={resultsRecords} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
             }
             {mode !== 'HOUSE' &&
-                <MyMap page={page} isLoading={isLoading} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} setSenateCount={setSenateCount} setGovCount={setGovCount} mode={mode} setMode={setMode}/>
+                <MyMap page={page} isLoading={isLoading} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} setMode={setMode}/>
             }
             {mode !== 'HOUSE' &&
             <hr />

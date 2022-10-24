@@ -170,9 +170,11 @@ const CallSimulator = () => {
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">
-                        <h3>GOP - <span id="repSeats">{mode === 'SENATE' ? senateCount[1] : mode === 'HOUSE' ? houseCount[1] : govCount[1] }</span></h3>
+                        {//<h3>GOP - <span id="repSeats">{mode === 'SENATE' ? senateCount[1] : mode === 'HOUSE' ? houseCount[1] : govCount[1] }</span></h3>
+                        }
                         <h2>{mode} ELECTION TRACKER</h2>
-                        <h3>DEMS - <span id="demSeats">{mode === 'SENATE' ? senateCount[0] : mode === 'HOUSE' ? houseCount[0] : govCount[0]}</span></h3>
+                        {//<h3>DEMS - <span id="demSeats">{mode === 'SENATE' ? senateCount[0] : mode === 'HOUSE' ? houseCount[0] : govCount[0]}</span></h3>
+                        }
                     </div>
                 </div>
             </div>
@@ -185,7 +187,7 @@ const CallSimulator = () => {
                 <HouseTracker mode={mode} resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} page={page} resultsRecords={simulatedResults} setResultsRecords={setSimulatedResults} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
             }
             {mode !== 'HOUSE' &&
-                <MyMap page={page} isLoading={isLoading} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={simulatedResults} setSenateCount={setSenateCount} setGovCount={setGovCount} mode={mode} setMode={setMode}/>
+                <MyMap page={page} isLoading={isLoading} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={simulatedResults} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} setMode={setMode}/>
             }
             {mode !== 'HOUSE' &&
             <hr />

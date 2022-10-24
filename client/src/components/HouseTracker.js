@@ -363,13 +363,14 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
         <>
             {page === 'CALLSIM' &&
                 <div className='houseCallButtons'>
-                    <button onClick={() => {autoCallRaces('ALL')}}>CALL ALL RACES</button>
-                    <button onClick={() => {autoCallRaces('SOLID')}}>CALL SOLID</button>
-                    <button onClick={() => {autoCallRaces('LIKELY')}}>CALL LIKELY</button>
-                    <button onClick={() => {autoCallRaces('LEAN')}}>CALL LEAN</button>
-                    <button onClick={() => {autoCallRaces('TILT')}}>CALL TILT</button>
+                    <h2>CALL RACES</h2>
+                    <button onClick={() => {autoCallRaces('ALL')}}>ALL</button>
+                    <button onClick={() => {autoCallRaces('SOLID')}}>SOLID</button>
+                    <button onClick={() => {autoCallRaces('LIKELY')}}>LIKELY</button>
+                    <button onClick={() => {autoCallRaces('LEAN')}}>LEAN</button>
+                    <button onClick={() => {autoCallRaces('TILT')}}>TILT</button>
 
-                    <button onClick={resetRaces}>RESET RACES</button>
+                    <button onClick={resetRaces}>RESET</button>
                     <button onClick={(e) => {enablePops(e)}}>DISABLE POPUPS</button>
                 </div>
             }

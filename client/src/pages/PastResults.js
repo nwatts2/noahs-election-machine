@@ -235,9 +235,11 @@ const PastResults = () => {
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">
-                        <h3>GOP - <span id="repSeats">{mode === 'SENATE' ? senateCount[1] : mode === 'HOUSE' ? houseCount[1] : govCount[1] }</span></h3>
+                        {//<h3>GOP - <span id="repSeats">{mode === 'SENATE' ? senateCount[1] : mode === 'HOUSE' ? houseCount[1] : govCount[1] }</span></h3>
+                        }
                         <h2>{resultsYear} {mode} ELECTIONS</h2>
-                        <h3>DEMS - <span id="demSeats">{mode === 'SENATE' ? senateCount[0] : mode === 'HOUSE' ? houseCount[0] : govCount[0]}</span></h3>
+                        {//<h3>DEMS - <span id="demSeats">{mode === 'SENATE' ? senateCount[0] : mode === 'HOUSE' ? houseCount[0] : govCount[0]}</span></h3>
+                        }
                     </div>
                 </div>
             </div>
@@ -246,7 +248,7 @@ const PastResults = () => {
                 <button onClick={() => {setMode('HOUSE')}}>HOUSE</button>
                 <button onClick={() => {setMode('GOVERNOR')}}>GOVERNORS</button>
             </div>
-            <div>
+            <div className='yearSelector'>
                 <span>Showing results for the</span>
                 <select onChange={(e) => {setResultsYear(Number(e.currentTarget.value))}}>
                     { mode === 'SENATE' &&
@@ -277,7 +279,7 @@ const PastResults = () => {
             </div>
 
             {mode !== 'HOUSE' &&
-                <MyMap page={page} isLoading={isLoading} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} setSenateCount={setSenateCount} setGovCount={setGovCount} mode={mode} setMode={setMode}/>
+                <MyMap page={page} isLoading={isLoading} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} setMode={setMode}/>
             }
             {mode !== 'HOUSE' &&
             <hr />

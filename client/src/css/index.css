@@ -175,6 +175,7 @@ hr {
     color:white;
     padding:5px;
     margin:0px 40px;
+    width:fit-content;
     height:auto;
     font-family:'Trebuchet MS';
     font-size:1.5rem;
@@ -301,7 +302,14 @@ hr {
 
 .footer li {
     margin:0;
+    width:33%;
     height:100%;
+    flex:1;
+    text-align:center;
+}
+
+.footer Link, .footer a {
+    width:fit-content;
 }
 
 .footer svg {
@@ -311,4 +319,101 @@ hr {
     text-shadow:2px 2px 5px black;
     
     margin:0;
+}
+
+@media screen and (max-width: 480px) {
+    .scrollable {
+        margin-bottom:0px;
+    }
+
+    h1 {
+        font-size:2rem;
+    }
+    h2 {
+        font-size:1.5rem;
+    }
+    h3 {
+        font-size:1.2rem;
+    }
+    p {
+        width: 95%;
+        padding: 10px
+    }
+
+    .typeInfo p {
+        width:90%;
+    }
+
+    .senateTitleBG {
+        width:95%;
+        margin:10px 0px;
+    }
+
+    .senateTitle {
+        padding:5px;
+    }
+
+    .senateTitle h2 {
+        font-size:1.5rem;
+    }
+
+    .modeButtons {
+        justify-content:space-around;
+    }
+
+    .modeButtons button {
+        font-size: 1.2rem;
+        margin:0px 0px;
+    }
+
+    .yearSelector {
+        display:flex;
+        flex-flow:row wrap;
+        justify-content:center;
+        align-items:center;
+    }
+    
+    .popupElement {
+        min-width:150px;
+        max-width:200px;
+        padding:5px;
+    }
+
+    .popupElement span {
+        font-size:0.5rem;
+    }
+    
+    .popupElement h3 {
+        font-size:0.6em;
+    }
+    
+    .popupElement hr {
+        margin:5px 0px 10px 0px;
+    }
+    
+    .popupElement th {
+        font-size:0.6rem;
+        padding:2px;
+        margin:10px 5px;
+    }
+    
+    .popupElement td {
+        font-size:0.5rem;
+        padding:2px;
+        margin:10px 0px;
+    }
+
+    .footerBorder {
+        position:relative;
+        bottom:0;
+    }
+    
+    .footer {
+        padding:5px 2px;
+    }
+    
+    .footer ul {
+        padding:0px 5px;    
+    }
+
 }

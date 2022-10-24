@@ -44,6 +44,12 @@
     padding:5px;
 }
 
+.houseCallButtons h2 {
+    background:none;
+    text-decoration:underline;
+    width:100%;
+}
+
 .houseCallButtons button {
     background-color:transparent;
     border:3px solid white;
@@ -129,10 +135,58 @@
     display:none;
 }
 
-/*.houseButton .candidateDemocratic:checked+label {
-    background-color:rgba(0, 71, 255, 1);
+@media screen and (max-width: 480px) {
+    .houseTracker {
+        width:95%;
+        padding:5px;
+        flex-flow: row wrap;
+        justify-content:center;
+    }
+    
+    .houseTracker h2 {
+        font-size:1.3rem;
+    }
+    
+    .houseTracker h3 {
+        font-size:0.8rem;
+    }
+    
+    .houseCallButtons {
+        flex-flow:row wrap;
+        width:100%;
+        margin:10px 0px 10px 0px;
+        padding:5px;
+    }
+    
+    .houseCallButtons button {
+        padding:5px;
+        width:13%;
+        font-size:0.8rem;
+    }
+    
+    .graphSection {
+        width:95%;
+    }
+    
+    .graphSection h3 {
+        margin:10px 0px;
+        font-size:1.2rem
+    }
+    
+    .graph {
+        width:100%;
+        margin: 0px 0px 10px 0px;
+    }
+    
+    .infoSection {
+        width:95%;
+    }
+    
+    .houseButton {
+        width:50%;
+    }
+    
+    .houseButton label {
+        font-size:0.8rem;
+    }
 }
-
-.houseButton .candidateRepublican:checked+label {
-    background-color:rgb(253, 3, 83);
-}*/

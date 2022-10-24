@@ -1,21 +1,22 @@
 import logo from '../images/electionLogo.png';
 import { Link } from 'react-router-dom';
 
-function Footer () {
+function Footer ({isMobile}) {
     return (
         <div className='footerBorder'>
             <div className='footer'>
                     <ul>
-                        <li>
+                        <li style={{textAlign: 'left'}}>
                             <a href='https://www.buymeacoffee.com/noahwatts' target='_blank'>
-                                <span>{'\u2615'} Buy me a coffee!</span>
+                                <span>{'\u2615'} {isMobile ? '' : 'Buy me a coffee!'}</span>
                             </a>
                         </li>
                         <li>
                             <a href='https://twitter.com/ElectionNoah' target='_blank'>
                                 <svg 
                                     x="0px" y="0px"
-                                    width="35" height="35"
+                                    width={isMobile ? "25" : "35"}
+                                    height={isMobile ? "25" : "35"}
                                     viewBox="0 0 30 30"
                                 >    
                                     <path 
@@ -24,9 +25,9 @@ function Footer () {
                                 </svg>
                             </a>
                         </li>
-                        <li>
+                        <li style={{textAlign: 'right'}}>
                             <Link to='/contact'>
-                                <span>Contact the Developer</span>
+                                <span>{isMobile ? 'Contact' : 'Contact the Developer'}</span>
                                 {//<img src={logo} alt="Noah's Election Machine Logo" height='20px' />
                                 }
                             </Link>

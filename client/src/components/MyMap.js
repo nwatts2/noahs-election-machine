@@ -6,7 +6,7 @@ import Spinner from '../components/Spinner';
 import useMousePosition from '../components/useMousePosition';
 import '../css/Map.css';
 
-function MyMap ({resultsYear, page, raceRecords, resultsRecords, setSenateCount, setGovCount, mode, setMode, isLoading}) {
+function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, setSenateCount, govCount, setGovCount, mode, setMode, isLoading}) {
     const [states, setStates] = useState([]);
     const [specialStates, setSpecialStates] = useState([]);
     const [enablePopups, setEnablePopups] = useState(true);
@@ -655,16 +655,24 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, setSenateCount,
                     <button onClick={() => {autoCallRaces('TILT')}}>TILT</button>
                 </>
             }
+            {(page === 'PAST' || page === 'LIVE') &&
+                <>
+                    <h2>SEAT BREAKDOWN</h2>
+                    <div className='seatBreakdown'>
+                        <h3>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
+                        <h3>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
+                    </div>
+                </>
+            }
         </div>
         <br />
+        <div className='mapContainer'>
             <svg
                 enable_background="new 0 0 1000 589"
-                height="589px"
                 pretty_print="False"
                 style={{strokeLinejoin: 'round', stroke: strokeColor, fill: 'none', fontSize:letterFont, color:letterColor}}
                 version="1.1"
                 viewBox="65 0 1000 589"
-                width="1000px"
                 id="svg">
                 <defs
                     id="defs4">
@@ -1377,6 +1385,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, setSenateCount,
                 <text id='MDtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={865} y={15}>TILT</text>
 
             </svg>
+        </div>
             <div className='mapButtons right'>
             {page === 'CALLSIM' &&
                 <>
@@ -1385,8 +1394,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, setSenateCount,
                 </>
             }
             </div>
-        </div>
-        
+        </div>        
 
     );
 }

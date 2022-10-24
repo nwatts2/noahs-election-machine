@@ -80,13 +80,13 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
 
     function calculatePopupPosition() {
         if (mouseposition.y > (.5 * window.screen.height) && mouseposition.x <= .5 * window.screen.width) {
-            return {bottom: `${window.screen.height - mouseposition.y - 130}px`, left:`${mouseposition.x + 10}px`};
+            return {bottom: `${100 * (window.screen.height - mouseposition.y - 130) / window.screen.height}%`, left:`${mouseposition.x + 10}px`};
 
         } else if (mouseposition.y > (.5 * window.screen.height) && mouseposition.x > .5 * window.screen.width) {
-            return {bottom: `${window.screen.height - mouseposition.y - 130}px`, right:`${window.screen.width - mouseposition.x - 10}px`};
+            return {bottom: `${100 * (window.screen.height - mouseposition.y - 130) / window.screen.height}%`, right:`${100 * (window.screen.width - mouseposition.x + 5) / window.screen.width}%`};
 
         } else if (mouseposition.y <= (.5 * window.screen.height) && mouseposition.x > .5 * window.screen.width) {
-            return {top: `${mouseposition.y + 10}px`, right:`${window.screen.width - mouseposition.x - 10}px`};
+            return {top: `${mouseposition.y + 10}px`, right:`${100 * (window.screen.width - mouseposition.x + 5) / window.screen.width}%`};
 
         } else if (mouseposition.y <= (.5 * window.screen.height) && mouseposition.x <= .5 * window.screen.width) {
             return {top: `${mouseposition.y + 10}px`, left:`${mouseposition.x + 10}px`};
