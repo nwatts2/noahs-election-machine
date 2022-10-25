@@ -99,6 +99,10 @@
         padding:5px;
         margin:10px 0px 5px 0px;
     }
+
+    .contactPage .buttonContainer:hover {
+        opacity:1;
+    }
     
     .contactPage .buttonContainer button {
         font-size:1.2rem;

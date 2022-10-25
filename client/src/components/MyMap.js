@@ -42,7 +42,12 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                             race.isSpecial = false;
                         }
                     } else if (record.state === race.state && race.year === resultsYear && race.type === mode) {
-                        race.isSpecial = false;
+                        if (record.isSpecial === true) {
+                            race.isSpecial = true;
+        
+                        } else {
+                            race.isSpecial = false;
+                        }
                     }
                 }
             }

@@ -1,14 +1,8 @@
-.menu img {
+.menu svg {
     position:fixed;
+    fill:white;
     top:5px;
-    left:0px;
-    opacity: 1;
-    transition: all .2s;
-}
-
-.menu img:hover {
-    opacity: 0.5;
-    transition: all .2s;
+    left:8px;
 }
 
 .navBody {

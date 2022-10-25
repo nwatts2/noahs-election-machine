@@ -10,6 +10,7 @@
 
 .resultsRecords table {
     width:70%;
+    height:auto;
     min-width:700px;
     border-collapse:collapse;
     border-radius:10px;

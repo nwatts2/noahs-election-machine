@@ -163,6 +163,10 @@
         width:13%;
         font-size:0.8rem;
     }
+
+    .houseCallButtons button:hover {
+        opacity:1;
+    }
     
     .graphSection {
         width:95%;
@@ -188,5 +192,9 @@
     
     .houseButton label {
         font-size:0.8rem;
+    }
+
+    .houseButton label:hover {
+        opacity:1;
     }
 }

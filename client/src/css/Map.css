@@ -116,14 +116,16 @@ path {pointer-events: auto;}
         margin:10px 0px 10px 0px;
         padding:5px;
     }
-    
-    .mapButtons {justify-content:center}
-    
+        
     .mapButtons button {
         padding:5px;
         margin:5px;
         min-width:fit-content;
         width:13%;
         font-size:0.8rem;
+    }
+
+    .mapButtons button:hover {
+        opacity:1;
     }
 }

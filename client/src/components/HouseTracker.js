@@ -341,8 +341,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
 
     function getHouseCount() {
         let houseDem = 0, houseRep = 0;
-        if (page === 'CALLSIM' || page === 'LIVE') {houseDem = 1; houseRep = 5;}
-
+        //if (page === 'CALLSIM' || page === 'LIVE') {houseDem = 1; houseRep = 5;}
 
         for (let record of resultsRecords) {
             if (record.called !== '' && record.year === resultsYear) {
