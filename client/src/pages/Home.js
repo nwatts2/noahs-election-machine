@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import CollapseText from '../components/CollapseText';
 import SenateTracker from '../components/SenateTracker';
 import HouseTracker from '../components/HouseTracker';
 import Spinner from '../components/Spinner';
@@ -170,43 +171,43 @@ const Home = () => {
     return (
         <div className="mainPage">
             <h1>THE 2022 US MIDTERM ELECTIONS</h1>
-            <p>&emsp;Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and Governor
-                election for the 2022 midterms. Check back on November 8th to view results for every election all in one place!<br /><br />&emsp;You can
-                also check out our Call Simulator to see how each race impacts control of the Senate, House, and Governorships, or you can
-                visit our Past Results page to view previous election results for every state. 
-            </p>
+            <CollapseText 
+                text={`Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and Governor ` +
+                    "election for the 2022 midterms. Check back on November 8th to view results for every election all in one place!"}
+                subtext = { "You can " +
+                    "also check out our Call Simulator to see how each race impacts control of the Senate, House, and Governorships, or you can " +
+                    "visit our Past Results page to view previous election results for every state."} />
+
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">
                         <h2>{mode} ELECTION TRACKER</h2>
                     </div>
                 </div>
-                {mode === 'SENATE' &&
-                    <p>
-                        &emsp; The U.S. senate elections are shaping up to be an interesting deviation from the typical
-                        midterm year. Since Democrats control the White House, Republicans would
-                        normally be expected to reclaim the senate. However, the Democrats have a shot at retaining control, despite the pendulum starting to swing back in favor of Republicans
-                        over the last couple weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across several key swing states.
-                        <br /><br />&emsp;As it stands, the GOP's keys to the senate will be through Nevada and Georgia,
-                        assuming the Democrats are able to pick up a seat in Pennsylvania, which they are favored to do at time of writing.
-                    </p>
-                } {mode === 'GOVERNOR' &&
-                    <p>
-                        &emsp; The race for control of the most governorships looks to be following a similar path to the senate elections.
-                        Candidate quality is what seems to matter most here, moreso than the national environment.<br /><br />&emsp;Republicans are favored to hold the
-                        most governorships, as is normally the case, but if things go well for the Democrats, we could possibly see a 
-                        25-25 split between the two parties, though this would be quite unlikely. This will ultimately come down to the most competitive races in Wisconsin,
-                        Oregon, Arizona, and Nevada. 
-                    </p>
-                } {mode === 'HOUSE' &&
-                    <p>
-                        &emsp; The 2022 U.S. House of Representatives elections are much more in line with what we would expect for a midterm year
-                        when compared to the senate and governorships. Republicans are favored to take back the house this November, primarily due to 
-                        the national environment, along with recent redistricting wins in key states.<br /><br />&emsp;Still, this is not set in stone, and
-                        there are plenty of tight races that Democrats have a shot at winning in states like New York, Arizona, and California, although a Democratic house is seeming more unlikely
-                        as we get closer to election day.
-                    </p>
-                }
+                <CollapseText
+                    text={mode === 'SENATE' ? "The U.S. senate elections are shaping up to be an interesting deviation from the typical " +
+                        "midterm year. Since Democrats control the White House, Republicans would " +
+                        "normally be expected to reclaim the senate. However, the Democrats have a shot at retaining control, despite the pendulum starting to swing back in favor of Republicans " +
+                        "over the last couple weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across several key swing states. " : 
+
+                    (mode === 'GOVERNOR' ? "The race for control of the most governorships looks to be following a similar path to the senate elections. " +
+                        "Candidate quality is what seems to matter most here, moreso than the national environment." : 
+
+                        "The 2022 U.S. House of Representatives elections are much more in line with what we would expect for a midterm year " +
+                        "when compared to the senate and governorships. Republicans are favored to take back the house this November, primarily due to " +
+                        "the national environment, along with recent redistricting wins in key states.")}
+                    
+                    subtext={mode === 'SENATE' ? "As it stands, the GOP's keys to the senate will be through Nevada and Georgia, " +
+                        "assuming the Democrats are able to pick up a seat in Pennsylvania, which they are favored to do at time of writing." : 
+                    
+                    (mode === 'GOVERNOR' ? "Republicans are favored to hold the " +
+                        "most governorships, as is normally the case, but if things go well for the Democrats, we could possibly see a " +
+                        "25-25 split between the two parties, though this would be quite unlikely. This will ultimately come down to the most competitive races in Wisconsin, " +
+                        "Oregon, Arizona, and Nevada." :
+
+                        "Still, this is not set in stone, and there are plenty of tight races that Democrats have a shot at winning in states like " +
+                        "New York, Arizona, and California, although a Democratic house is seeming more unlikely as we get closer to election day." )}
+                />
             </div>
             <div className='modeButtons'>
                 <button onClick={() => {setMode('SENATE');}}>SENATE</button>

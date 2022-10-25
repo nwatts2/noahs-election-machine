@@ -1,7 +1,10 @@
 const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode, state, mouseposition}) => {
     let title = '-', raceInfo = '-', favoriteStatement;
-    const tableTitle = `${resultsYear} ${mode} ELECTION RESULTS`;
     let thisRace = {}, separatedState = '', district = '';
+
+    const stateList = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+    const stateFullList = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachussetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconson','Wyoming'];
+
 
     if (mode === 'HOUSE') {
         separatedState = state.slice(0, 2);
@@ -47,7 +50,15 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
             }
         }
     }
-    
+
+    let fullState = '';
+    for (let x of stateList) {
+        if (state.slice(0, 2) === x) {
+            fullState = stateFullList[stateList.indexOf(x)];
+        }
+    }
+
+    const tableTitle = `${resultsYear} ${mode === 'HOUSE' ? state : fullState.toUpperCase()} ${mode} RESULTS`;
 
     let typeText = '';
 
@@ -63,24 +74,14 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
     if (mode === 'SENATE' && state === 'AK') {favoriteStatement = 'slightly favored'}
 
     //if (candidate.hasElection) {
-    title = `${state} ${mode} RACE`;
+    title = `${fullState.toUpperCase()} ${favorite.isSpecial ? 'SPECIAL ': ''}${mode} RACE`;
     if (mode === 'SENATE' || mode === 'GOVERNOR') {
-        raceInfo = `${favorite.name} is running for ${typeText} in the state of ${state} against ${altCandidate.name}. ${favorite.name} is ${favoriteStatement} to win this race, which would be a win for the ${favorite.party} party.`
+        raceInfo = `${favorite.name} is running for ${typeText} in the state of ${fullState} against ${altCandidate.name}. ${favorite.name} is a member of the ${favorite.party} party and is ${favoriteStatement} to win this race.`
 
     } else if (mode === 'HOUSE') {
-        raceInfo = `${favorite.name} is running for ${typeText} in the ${district} district of ${separatedState} against ${altCandidate.name}. ${favorite.name} is ${favoriteStatement} to win this race, which would be a win for the ${favorite.party} party.`
+        raceInfo = `${favorite.name} is running for ${typeText} in the ${district} district of ${fullState} against ${altCandidate.name}. ${favorite.name} is a member of the ${favorite.party} party and is ${favoriteStatement} to win this race.`
 
     }
-    /*}
-    else if (!candidate.hasElection && (candidate.party === 'Republican' || candidate.party === 'Democratic')) {
-        title = `${candidate.state} ${candidate.type}`;
-        raceInfo = `${candidate.name} is an incumbent senator and a member of the ${candidate.party} party. There are no elections for this seat in the 2022 election cycle.`
-     
-    } 
-    else {
-        title = `${candidate.state} ${candidate.type}`;
-        raceInfo = `${candidate.name} is an incumbent and independent senator who caucuses with the ${candidate.caucus} party. There are no elections for this seat in the 2022 election cycle.`
-    }*/
 
     function calculatePopupPosition() {
         if (mouseposition.y > (.5 * window.screen.height) && mouseposition.x <= .5 * window.screen.width) {

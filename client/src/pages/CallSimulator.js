@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import CollapseText from '../components/CollapseText';
 import SenateTracker from '../components/SenateTracker';
 import HouseTracker from '../components/HouseTracker';
 import ResultsRecordList from '../components/ResultsRecordList';
@@ -164,9 +165,8 @@ const CallSimulator = () => {
     return (
         <div className="mainPage">
             <h1>NOAH'S CALL SIMULATOR</h1>
-            <p>&emsp;Welcome to the Call Simulator! Here you can play around with different scenarios for the 2022 US midterm elections. Click on a state to call that race, or click it again to switch parties.
-                The call buttons below will automatically call a race based on its FiveThirtyEight rating.
-            </p>
+            <CollapseText text={"Welcome to the Call Simulator! Here you can play around with different scenarios for the 2022 US midterm elections. Click on a state to call that race, or click it again to switch parties. " +
+                "The call buttons below will automatically call a race based on its FiveThirtyEight rating."}/>
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">

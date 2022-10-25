@@ -57,6 +57,10 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
             }
         }
 
+        for (let race of raceRecords) {
+            if (race.state === 'OK' && race.district === 'S3') {race.isSpecial = false;}
+        }
+
         if (resultsYear === 2022) {
             for (let thisState of stateList) {
                 let currentRace = {};
@@ -108,6 +112,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                         tempSpecialStates.push(race);
                     }
                 }
+
             }
             //if (mode === 'SENATE') {newStates.push({state: "OK-Special", called: '', hasElection: true, ratingRank: -3})}
 
@@ -538,10 +543,16 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
             for (let state of solid) {
                 if (state.called === '') {
                     callRace(document.getElementById(state.state));
+                } else {
+                    state.called = '';
+                    callRace(document.getElementById(state.state));
                 }
             }
             for (let state of specialSolid) {
                 if (state.called === '') {
+                    callRace(document.getElementById(`SPECIAL${specialStates.indexOf(state) + 1}`));
+                } else {
+                    state.called = '';
                     callRace(document.getElementById(`SPECIAL${specialStates.indexOf(state) + 1}`));
                 }
             }
@@ -549,10 +560,17 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
         if (rating === 'ALL' || rating === 'LIKELY') {
             for (let state of likely) {
-                if (state.called === '') {callRace(document.getElementById(state.state));}
-            }
+                if (state.called === '') {
+                    callRace(document.getElementById(state.state));
+                } else {
+                    state.called = '';
+                    callRace(document.getElementById(state.state));
+                }            }
             for (let state of specialLikely) {
                 if (state.called === '') {
+                    callRace(document.getElementById(`SPECIAL${specialStates.indexOf(state) + 1}`));
+                } else {
+                    state.called = '';
                     callRace(document.getElementById(`SPECIAL${specialStates.indexOf(state) + 1}`));
                 }
             }
@@ -560,10 +578,17 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
         if (rating === 'ALL' || rating === 'LEAN') {
             for (let state of lean) {
-                if (state.called === '') {callRace(document.getElementById(state.state));}
-            }
+                if (state.called === '') {
+                    callRace(document.getElementById(state.state));
+                } else {
+                    state.called = '';
+                    callRace(document.getElementById(state.state));
+                }            }
             for (let state of specialLean) {
                 if (state.called === '') {
+                    callRace(document.getElementById(`SPECIAL${specialStates.indexOf(state) + 1}`));
+                } else {
+                    state.called = '';
                     callRace(document.getElementById(`SPECIAL${specialStates.indexOf(state) + 1}`));
                 }
             }
@@ -571,10 +596,17 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
         if (rating === 'ALL' || rating === 'TILT') {
             for (let state of tilt) {
-                if (state.called === '') {callRace(document.getElementById(state.state));}
-            }
+                if (state.called === '') {
+                    callRace(document.getElementById(state.state));
+                } else {
+                    state.called = '';
+                    callRace(document.getElementById(state.state));
+                }            }
             for (let state of specialTilt) {
                 if (state.called === '') {
+                    callRace(document.getElementById(`SPECIAL${specialStates.indexOf(state) + 1}`));
+                } else {
+                    state.called = '';
                     callRace(document.getElementById(`SPECIAL${specialStates.indexOf(state) + 1}`));
                 }
             }

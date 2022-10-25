@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import CollapseText from '../components/CollapseText';
 import SenateTracker from '../components/SenateTracker';
 import HouseTracker from '../components/HouseTracker';
 import ResultsRecordList from '../components/ResultsRecordList';
@@ -228,10 +229,10 @@ const PastResults = () => {
     return (
         <div className="mainPage">
             <h1>PAST ELECTIONS</h1>
-            <p>&emsp;Here you can view results from past November elections for the US Senate, House of Representatives, and governorships. 
-            <br /><br />&emsp;You can currently view senate and gubernatorial results dating back to the year 2000, but more data will 
-                become available in the future, as will for the house.
-            </p>
+            <CollapseText 
+                text={"Here you can view results from past November elections for the US Senate, House of Representatives, and governorships."}
+                subtext={"You can currently view senate and gubernatorial results dating back to the year 2000, but more data will " +
+                    "become available in the future, as will for the house."}/>
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">
