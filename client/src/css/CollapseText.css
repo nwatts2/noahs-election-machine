@@ -1,4 +1,4 @@
-.collapseTextContainer, .collapseTextContainerTracker {
+.collapseTextContainer {
     padding:40px 70px 20px 70px;
     margin:10px 0px 10px 0px;
     align-self: center;
@@ -9,7 +9,7 @@
     background-image:linear-gradient(to bottom right, rgba(36, 36, 37, .95), transparent);
     box-shadow:0px 0px 10px grey;
     position:relative;
-    transition: max-height .25s ease-in-out, padding .25s ease-in-out, color .25s ease-in-out, text-shadow .25s ease-in-out;
+    transition: max-height .25s ease-in-out, padding-top .25s ease-in-out, padding-bottom .25s ease-in-out, color .25s ease-in-out, text-shadow .25s ease-in-out;
     overflow:hidden;
 }
 
@@ -30,4 +30,19 @@
     font-family: 'Trebuchet MS';
     font-size: 1.1rem;
     line-height:1.5rem;
+}
+
+@media screen and (max-width: 480px) {
+    .collapseTextContainer {
+        width: 95%;
+        padding: 25px 10px 10px 10px
+    }
+
+    .typeInfo .collapseTextContainer {
+        width:90%;
+    }
+
+    .collapseTextContainer button {
+        right:0px;
+    }
 }

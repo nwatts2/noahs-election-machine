@@ -1,8 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/CollapseText.css';
 
 function CollapseText ({ text, subtext }) {
     const [isExpanded, setIsExpanded] = useState(true);
+    const [style, setStyle] = useState({});
+    const getIsMobile = () => window.innerWidth <= 480;
+    const [isMobile, setIsMobile] = useState(getIsMobile());
+
+    useEffect(() => {
+        if (isMobile) {
+            setStyle({padding: '0px 10px 0px 10px', maxHeight: '50px', color: 'transparent', textShadow: 'none'})
+        } else {
+            setStyle({padding: '0px 70px 0px 70px', maxHeight: '50px', color: 'transparent', textShadow: 'none'})
+        }
+        
+    }, [isMobile])
+
+    useEffect(() => {
+        const onResize = () => {
+            setIsMobile(getIsMobile());
+        }
+
+        window.addEventListener('resize', onResize);
+
+        return () => {
+            window.removeEventListener('resize', onResize);
+        }
+
+    }, [])
 
     function expand () {
         if (isExpanded) {setIsExpanded(false)}
@@ -10,7 +35,7 @@ function CollapseText ({ text, subtext }) {
     }
 
     return (
-        <div className='collapseTextContainer' style={isExpanded ? {} : {padding: '0px 70px 0px 70px', maxHeight: '50px', color: 'transparent', textShadow: 'none'}}>
+        <div className='collapseTextContainer' style={isExpanded ? {} : style}>
             <button className='expandButton' onClick={expand}>{isExpanded ? '-' : '+'}</button>
             &emsp;
             <span className='collapseText'>{text}</span>
