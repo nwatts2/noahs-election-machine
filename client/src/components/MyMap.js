@@ -28,6 +28,10 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
     const stateList = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
 
     useEffect(() => {
+        resetMap();
+    }, [mode])
+
+    useEffect(() => {
         const newStates = [];
         const tempSpecialStates = [];
 
@@ -63,14 +67,12 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                         let called = '', margin = x.margin;
 
                         for (let candidate of resultsRecords) {
-                            if (candidate.year === resultsYear && candidate.state.includes(thisState) && candidate.isSpecial === x.isSpecial) {
+                            if (candidate.year === resultsYear && candidate.state.includes(thisState) && candidate.type === mode && candidate.isSpecial === x.isSpecial) {
 
                                 if (candidate.called === 'Democratic') {
-                                    //callRace(document.getElementById(candidate.state))
                                     called = 'Democratic';
                 
                                 } else if (candidate.called === 'Republican') {
-                                    //callRace(document.getElementById(candidate.state))
                                     called = 'Republican';
                 
                                 }
@@ -297,10 +299,9 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
             if (state.hasElection && elem) {
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
-                    callRace(document.getElementById(state.state));
-                }
+                    callRace(elem);
 
-                if (state.ratingRank === 3 && state.hasElection) {
+                } else if (state.ratingRank === 3 && state.hasElection) {
                     elem.style.fill = safeDemColor;
 
                 } else if (state.ratingRank === 2 && state.hasElection) {
@@ -346,10 +347,9 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
             if (state.hasElection && elem) {
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
-                    callRace(document.getElementById(`SPECIAL${tempSpecialStates.indexOf(state) + 1}`));
-                }
+                    callRace(elem);
 
-                if (state.ratingRank === 3 && state.hasElection) {
+                } else if (state.ratingRank === 3 && state.hasElection) {
                     elem.style.fill = safeDemColor;
 
                 } else if (state.ratingRank === 2 && state.hasElection) {
@@ -432,8 +432,17 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                 hoverObj.attributes['calledpath'].value += target.attributes['d'].value + ` M 0,0 z `;
                 hoverObj.attributes['d'].value = hoverObj.attributes['calledpath'].value;
             }
+            
+            if (page === 'LIVE') {
+                if (currentState.called === 'Democratic') {
+                    target.style.fill = calledDemColor;
 
-            if (currentState.ratingRank > 0 && currentState.ratingRank < 4 && currentState.called === '') {
+                } else if (currentState.called === 'Republican') {
+                    target.style.fill = calledRepColor;
+                    
+                }
+            }
+            else if (currentState.ratingRank > 0 && currentState.ratingRank < 4 && currentState.called === '') {
                 target.style.fill = calledDemColor;
                 currentState.called = 'Democratic';
                 updateState(currentState);

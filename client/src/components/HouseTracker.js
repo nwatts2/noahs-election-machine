@@ -24,6 +24,10 @@ function HouseButton ({resultsYear, updateHouseWidget, setUpdateHouseWidget, pag
                 if (record.caucus === 'Republican' || record.name === 'Angie Craig') {
                     candidates.push(record);
                 }
+            } else if (thisState === 'ME-2nd' && resultsYear === 2022) {
+                if (record.caucus === 'Republican' || record.name === 'Jared Golden') {
+                    candidates.push(record);
+                }
             } else {
                 candidates.push(record);
 
@@ -139,6 +143,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
     const [calledHouseRaces, setCalledHouseRaces] = useState([]);
     const [popupState, setPopupState] = useState('');
     const [enablePopups, setEnablePopups] = useState(true);
+    const [widgetLoaded, setWidgetLoaded] = useState(false);
 
     const mouseposition = useMousePosition();
 
@@ -152,12 +157,6 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
     const displayedList = [];
 
     useEffect(() => {
-        if (page === 'CALLSIM' || page === 'LIVE') {
-            resetRaces();
-        }
-    }, []);
-
-    useEffect(() => {
         getHouseCount();
         return;
     }, [updateHouseWidget]);
@@ -169,7 +168,6 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
             {value: houseCount[1], party: 'GOP'}
         ]);
     }, [houseCount]);
-    
 
     function resetRaces() {
         for (let record of resultsRecords) {
@@ -177,7 +175,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
         }
 
         setUpdateHouseWidget((c) => {return c + 1})
-        setHouseCount([0,0]);
+        //setHouseCount([0,0]);
     }
 
     function autoCallRaces(rating) {
@@ -203,11 +201,11 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
 
         const calledRaces = [];
         
-        if (calledHouseRaces.length !== 0) {
+        /*if (calledHouseRaces.length !== 0) {
             for (let race of calledHouseRaces) {
                 calledRaces.push(race);
             }
-        }
+        }*/
 
         setUpdateHouseWidget((c) => {return c + 1});
         let houseDems = houseCount[0], houseReps = houseCount[1];
@@ -216,7 +214,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
             houseDems += 1;
             houseReps += 5;
             for (let record of resultsRecords) {
-                if (record.called !== '' && calledRaces.includes(`${record.state}-${record.district}`) === false) {
+                if (record.called !== '' && record.type === 'HOUSE' && Math.abs(record.ratingRank) === 3 && calledRaces.includes(`${record.state}-${record.district}`) === false) {
                     calledRaces.push(`${record.state}-${record.district}`);
                 } else if (record.called === '' && Math.abs(record.ratingRank) === 3 && record.type === 'HOUSE' && calledRaces.includes(`${record.state}-${record.district}`) === false) {
                     if (record.caucus === 'Democratic' && record.margin > 0 && calledRaces.includes(`${record.state}-${record.district}`) === false) {
@@ -238,7 +236,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
 
         if (rating === 'ALL' || rating === 'LIKELY') {
             for (let record of resultsRecords) {
-                if (record.called !== '' && calledRaces.includes(`${record.state}-${record.district}`) === false) {
+                if (record.called !== '' && record.type === 'HOUSE' && Math.abs(record.ratingRank) === 2 && calledRaces.includes(`${record.state}-${record.district}`) === false) {
                     calledRaces.push(`${record.state}-${record.district}`);
                 } else if (record.called === '' && Math.abs(record.ratingRank) === 2 && record.type === 'HOUSE' && calledRaces.includes(`${record.state}-${record.district}`) === false) {
                     if (record.caucus === 'Democratic' && record.margin > 0 && calledRaces.includes(`${record.state}-${record.district}`) === false) {
@@ -260,7 +258,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
 
         if (rating === 'ALL' || rating === 'LEAN') {
             for (let record of resultsRecords) {
-                if (record.called !== '' && calledRaces.includes(`${record.state}-${record.district}`) === false) {
+                if (record.called !== '' && record.type === 'HOUSE' && Math.abs(record.ratingRank) === 1 && calledRaces.includes(`${record.state}-${record.district}`) === false) {
                     calledRaces.push(`${record.state}-${record.district}`);
                 } else if (record.called === '' && Math.abs(record.ratingRank) === 1 && record.type === 'HOUSE' && calledRaces.includes(`${record.state}-${record.district}`) === false) {
                     if (record.caucus === 'Democratic' && record.margin > 0 && calledRaces.includes(`${record.state}-${record.district}`) === false) {
@@ -282,7 +280,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
 
         if (rating === 'ALL' || rating === 'TILT') {
             for (let record of resultsRecords) {
-                if (record.called !== '' && calledRaces.includes(`${record.state}-${record.district}`) === false) {
+                if (record.called !== '' && record.type === 'HOUSE' && Math.abs(record.ratingRank) === 0 && calledRaces.includes(`${record.state}-${record.district}`) === false) {
                     calledRaces.push(`${record.state}-${record.district}`);
                 } else if (record.called === '' && Math.abs(record.ratingRank) === 0 && record.type === 'HOUSE' && calledRaces.includes(`${record.state}-${record.district}`) === false) {
                     if (record.caucus === 'Democratic' && record.margin > 0 && calledRaces.includes(`${record.state}-${record.district}`) === false) {

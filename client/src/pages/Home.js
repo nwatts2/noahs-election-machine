@@ -20,11 +20,16 @@ const Home = () => {
     const [updateHouseWidget, setUpdateHouseWidget] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
 
+    const [updateInterval, setUpdateInterval] = useState(0);
+
     const page = 'LIVE';
 
     const governorResultsYear = 2018, senateResultsYear = 2020, houseResultsYear = 2020, currentYear = 2022;
 
+
     useEffect(() => {
+        //const interval = setInterval(() => {setUpdateInterval((c) => c + 1)}, 30000);
+
         async function getRecords() {
             if (isLoading === false) {setIsLoading(true)}
             const candidatesResponse = await fetch(`/candidatesRecord/`);
@@ -62,15 +67,15 @@ const Home = () => {
                 setIsLoading(false);
             }
 
-            const resultsList = await resultsResponse.json(), resultsRecords = [];
+            const resultsList = await resultsResponse.json(), tempResultsRecords = [];
 
             for (let x of resultsList) {
                 if ((x.type === 'GOVERNOR' && (x.year === governorResultsYear || x.year === currentYear)) || (x.type === 'SENATE' && (x.year === senateResultsYear || x.year === currentYear)) || (x.type === 'HOUSE' && (x.year === houseResultsYear || x.year === currentYear))) {
-                    resultsRecords.push(x);
+                    tempResultsRecords.push(x);
                 }
             }
             
-            setResultsRecords(resultsRecords);
+            if (JSON.stringify(resultsRecords) !== JSON.stringify(tempResultsRecords)) {setResultsRecords(tempResultsRecords);}
 
         }
 
@@ -135,9 +140,10 @@ const Home = () => {
         getRaces();
         getCounts();
 
+        //return (clearInterval(interval));
         return;
 
-    }, [mode]);
+    }, [mode, updateInterval]);
 
     function rankSort(array) {
         const length = array.length;
