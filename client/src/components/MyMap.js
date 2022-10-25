@@ -1316,61 +1316,61 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                 
                 <path id='topObj' className='highlighted' d='' calledpath=''/>
 
-                <text id='WAtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={250} y={80}>WA</text>
-                <text id='ORtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={220} y={140}>OR</text>
-                <text id='CAtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={210} y={300}>CA</text>
-                <text id='IDtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={310} y={170}>ID</text>
-                <text id='NVtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={260} y={250}>NV</text>
-                <text id='UTtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={340} y={260}>UT</text>
-                <text id='AZtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={325} y={360}>AZ</text>
-                <text id='AKtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={220} y={490}>AK</text>
-                <text id='MTtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={390} y={115}>MT</text>
-                <text id='WYtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={410} y={195}>WY</text>
-                <text id='COtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={435} y={275}>CO</text>
-                <text id='NMtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={420} y={370}>NM</text>
-                <text id='NDtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={515} y={110}>ND</text>
-                <text id='SDtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={515} y={170}>SD</text>
-                <text id='NEtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={530} y={230}>NE</text>
-                <text id='KStitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={545} y={290}>KS</text>
-                <text id='OKtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={570} y={350}>OK</text>
-                <text id='TXtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={540} y={430}>TX</text>
-                <text id='MNtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={600} y={140}>MN</text>
-                <text id='IAtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={620} y={215}>IA</text>
-                <text id='MOtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={640} y={290}>MO</text>
-                <text id='ARtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={645} y={360}>AR</text>
-                <text id='LAtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={650} y={430}>LA</text>
-                <text id='WItitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={665} y={160}>WI</text>
-                <text id='ILtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={685} y={240}>IL</text>
-                <text id='MItitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={745} y={180}>MI</text>
-                <text id='INtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={735} y={240}>IN</text>
-                <text id='OHtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={785} y={230}>OH</text>
-                <text id='KYtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={765} y={290}>KY</text>
-                <text id='TNtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={750} y={330}>TN</text>
-                <text id='MStitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={695} y={390}>MS</text>
-                <text id='ALtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={745} y={390}>AL</text>
-                <text id='GAtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={810} y={390}>GA</text>
-                <text id='FLtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={845} y={450}>FL</text>
-                <text id='HItitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={370} y={530}>HI</text>
-                <text id='SCtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={845} y={350}>SC</text>
-                <text id='NCtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={860} y={310}>NC</text>
-                <text id='VAtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={865} y={270}>VA</text>
-                <text id='WVtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={820} y={265}>WV</text>
-                <text id='PAtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={860} y={200}>PA</text>
-                <text id='NYtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={880} y={150}>NY</text>
-                <text id='MEtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={950} y={70}>ME</text>
-                <text id='VTtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={903} y={84}>VT</text>
-                <text id='NHtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={960} y={125}>NH</text>
-                <text id='MAtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={970} y={155}>MA</text>
-                <text id='CTtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={940} y={185}>CT</text>
-                <text id='RItitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={953} y={168}>RI</text>
-                <text id='NJtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={930} y={200}>NJ</text>
-                <text id='DEtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={925} y={230}>DE</text>
-                <text id='MDtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={925} y={250}>MD</text>
+                <text id='WAtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={250} y={80}>WA</text>
+                <text id='ORtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={220} y={140}>OR</text>
+                <text id='CAtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={210} y={300}>CA</text>
+                <text id='IDtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={310} y={170}>ID</text>
+                <text id='NVtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={260} y={250}>NV</text>
+                <text id='UTtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={340} y={260}>UT</text>
+                <text id='AZtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={325} y={360}>AZ</text>
+                <text id='AKtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={220} y={490}>AK</text>
+                <text id='MTtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={390} y={115}>MT</text>
+                <text id='WYtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={410} y={195}>WY</text>
+                <text id='COtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={435} y={275}>CO</text>
+                <text id='NMtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={420} y={370}>NM</text>
+                <text id='NDtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={515} y={110}>ND</text>
+                <text id='SDtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={515} y={170}>SD</text>
+                <text id='NEtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={530} y={230}>NE</text>
+                <text id='KStitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={545} y={290}>KS</text>
+                <text id='OKtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={570} y={350}>OK</text>
+                <text id='TXtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={540} y={430}>TX</text>
+                <text id='MNtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={600} y={140}>MN</text>
+                <text id='IAtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={620} y={215}>IA</text>
+                <text id='MOtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={640} y={290}>MO</text>
+                <text id='ARtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={645} y={360}>AR</text>
+                <text id='LAtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={650} y={430}>LA</text>
+                <text id='WItitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={665} y={160}>WI</text>
+                <text id='ILtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={685} y={240}>IL</text>
+                <text id='MItitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={745} y={180}>MI</text>
+                <text id='INtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={735} y={240}>IN</text>
+                <text id='OHtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={785} y={230}>OH</text>
+                <text id='KYtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={765} y={290}>KY</text>
+                <text id='TNtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={750} y={330}>TN</text>
+                <text id='MStitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={695} y={390}>MS</text>
+                <text id='ALtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={745} y={390}>AL</text>
+                <text id='GAtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={810} y={390}>GA</text>
+                <text id='FLtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={845} y={450}>FL</text>
+                <text id='HItitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={370} y={530}>HI</text>
+                <text id='SCtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={845} y={350}>SC</text>
+                <text id='NCtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={860} y={310}>NC</text>
+                <text id='VAtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={865} y={270}>VA</text>
+                <text id='WVtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={820} y={265}>WV</text>
+                <text id='PAtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={860} y={200}>PA</text>
+                <text id='NYtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={880} y={150}>NY</text>
+                <text id='MEtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={950} y={70}>ME</text>
+                <text id='VTtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={903} y={84}>VT</text>
+                <text id='NHtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={960} y={125}>NH</text>
+                <text id='MAtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={970} y={155}>MA</text>
+                <text id='CTtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={940} y={185}>CT</text>
+                <text id='RItitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={953} y={168}>RI</text>
+                <text id='NJtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={930} y={200}>NJ</text>
+                <text id='DEtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={925} y={230}>DE</text>
+                <text id='MDtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={925} y={250}>MD</text>
 
-                <text id='SPECIAL1-text' textAnchor='middle' className={specialStates.length > 0 ? "visible" : 'invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={262}>SPECIAL-1</text>
-                <text id='SPECIAL2-text' textAnchor='middle' className={specialStates.length > 1 ? "visible" : 'invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={292}>SPECIAL-2</text>
-                <text id='SPECIAL3-text' textAnchor='middle' className={specialStates.length > 2 ? "visible" : 'invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={322}>SPECIAL-3</text>
-                <text id='SPECIAL4-text' textAnchor='middle' className={specialStates.length > 3 ? "visible" : 'invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={352}>SPECIAL-4</text>
+                <text id='SPECIAL1-text' textAnchor='middle' className={specialStates.length > 0 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={262}>SPECIAL-1</text>
+                <text id='SPECIAL2-text' textAnchor='middle' className={specialStates.length > 1 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={292}>SPECIAL-2</text>
+                <text id='SPECIAL3-text' textAnchor='middle' className={specialStates.length > 2 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={322}>SPECIAL-3</text>
+                <text id='SPECIAL4-text' textAnchor='middle' className={specialStates.length > 3 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={352}>SPECIAL-4</text>
 
                 <path d='m 700,25 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: safeDemColor}} />
                 <path d='m 700,45 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: safeRepColor}} />
@@ -1381,10 +1381,10 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                 <path d='m 850,25 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: tiltDemColor}} />
                 <path d='m 850,45 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: tiltRepColor}} />
 
-                <text id='MDtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={715} y={15}>SOLID</text>
-                <text id='MDtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={765} y={15}>LIKELY</text>
-                <text id='MDtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={815} y={15}>LEAN</text>
-                <text id='MDtitle' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={865} y={15}>TILT</text>
+                <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={715} y={15}>SOLID</text>
+                <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={765} y={15}>LIKELY</text>
+                <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={815} y={15}>LEAN</text>
+                <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={865} y={15}>TILT</text>
 
             </svg>
         </div>

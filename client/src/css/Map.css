@@ -67,6 +67,10 @@ path {pointer-events: auto;}
     width:1000px;
 }
 
+.stateText {
+    text-shadow:2px 2px 5px rgba(36, 36, 37, .25);
+}
+
 .seatBreakdown {
     margin-bottom: 130px;
 }

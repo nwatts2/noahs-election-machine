@@ -7,10 +7,15 @@ function Menu () {
     const [isExpanded, setIsExpanded] = useState(false);
     const [menuStyle, setMenuStyle] = useState({visibility: 'hidden', animation: 'moveLeft .5s ease-in-out'})
 
+    useEffect(() => {
+        
+    }, [])
+
     function expand() {
         let style = {
             visibility: 'visible',
-            animation: 'moveRight .5s ease-in-out'
+            animation: 'moveRight .5s ease-in-out',
+            left: '0rem'
         }
 
         setMenuStyle(style);
@@ -21,7 +26,8 @@ function Menu () {
     function hide() {
         let style = {
             animation: 'moveLeft .5s ease-in-out',
-            visibility: 'hidden'
+            visibility: 'hidden',
+            left: '-20rem'
         }
 
         setMenuStyle(style);
