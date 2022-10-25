@@ -189,7 +189,7 @@ const Home = () => {
                         &emsp; The race for control of the most governorships looks to be following a similar path to the senate elections.
                         Candidate quality is what seems to matter most here, moreso than the national environment.<br /><br />&emsp;Republicans are favored to hold the
                         most governorships, as is normally the case, but if things go well for the Democrats, we could possibly see a 
-                        25-25 split between the two parties. This will ultimately come down to the most competitive races in Wisconsin,
+                        25-25 split between the two parties, though this would be quite unlikely. This will ultimately come down to the most competitive races in Wisconsin,
                         Oregon, Arizona, and Nevada. 
                     </p>
                 } {mode === 'HOUSE' &&

@@ -34,13 +34,15 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
         for (let record of resultsRecords) {
             if (record.year === resultsYear && record.type === mode) {
                 for (let race of raceRecords) {
-                    if (record.state === race.state && race.year === resultsYear && race.type === mode && race.candidateA === record.name) {
+                    if (record.state === race.state && race.year === resultsYear && race.type === mode && (race.candidateA === record.name || race.candidateB === record.name)) {
                         if (record.isSpecial === true) {
                             race.isSpecial = true;
         
                         } else {
                             race.isSpecial = false;
                         }
+                    } else if (record.state === race.state && race.year === resultsYear && race.type === mode) {
+                        race.isSpecial = false;
                     }
                 }
             }
@@ -644,7 +646,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
     
     return (
         <div className='map'>
-        <div className='mapButtons left'>
+        <div className='mapButtons'>
             {page === 'CALLSIM' &&
                 <>
                     <h2>CALL RACES</h2>
@@ -1386,12 +1388,21 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
             </svg>
         </div>
-            <div className='mapButtons right'>
+            <div className='mapButtons'>
+            {(page === 'CALLSIM') &&
+                <div>
+                    <h2>SEAT BREAKDOWN</h2>
+                    <div className='seatBreakdown'>
+                        <h3>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
+                        <h3>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
+                    </div>
+                </div>
+            }
             {page === 'CALLSIM' &&
-                <>
+                <div>
                     <button onClick={resetMap}>RESET MAP</button>
                     <button onClick={(e) => {enablePops(e)}}>DISABLE POPUPS</button>
-                </>
+                </div>
             }
             </div>
         </div>        

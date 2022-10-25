@@ -8,7 +8,7 @@
     display:flex;
     flex-flow:row nowrap;
     width:100%;
-    height:auto;
+    height:fit-content;
     align-items:center;
     justify-content:center;
 }
@@ -26,14 +26,10 @@ path {pointer-events: auto;}
     flex-flow:column nowrap;
     align-items:center;
     justify-content:center;
-    height:auto;
     width:13%;
     margin:10px 0px 20px 0px;
     padding:5px;
 }
-
-.left {align-self:flex-start}
-.right {align-self:flex-end}
 
 .mapButtons h2 {
     background:none;
@@ -71,9 +67,18 @@ path {pointer-events: auto;}
     width:1000px;
 }
 
+.seatBreakdown {
+    margin-bottom: 130px;
+}
+
+.seatBreakdown h3 {
+    font-family:'Trebuchet MS';
+}
+
 @media screen and (max-width: 480px) {
     .seatBreakdown {
         width:100%;
+        margin-bottom:0px;
         display:flex;
         flex-flow:row nowrap;
         justify-content:center;
@@ -108,7 +113,7 @@ path {pointer-events: auto;}
         padding:5px;
     }
     
-    .left, .right {align-self:center}
+    .mapButtons {justify-content:center}
     
     .mapButtons button {
         padding:5px;

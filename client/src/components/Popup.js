@@ -8,11 +8,12 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
         district = state.slice(3, state.length);
     }
 
-    for (let x of raceRecords) {
-        if (mode === 'HOUSE') {
-            if (x.year === resultsYear && x.type === mode && x.state === separatedState && Number(x.district) === Number(district.slice(0, district.length - 2))) {thisRace = x; break;}
-
-        } else {
+    if (mode === 'HOUSE') {
+        for (let x of raceRecords) {
+                if (x.year === resultsYear && x.type === mode && x.state === separatedState && Number(x.district) === Number(district.slice(0, district.length - 2))) {thisRace = x; break;}
+        }
+    } else {
+        for (let x of raceRecords) {
             if (x.year === resultsYear && x.type === mode && x.state === state && x.isSpecial === isSpecial) {thisRace = x; break;}
         }
     }
@@ -21,7 +22,7 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
 
     if (mode === 'HOUSE') {
         for (let x of resultsRecords) {
-            if (x.year === resultsYear && x.state === separatedState && x.district === district && x.type === mode && x.isSpecial === isSpecial) {
+            if (x.year === resultsYear && x.state === separatedState && x.district === district && x.type === mode) {
                 if (thisRace.margin < 0 && x.caucus === 'Republican' && typeof favorite.state === 'undefined') {
                     favorite = x;
                 } else if (thisRace.margin >= 0 && x.caucus === 'Democratic' && typeof favorite.state === 'undefined') {
@@ -41,6 +42,7 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
                     favorite = x;
                 } else if (typeof altCandidate.state === 'undefined') {
                     altCandidate = x;
+                    console.log(isSpecial)
                 }
             }
         }
@@ -57,6 +59,8 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
     else if (Math.abs(thisRace.ratingRank) === 2) {favoriteStatement = 'favored'}
     else if (Math.abs(thisRace.ratingRank) === 1) {favoriteStatement = 'somewhat favored'}
     else if (Math.abs(thisRace.ratingRank) === 0) {favoriteStatement = 'slightly favored'}
+
+    if (mode === 'SENATE' && state === 'AK') {favoriteStatement = 'slightly favored'}
 
     //if (candidate.hasElection) {
     title = `${state} ${mode} RACE`;
