@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.57630e9f.css",
-    "main.js": "/static/js/main.ad00855d.js",
+    "main.css": "/static/css/main.00aa4f7b.css",
+    "main.js": "/static/js/main.93637826.js",
     "static/media/electionLogo.png": "/static/media/electionLogo.e585437d9243f22f7d3c.png",
     "index.html": "/index.html",
-    "main.57630e9f.css.map": "/static/css/main.57630e9f.css.map",
-    "main.ad00855d.js.map": "/static/js/main.ad00855d.js.map"
+    "main.00aa4f7b.css.map": "/static/css/main.00aa4f7b.css.map",
+    "main.93637826.js.map": "/static/js/main.93637826.js.map"
   },
   "entrypoints": [
-    "static/css/main.57630e9f.css",
-    "static/js/main.ad00855d.js"
+    "static/css/main.00aa4f7b.css",
+    "static/js/main.93637826.js"
   ]
 }
