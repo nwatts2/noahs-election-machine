@@ -428,7 +428,7 @@ export default function ResultsRecordList(props) {
                     })}
                 </select>
             </div>
-            <table>
+            <table id='resultsTable'>
                 <thead>
                     <tr>
                         <th>State</th>

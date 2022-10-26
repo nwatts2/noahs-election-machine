@@ -177,7 +177,7 @@ const Home = ({ isMobile }) => {
                 subtext = { "You can " +
                     "also check out our Call Simulator to see how each race impacts control of the Senate, House, and Governorships, or you can " +
                     "visit our Past Results page to view previous election results for every state."} />
-
+            
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">

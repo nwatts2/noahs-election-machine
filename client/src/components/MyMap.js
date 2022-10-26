@@ -479,15 +479,27 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
             if (page === 'CALLSIM') {
                 for (let record of resultsRecords) {
-                    if (record.state === currentState.state) {
-                        if (currentState.called === 'Democratic' && record.caucus === 'Democratic') {
-                            record.called = 'Democratic';
-                        } else if (currentState.called === 'Republican' && record.caucus === 'Republican') {
-                            record.called = 'Republican';
-                        } else if (currentState.called === 'Democratic' && record.caucus === 'Republican') {
+                    if (record.state === currentState.state && record.type === mode && record.year === resultsYear) {
+                        if (currentState.called === 'Democratic' && record.caucus === 'Republican') {
                             record.called = '';
+
                         } else if (currentState.called === 'Republican' && record.caucus === 'Democratic') {
                             record.called = '';
+
+                        }
+                    }
+                }
+
+                for (let record of resultsRecords) {
+                    if (record.state === currentState.state && record.type === mode && record.year === resultsYear) {
+                        if (currentState.called === 'Democratic' && record.caucus === 'Democratic') {
+                            record.called = 'Democratic';
+                            break;
+
+                        } else if (currentState.called === 'Republican' && record.caucus === 'Republican') {
+                            record.called = 'Republican';
+                            break;
+
                         }
                     }
                 }

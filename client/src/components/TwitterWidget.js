@@ -1,12 +1,32 @@
-import { Timeline} from 'react-twitter-widgets';
+import { Tweet, Timeline} from 'react-twitter-widgets';
+import $ from 'jquery';
+
 
 function TwitterWidget () {
+    //const list = await fetch("https://api.twitter.com/1.1/lists/statuses.json?slug=teams&ElectionNoah=MLS&count=1");
+    //console.log(list[0].truncated);
+    let tweetID = '1585041605584900096';
+
+    /*$.getJSON("http://twitter.com/status/user_timeline/ElectionNoah.json?count=1&callback=callbackName", function (data) {
+        if (data.length > 0) {
+            let link = $.jQuery('<a>').attr('http://twitter.com/ElectionNoah/status/' + data[0].id).text('Read');
+            tweetID = data[0].id;
+        }
+    });*/
+
     return (
-        <Timeline
+       <Tweet tweetId={tweetID} />
+    );
+}
+
+export default TwitterWidget;
+
+/* <Timeline
             dataSource={{
-                sourceType: 'list',
+                sourceType: 'tweet',
                 ownerScreenName: 'ElectionNoah',
                 slug: '1583216805983571968'
+                tweet
             }}
             options={{
                 height:'400',
@@ -15,8 +35,4 @@ function TwitterWidget () {
                 tweetLimit: 10,
                 theme: 'dark'
             }}
-        />
-    );
-}
-
-export default TwitterWidget;
+        />*/

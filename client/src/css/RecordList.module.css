@@ -1,6 +1,5 @@
 .resultsRecords {
     width:100%;
-    transition: all 0.2s ease-in-out;
     display:flex;
     flex-flow:column nowrap;
     justify-content:center;

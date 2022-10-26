@@ -45,7 +45,6 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
                     favorite = x;
                 } else if (typeof altCandidate.state === 'undefined') {
                     altCandidate = x;
-                    console.log(isSpecial)
                 }
             }
         }
