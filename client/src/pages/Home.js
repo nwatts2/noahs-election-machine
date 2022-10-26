@@ -8,7 +8,7 @@ import MyMap from '../components/MyMap';
 import TwitterWidget from '../components/TwitterWidget';
 import '../css/index.css';
 
-const Home = () => {
+const Home = ({ isMobile }) => {
     const [records, setRecords] = useState([]);
     const [raceRecords, setRaceRecords] = useState([]);
     const [resultsRecords, setResultsRecords] = useState([]);
@@ -171,7 +171,7 @@ const Home = () => {
     return (
         <div className="mainPage">
             <h1>THE 2022 US MIDTERM ELECTIONS</h1>
-            <CollapseText 
+            <CollapseText isMobile={isMobile}
                 text={`Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and Governor ` +
                     "election for the 2022 midterms. Check back on November 8th to view results for every election all in one place!"}
                 subtext = { "You can " +
@@ -184,7 +184,7 @@ const Home = () => {
                         <h2>{mode} ELECTION TRACKER</h2>
                     </div>
                 </div>
-                <CollapseText
+                <CollapseText isMobile={isMobile}
                     text={mode === 'SENATE' ? "The U.S. senate elections are shaping up to be an interesting deviation from the typical " +
                         "midterm year. Since Democrats control the White House, Republicans would " +
                         "normally be expected to reclaim the senate. However, the Democrats have a shot at retaining control, despite the pendulum starting to swing back in favor of Republicans " +

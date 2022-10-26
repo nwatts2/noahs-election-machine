@@ -3,7 +3,7 @@
     margin:10px 0px 10px 0px;
     align-self: center;
     width:50%;
-    max-height:500px;
+    max-height:800px;
     border-radius:10px;
     border-bottom:7px solid white;
     background-image:linear-gradient(to bottom right, rgba(36, 36, 37, .95), transparent);
@@ -44,5 +44,6 @@
 
     .collapseTextContainer button {
         right:0px;
+        top:-10px;
     }
 }

@@ -1,5 +1,7 @@
 .menu svg {
     position:fixed;
+    stroke:white;
+    stroke-width:.75;
     fill:white;
     top:5px;
     left:8px;

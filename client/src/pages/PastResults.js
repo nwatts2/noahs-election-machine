@@ -6,7 +6,7 @@ import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
 import '../css/index.css';
 
-const PastResults = () => {
+const PastResults = ({ isMobile }) => {
     const [records, setRecords] = useState([]);
     const [raceRecords, setRaceRecords] = useState([]);
     const [resultsRecords, setResultsRecords] = useState([]);
@@ -229,7 +229,7 @@ const PastResults = () => {
     return (
         <div className="mainPage">
             <h1>PAST ELECTIONS</h1>
-            <CollapseText 
+            <CollapseText isMobile={isMobile}
                 text={"Here you can view results from past November elections for the US Senate, House of Representatives, and governorships."}
                 subtext={"You can currently view senate and gubernatorial results dating back to the year 2000, but more data will " +
                     "become available in the future, as will for the house."}/>
