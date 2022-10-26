@@ -4,7 +4,7 @@ import '../css/CollapseText.css';
 function CollapseText ({ text, subtext }) {
     const [isExpanded, setIsExpanded] = useState(true);
     const [style, setStyle] = useState({});
-    const getIsMobile = () => window.innerWidth <= 480;
+    const getIsMobile = () => window.innerWidth <= 740;
     const [isMobile, setIsMobile] = useState(getIsMobile());
 
     useEffect(() => {

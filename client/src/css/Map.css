@@ -79,7 +79,7 @@ path {pointer-events: auto;}
     font-family:'Trebuchet MS';
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 740px) {
     .seatBreakdown {
         width:100%;
         margin-bottom:0px;

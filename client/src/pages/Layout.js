@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import '../css/index.css';
 
 const Layout = () => {
-    const getIsMobile = () => window.innerWidth <= 480;
+    const getIsMobile = () => window.innerWidth <= 740;
     const [isMobile, setIsMobile] = useState(getIsMobile());
 
     useEffect(() => {

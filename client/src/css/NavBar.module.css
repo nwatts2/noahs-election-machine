@@ -69,7 +69,7 @@ img {margin:0px 10px;}
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 740px) {
     ul {
         font-size:0.8rem;
     }
