@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-import { useState } from 'react';
 
 function drawChart (element, data) {
   const colors = ["rgba(0, 71, 255, 1)", "rgba(36, 36, 37, .95)", 'rgb(253, 3, 83)'];
@@ -35,8 +34,6 @@ function drawChart (element, data) {
   arcs
     .append("path")
     .attr("d", arcGenerator)
-    //.style('stroke', 'white')
-    //.style('stroke-width', 4)
     .style("fill", (d, i) => colors[i % data.length])
     .transition()
     .duration(400)

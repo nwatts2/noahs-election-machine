@@ -216,15 +216,38 @@ export default function ResultsRecordList(props) {
     const [needRunoff, setNeedRunoff] = useState(false);
     const [currentState, setCurrentState] = useState((props.page === 'LIVE' || props.page === 'CALLSIM') ? 'Top Races' : 'AL');
     const [limit, setLimit] = useState(5);
-    const [limitStyle, setLimitStyle] = useState({maxHeight: '500px'});
+    const [updateAnimation, setUpdateAnimation] = useState(0);
+    const [limitStyle, setLimitStyle] = useState({maxHeight: '1000px'});
     const [displayedList, setDisplayedList] = useState([]);
     const [neededStates, setNeededStates] = useState([]);
+    const [thisHeight, setThisHeight] = useState([0, 0])
 
     const stateSelect = useRef(null);
 
     const stateList = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
 
+    useEffect(() => {
+        let elem = document.getElementsByClassName('resultsRecords')[0];
 
+        let endHeight = window.getComputedStyle(elem).height;
+        endHeight = Number(endHeight.slice(0, endHeight.length - 2));
+
+        if (endHeight !== thisHeight[1]) {
+            setThisHeight([thisHeight[0], endHeight]);
+        }
+
+        //window.alert(thisHeight[0] + ' ' + thisHeight[1])
+
+        if (thisHeight[1] !== 0) {
+            //elem.style.maxHeight = endHeight + 'px';
+        }
+        
+
+        //setLimitStyle({maxHeight: Number(startHeight.slice(0, startHeight.length-2)) + 100 + 'px'});
+        //setLimitStyle({maxHeight: Number(endHeight.slice(0, endHeight.length-2)) + 100 + 'px'});
+
+    }, [updateAnimation]);
+    
     useEffect(() => {
         let needSet = false, candidatesList = [];
 
@@ -245,6 +268,7 @@ export default function ResultsRecordList(props) {
 
         if (limit === 1000 && document.getElementById('showMore')) {
         //if (limitStyle.maxHeight === '1500px' && document.getElementById('showMore')) {
+            //setLimitStyle({maxHeight: '1000px'});
             showMore(document.getElementById('showMore'));
         }
 
@@ -288,15 +312,29 @@ export default function ResultsRecordList(props) {
     }
 
     function showMore(e) {
+        let elem = document.getElementsByClassName('resultsRecords')[0];
+        let startHeight = window.getComputedStyle(elem).height;
+        startHeight = Number(startHeight.slice(0, startHeight.length - 2));
+        
+        if (thisHeight[0] !== startHeight) {
+            setThisHeight([startHeight, thisHeight[1]]);
+        }
+
+        if (thisHeight[0] !== 0) {
+            //elem.style.maxHeight = startHeight + 'px';
+        }
+
         if (limit !== 1000) {
         //if (limitStyle.maxHeight !== '1500px') {
 
-            //setLimitStyle({maxHeight: '1500px'})
             setLimit(1000);
+
+            //setLimitStyle({maxHeight: '10000px'})
             e.innerHTML = 'SHOW LESS';
         } else {
             setLimit(5);
-            //setLimitStyle({maxHeight: '200px'})
+
+            //setLimitStyle({maxHeight: '1000px'})
             e.innerHTML = 'SHOW MORE';
         }
     }
@@ -354,6 +392,7 @@ export default function ResultsRecordList(props) {
 
                     if (numRecords < limit) {
                         numRecords += 1;
+                        if (numRecords === limit - 1 && updateAnimation !== numRecords) {setUpdateAnimation(numRecords);}
                         return <ResultRecord updateHouseWidget={props.updateHouseWidget} states={neededStates} records={props.records} setRecords={props.setRecords} district={record.district} state={record.state} type={props.type} needRunoff={needRunoff} year={props.year}/>
     
                     }
@@ -365,6 +404,7 @@ export default function ResultsRecordList(props) {
                     thisState = `${record.state}-${record.district}`;
 
                     numRecords += 1;
+                    if (numRecords === limit - 1 && updateAnimation !== numRecords) {setUpdateAnimation(numRecords);}
 
                     return (
                         <ResultRecord updateHouseWidget={props.updateHouseWidget} states={neededStates} records={props.records} setRecords={props.setRecords} district={record.district} state={record.state} type={props.type} needRunoff={needRunoff} year={props.year}/>

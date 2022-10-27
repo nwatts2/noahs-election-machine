@@ -20,9 +20,11 @@
 
 .collapseTextContainer button {
     border:none;
+    background:none;
+    color:white;
     font-size:3rem;
     position:absolute;
-    right:-40px;
+    right:5px;
     top:-15px;
 }
 
