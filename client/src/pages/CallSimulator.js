@@ -1,13 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import CollapseText from '../components/CollapseText';
-import SenateTracker from '../components/SenateTracker';
 import HouseTracker from '../components/HouseTracker';
 import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
-import '../css/index.css';
 
-const CallSimulator = ({isMobile}) => {
-    const [records, setRecords] = useState([]);
+const CallSimulator = () => {
     const [raceRecords, setRaceRecords] = useState([]);
     const [resultsRecords, setResultsRecords] = useState([]);
     const [simulatedResults, setSimulatedResults] = useState([])
@@ -23,30 +20,6 @@ const CallSimulator = ({isMobile}) => {
     const page = 'CALLSIM';
 
     useEffect(() => {
-        async function getRecords() {
-            if (isLoading === false) {setIsLoading(true)}
-            const candidatesResponse = await fetch(`/candidatesRecord/`);
-
-            if (!candidatesResponse.ok) {
-                const message = `An error occurred: ${candidatesResponse.statusText}`;
-                window.alert(message);
-                return;
-            } else {
-                setIsLoading(false);
-            }
-
-            const candidatesList = await candidatesResponse.json(), records = [];
-
-            for (let x of candidatesList) {
-                if (x.type === 'SENATE') {
-                    records.push(x)
-                }
-            }
-            
-            setRecords(rankSort(records));
-
-        }
-
         async function getResults() {
             if (isLoading === false) {setIsLoading(true)}
             const resultsResponse = await fetch(`/resultsRecord/`);
@@ -90,7 +63,7 @@ const CallSimulator = ({isMobile}) => {
             const racesList = await racesResponse.json(), raceRecords = [];
 
             for (let x of racesList) {
-                if (/*(x.type === 'GOVERNOR' || x.type === 'SENATE') &&*/ x.year === resultsYear) {
+                if (x.year === resultsYear) {
                     raceRecords.push(x);
                 }
             }
@@ -131,7 +104,6 @@ const CallSimulator = ({isMobile}) => {
             setGovCount([govDem + 6, govRep + 8]);
         }
 
-        getRecords();
         getResults();
         getRaces();
         getCounts();
@@ -140,41 +112,15 @@ const CallSimulator = ({isMobile}) => {
 
     }, [mode]);
 
-    function rankSort(array) {
-        const length = array.length;
-      
-        for (let i = 0; i < length; i++) {
-          for (let j = 0; j < length; j++) {
-            if (array[i].ratingRank > array[j].ratingRank) {
-              const temp = array[i];
-              array[i] = array[j];
-              array[j] = temp;
-            } else if (array[i].ratingRank === array[j].ratingRank) {
-              if (array[i].state < array[j].state) {
-                const temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-              }
-            }
-          }
-        }
-      
-        return array;
-    }
-
     return (
         <div className="mainPage">
             <h1>NOAH'S CALL SIMULATOR</h1>
-            <CollapseText isMobile={isMobile} text={"Welcome to the Call Simulator! Here you can play around with different scenarios for the 2022 US midterm elections. Click on a state to call that race, or click it again to switch parties. " +
+            <CollapseText text={"Welcome to the Call Simulator! Here you can play around with different scenarios for the 2022 US midterm elections. Click on a state to call that race, or click it again to switch parties. " +
                 "The call buttons below will automatically call a race based on its FiveThirtyEight rating."}/>
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">
-                        {//<h3>GOP - <span id="repSeats">{mode === 'SENATE' ? senateCount[1] : mode === 'HOUSE' ? houseCount[1] : govCount[1] }</span></h3>
-                        }
                         <h2>{mode} ELECTION TRACKER</h2>
-                        {//<h3>DEMS - <span id="demSeats">{mode === 'SENATE' ? senateCount[0] : mode === 'HOUSE' ? houseCount[0] : govCount[0]}</span></h3>
-                        }
                     </div>
                 </div>
             </div>
@@ -192,8 +138,6 @@ const CallSimulator = ({isMobile}) => {
             {mode !== 'HOUSE' &&
             <hr />
             }
-            {//<SenateTracker records={records} className={'senateTrackerFull'}/>}
-}
             <ResultsRecordList updateHouseWidget={updateHouseWidget} page={page} year={resultsYear} records={simulatedResults} setRecords={setSimulatedResults} raceRecords={raceRecords} type={mode}/>
         </div>
     );

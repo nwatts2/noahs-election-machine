@@ -175,6 +175,7 @@ hr {
     padding:5px;
     margin:0px 40px;
     width:fit-content;
+    border:none;
     height:auto;
     font-family:'Trebuchet MS';
     font-size:1.5rem;

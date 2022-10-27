@@ -1,13 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import CollapseText from '../components/CollapseText';
-import SenateTracker from '../components/SenateTracker';
 import HouseTracker from '../components/HouseTracker';
 import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
-import '../css/index.css';
 
-const PastResults = ({ isMobile }) => {
-    const [records, setRecords] = useState([]);
+const PastResults = () => {
     const [raceRecords, setRaceRecords] = useState([]);
     const [resultsRecords, setResultsRecords] = useState([]);
     const [senateCount, setSenateCount] = useState([0, 0]);
@@ -30,31 +27,6 @@ const PastResults = ({ isMobile }) => {
     const stateList = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
 
     useEffect(() => {
-        async function getRecords() {
-
-            if (isLoading === false) {setIsLoading(true)}
-            const candidatesResponse = await fetch(`/candidatesRecord/`);
-
-            if (!candidatesResponse.ok) {
-                const message = `An error occurred: ${candidatesResponse.statusText}`;
-                window.alert(message);
-                return;
-            } else {
-                setIsLoading(false);
-            }
-
-            const candidatesList = await candidatesResponse.json(), records = [];
-
-            for (let x of candidatesList) {
-                if (x.type === 'SENATE') {
-                    records.push(x)
-                }
-            }
-            
-            setRecords(rankSort(records));
-
-        }
-
         async function getResults() {
             if (isLoading === false) {setIsLoading(true)}
             const resultsResponse = await fetch(`/resultsRecord/`);
@@ -70,12 +42,6 @@ const PastResults = ({ isMobile }) => {
             const resultsList = await resultsResponse.json(), resultsRecords = [];
 
             for (let x of resultsList) {
-                /*if ((x.type === 'GOVERNOR' || x.type === 'SENATE' || x.type === 'HOUSE') && x.year === resultsYear) {
-                    resultsRecords.push(x);
-                } else if (x._id === 'seatHeldHistory') {
-                    setSeatHistory(x);
-                }*/
-
                 if (x._id === 'seatHeldHistory') {
                     if (!seatHistory['2020']) {
                         setSeatHistory(x);
@@ -147,27 +113,6 @@ const PastResults = ({ isMobile }) => {
 
         }
 
-        async function getRaces() {
-            const racesResponse = await fetch(`/racesRecord/`);
-
-            if (!racesResponse.ok) {
-                const message = `An error occurred: ${racesResponse.statusText}`;
-                window.alert(message);
-                return;
-            }
-
-            const racesList = await racesResponse.json(), raceRecords = [];
-
-            for (let x of racesList) {
-                if ((x.type === 'GOVERNOR' || x.type === 'SENATE') && x.year === resultsYear) {
-                    raceRecords.push(x);
-                }
-            }
-            
-            setRaceRecords(raceRecords);
-
-        }
-
         function updateCount () {    
             let demCount = 0, repCount = 0;
 
@@ -196,7 +141,6 @@ const PastResults = ({ isMobile }) => {
             setResultsYear(2020);
         }
 
-        getRecords();
         getResults();
         convertRacesToResults();   
 
@@ -204,43 +148,17 @@ const PastResults = ({ isMobile }) => {
 
     }, [mode, resultsYear, seatHistory]);
 
-    function rankSort(array) {
-        const length = array.length;
-      
-        for (let i = 0; i < length; i++) {
-          for (let j = 0; j < length; j++) {
-            if (array[i].ratingRank > array[j].ratingRank) {
-              const temp = array[i];
-              array[i] = array[j];
-              array[j] = temp;
-            } else if (array[i].ratingRank === array[j].ratingRank) {
-              if (array[i].state < array[j].state) {
-                const temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-              }
-            }
-          }
-        }
-      
-        return array;
-    }
-
     return (
         <div className="mainPage">
             <h1>PAST ELECTIONS</h1>
-            <CollapseText isMobile={isMobile}
+            <CollapseText 
                 text={"Here you can view results from past November elections for the US Senate, House of Representatives, and governorships."}
                 subtext={"You can currently view senate and gubernatorial results dating back to the year 2000, but more data will " +
                     "become available in the future, as will for the house."}/>
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">
-                        {//<h3>GOP - <span id="repSeats">{mode === 'SENATE' ? senateCount[1] : mode === 'HOUSE' ? houseCount[1] : govCount[1] }</span></h3>
-                        }
                         <h2>{resultsYear} {mode} ELECTIONS</h2>
-                        {//<h3>DEMS - <span id="demSeats">{mode === 'SENATE' ? senateCount[0] : mode === 'HOUSE' ? houseCount[0] : govCount[0]}</span></h3>
-                        }
                     </div>
                 </div>
             </div>
@@ -288,8 +206,6 @@ const PastResults = ({ isMobile }) => {
             {mode === 'HOUSE' &&
                 <HouseTracker page={page} resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} resultsRecords={resultsRecords} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
             }
-            {//<SenateTracker records={records} className={'senateTrackerFull'}/>}
-}
             <ResultsRecordList page={page} year={resultsYear} records={resultsRecords} setRecords={setResultsRecords} type={mode}/>
         </div>
     );

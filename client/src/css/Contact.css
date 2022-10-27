@@ -81,11 +81,16 @@
         width:90%;
         font-size:1rem;
         text-align:center;
+        padding: 25px 10px 10px 10px
     }
     
     .contactPage label {
         padding:10px;
         font-size:1.2rem;
+    }
+
+    .contactPage label:hover {
+        opacity:1;
     }
     
     .contactPage input, .contactPage textarea {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styles from '../css/RecordList.module.css';
+import '../css/RecordList.css';
 
 const ResultRecord = (props) => {
     const [stateCandidates, setStateCandidates] = useState([]);
@@ -8,7 +8,7 @@ const ResultRecord = (props) => {
     const [stateFirstSpecial, setStateFirstSpecial] = useState({});
 
     const [winningClass, setWinningClass] = useState();
-    const [losingClass, setLosingClass] = useState(styles.notCalled);
+    const losingClass = 'notCalled';
 
     useEffect(() => {
         let candidates = [], specialCandidates = [], firstCandidate = {}, firstSpecial = {};
@@ -25,8 +25,8 @@ const ResultRecord = (props) => {
                         }
 
                         if (props.records[i].called !== '') {
-                            if (props.records[i].caucus === 'Democratic') {setWinningClass(styles.calledDem)}
-                            else if (props.records[i].caucus === 'Republican') {setWinningClass(styles.calledRep)}
+                            if (props.records[i].caucus === 'Democratic') {setWinningClass('calledDem')}
+                            else if (props.records[i].caucus === 'Republican') {setWinningClass('calledRep')}
                         }
             
                         k += 1;
@@ -38,8 +38,8 @@ const ResultRecord = (props) => {
                         }
 
                         if (props.records[i].called !== '') {
-                            if (props.records[i].caucus === 'Democratic') {setWinningClass(styles.calledDem)}
-                            else if (props.records[i].caucus === 'Republican') {setWinningClass(styles.calledRep)}
+                            if (props.records[i].caucus === 'Democratic') {setWinningClass('calledDem')}
+                            else if (props.records[i].caucus === 'Republican') {setWinningClass('calledRep')}
                         }
             
                         j += 1;
@@ -56,8 +56,8 @@ const ResultRecord = (props) => {
                         }
 
                         if (props.records[i].called !== '') {
-                            if (props.records[i].caucus === 'Democratic') {setWinningClass(styles.calledDem)}
-                            else if (props.records[i].caucus === 'Republican') {setWinningClass(styles.calledRep)}
+                            if (props.records[i].caucus === 'Democratic') {setWinningClass('calledDem')}
+                            else if (props.records[i].caucus === 'Republican') {setWinningClass('calledRep')}
                         }
             
                         k += 1;
@@ -69,8 +69,8 @@ const ResultRecord = (props) => {
                         }
 
                         if (props.records[i].called !== '') {
-                            if (props.records[i].caucus === 'Democratic') {setWinningClass(styles.calledDem)}
-                            else if (props.records[i].caucus === 'Republican') {setWinningClass(styles.calledRep)}
+                            if (props.records[i].caucus === 'Democratic') {setWinningClass('calledDem')}
+                            else if (props.records[i].caucus === 'Republican') {setWinningClass('calledRep')}
                         }
             
                         j += 1;
@@ -123,32 +123,13 @@ const ResultRecord = (props) => {
         setStateFirstSpecial(firstSpecial);
     }, [props.state, props.year, props.type, JSON.stringify(props.records), props.updateHouseWidget])
     
-
-    /*useEffect(() => {
-        //candidates.length = 0;
-        //specialCandidates.length = 0;
-        //firstCandidate = {};
-        //firstSpecial = {};
-
-        
-
-        window.alert(candidates.length)
-
-        //if (firstSpecial.name !== tempFirstSpecial.name) {setFirstSpecial(tempFirstSpecial)}
-        //if (firstCandidate.name !== tempFirstCandidate.name) {setFirstCandidate(tempFirstCandidate)}
-
-        //setCandidates(tempCandidates);
-        //setSpecialCandidates(tempSpecialCandidates);
-    //}, [props.state, props.year, props.type]);  */  
-    
-    
     return (
     <>
             {stateSpecialCandidates.map((candidate) => {
                 if (candidate === stateFirstSpecial) {
                     return (
                         <tr style={{borderTop:'2px solid white'}} className={candidate.called === '' ? losingClass : winningClass}>
-                            <td className={`${styles.stateLabel}`} rowSpan={stateSpecialCandidates.length}>{props.type === 'HOUSE' ? `${props.state}-${candidate.district} Special` : `${props.state} Special`}</td>
+                            <td className={`${'stateLabel'}`} rowSpan={stateSpecialCandidates.length}>{props.type === 'HOUSE' ? `${props.state}-${candidate.district} Special` : `${props.state} Special`}</td>
                             <td>{candidate.name}</td>
                             <td>{candidate.party}</td>
                             {candidate.vote === '' ? <td>-</td>: <td>{candidate.vote}</td>}
@@ -189,7 +170,7 @@ const ResultRecord = (props) => {
                 if (candidate === stateFirstCandidate) {
                     return (
                         <tr style={{borderTop:'2px solid white'}}  className={candidate.called === '' ? losingClass : winningClass}>
-                            <td className={`${styles.stateLabel}`} rowSpan={stateCandidates.length}>{props.type === 'HOUSE' ? `${props.state}-${candidate.district}` : props.state}</td>
+                            <td className={`${'stateLabel'}`} rowSpan={stateCandidates.length}>{props.type === 'HOUSE' ? `${props.state}-${candidate.district}` : props.state}</td>
                             <td>{candidate.name}</td>
                             <td>{candidate.party}</td>
                             {candidate.vote === '' ? <td>-</td>: <td>{candidate.vote}</td>}
@@ -233,8 +214,9 @@ const ResultRecord = (props) => {
 
 export default function ResultsRecordList(props) {
     const [needRunoff, setNeedRunoff] = useState(false);
-    const [currentState, setCurrentState] = useState(props.page === 'LIVE' || props.page === 'CALLSIM' ? 'Top Races' : 'AL');
+    const [currentState, setCurrentState] = useState((props.page === 'LIVE' || props.page === 'CALLSIM') ? 'Top Races' : 'AL');
     const [limit, setLimit] = useState(5);
+    const [limitStyle, setLimitStyle] = useState({maxHeight: '500px'});
     const [displayedList, setDisplayedList] = useState([]);
     const [neededStates, setNeededStates] = useState([]);
 
@@ -262,6 +244,7 @@ export default function ResultsRecordList(props) {
         else {setNeedRunoff(false)}
 
         if (limit === 1000 && document.getElementById('showMore')) {
+        //if (limitStyle.maxHeight === '1500px' && document.getElementById('showMore')) {
             showMore(document.getElementById('showMore'));
         }
 
@@ -273,84 +256,58 @@ export default function ResultsRecordList(props) {
 
     function getNeededStates() {
         const states = [];
-
-        //if (typeof currentState !== 'undefined' && neededStates.includes(currentState) === false) {setCurrentState(neededStates[0])}
+        let needsUpdate = false;
 
         for (let thisState of stateList) {
             for (let record of props.records) {
-                if (record.state.includes(thisState) && record.type === props.type && states.includes(thisState) === false) {
+                if (record.state.includes(thisState) && record.type === props.type && record.year === props.year && states.includes(thisState) === false) {
                     states.push(record.state);
                 }
             }
         }
 
-        if (states.length !== neededStates.length) {setNeededStates(states)}
-
-        //window.alert(currentState + ' ' + typeof(currentState))
-    }
-
-    function marginSort() {
-        let i = 1, prevMargin = 0, thisMargin = 0;
-        const length = props.records.length;
-        const marginArray = [];
-
-        while (i < length) {
-            if (props.page === 'LIVE') {
-                props.raceRecords.map((race) => {
-                    //window.alert(race.type + ' ' + race.year + ' ' + race.state +' ' + race.district);
-                    if (props.records[i-1].type === race.type && props.records[i-1].year === race.year && props.records[i-1].state === race.state) {
-                        if (race.type === 'HOUSE' && props.records[i-1].district === race.district) {prevMargin = race.margin;}
-                        else if (race.type !== 'HOUSE') {prevMargin = race.margin;}
-                    }
-
-                    if (props.records[i].type === race.type && props.records[i].year === race.year && props.records[i].state === race.state && props.records[i].district === race.district) {
-                        if (race.type === 'HOUSE' && props.records[i].district === race.district) {thisMargin = race.margin;}
-                        else if (race.type !== 'HOUSE') {thisMargin = race.margin;}
-                    }
-                });
+        let i = 0;
+        while (i < neededStates.length) {
+            if (!(states[i] && neededStates[i] && states[i] === neededStates[i])) {
+                needsUpdate = true;
             }
 
-            if (Math.abs(props.records[i].margin) < Math.abs(props.records[i-1].margin)) {
-                const newRecords = props.records;
-                window.alert(props.records[i].margin);
-                const temp = newRecords[i];
-                newRecords[i] = newRecords[i-1];
-                newRecords[i-1] = temp;
-                props.setRecords(newRecords);
-                window.alert(props.records[i].margin);
-            }
-            i += 1;
+            i++;
         }
-        window.alert(prevMargin + ' ' + thisMargin);
 
-    }
+        if (needsUpdate || neededStates.length === 0) {setNeededStates(states)}
 
-    function updateState (e) {
-        const selected = e.currentTarget.value;
-
-        setCurrentState(selected);
+        if (states.includes(currentState) === false) {
+            if (props.page === 'LIVE' || props.page === 'CALLSIM') {
+                setCurrentState('Top Races');
+            } else {
+                setCurrentState(states[0]);
+            }
+        }
 
     }
 
     function showMore(e) {
         if (limit !== 1000) {
+        //if (limitStyle.maxHeight !== '1500px') {
+
+            //setLimitStyle({maxHeight: '1500px'})
             setLimit(1000);
             e.innerHTML = 'SHOW LESS';
         } else {
             setLimit(5);
+            //setLimitStyle({maxHeight: '200px'})
             e.innerHTML = 'SHOW MORE';
         }
     }
 
     function recordList() {
-        let thisState = '', thisList = [];
+        let thisState = '', thisList = [], needsUpdate = false;
         const topSenate = ['PA', 'WI', 'NC', 'OH', 'AZ', 'NV', 'GA', 'CO', 'NH', 'FL'];
         const topGovernor = ['PA', 'WI', 'NV', 'AZ', 'KS', 'OR', 'TX'];
         const topHouse = ['AK-1st', 'AZ-2nd', 'CA-22nd', 'CA-27th', 'CO-8th', 'IA-3rd', 'IL-17th', 'KS-3rd', 'MD-6th', 'ME-2nd', 'NC-13th', 'NJ-7th', 'NM-2nd', 'NV-3rd', 'NY-18th', 'NY-19th', 'NY-22nd', 'PA-7th', 'TX-15th', 'VA-2nd'];
 
         let numRecords = 0;
-
-        //marginSort();
 
         props.records.map((record) => {
             if (currentState === 'Top Races') {
@@ -372,18 +329,25 @@ export default function ResultsRecordList(props) {
                 }
             }
             else if (record.state === currentState && record.year === props.year && record.type === props.type && thisState !== `${record.state}-${record.district}`) {
-                if (numRecords < limit) {
-                    thisState = `${record.state}-${record.district}`;
+                thisState = `${record.state}-${record.district}`;
 
-                    thisList.push(record);
-                }
+                thisList.push(record);
             }
         });
 
-        if (displayedList.length !== thisList.length) {setDisplayedList(thisList);}
+        let i = 0;
+        while (i < thisList.length) {
+            if (!(thisList[i] && displayedList[i] && thisList[i].name === displayedList[i].name)) {
+                needsUpdate = true;
+            }
+            
+            i++;
+        }
+
+        if (needsUpdate || (thisList.length !== 0 && displayedList.length === 0)) {setDisplayedList(thisList);}
         thisState = '';
 
-        return thisList.map((record) => {
+        return displayedList.map((record) => {
             if (currentState === 'Top Races') {
                 if (thisState !== `${record.state}-${record.district}`) {
                     thisState = `${record.state}-${record.district}`;
@@ -413,11 +377,11 @@ export default function ResultsRecordList(props) {
     }
 
     return (
-        <div className={styles.resultsRecords}>
+        <div className={'resultsRecords'}>
             <h3>{props.year} {props.type} RACES</h3>
             <div>
-                <span className={styles.spanText}>Showing Results for</span>
-                <select ref={stateSelect} value={currentState} onChange={(e) => {updateState(e)}}>
+                <span className={'spanText'}>Showing Results for</span>
+                <select ref={stateSelect} value={currentState} onChange={(e) => {setCurrentState(e.currentTarget.value)}}>
                     {(props.page === 'LIVE' || props.page === 'CALLSIM') &&
                         <option>Top Races</option>
                     }

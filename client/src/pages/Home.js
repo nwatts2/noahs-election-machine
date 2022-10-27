@@ -1,15 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import CollapseText from '../components/CollapseText';
-import SenateTracker from '../components/SenateTracker';
 import HouseTracker from '../components/HouseTracker';
-import Spinner from '../components/Spinner';
 import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
-import TwitterWidget from '../components/TwitterWidget';
-import '../css/index.css';
 
-const Home = ({ isMobile }) => {
-    const [records, setRecords] = useState([]);
+const Home = () => {
     const [raceRecords, setRaceRecords] = useState([]);
     const [resultsRecords, setResultsRecords] = useState([]);
     const [senateCount, setSenateCount] = useState([36, 29]);
@@ -21,41 +16,9 @@ const Home = ({ isMobile }) => {
     const [updateHouseWidget, setUpdateHouseWidget] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
 
-    const [updateInterval, setUpdateInterval] = useState(0);
-
     const page = 'LIVE';
 
-    const governorResultsYear = 2018, senateResultsYear = 2020, houseResultsYear = 2020, currentYear = 2022;
-
-
     useEffect(() => {
-        //const interval = setInterval(() => {setUpdateInterval((c) => c + 1)}, 30000);
-
-        async function getRecords() {
-            if (isLoading === false) {setIsLoading(true)}
-            const candidatesResponse = await fetch(`/candidatesRecord/`);
-
-            if (!candidatesResponse.ok) {
-                const message = `An error occurred: ${candidatesResponse.statusText}`;
-                window.alert(message);
-                return;
-            } else {
-                setIsLoading(false);
-            }
-
-            const candidatesList = await candidatesResponse.json(), records = [];
-
-            for (let x of candidatesList) {
-                if (x.type === 'SENATE') {
-                    records.push(x)
-                }
-            }
-            
-            setRecords(rankSort(records));
-            //if (isLoading === true) {setIsLoading(false)}
-
-        }
-
         async function getResults() {
             if (isLoading === false) {setIsLoading(true)}
             const resultsResponse = await fetch(`/resultsRecord/`);
@@ -71,7 +34,7 @@ const Home = ({ isMobile }) => {
             const resultsList = await resultsResponse.json(), tempResultsRecords = [];
 
             for (let x of resultsList) {
-                if ((x.type === 'GOVERNOR' && (x.year === governorResultsYear || x.year === currentYear)) || (x.type === 'SENATE' && (x.year === senateResultsYear || x.year === currentYear)) || (x.type === 'HOUSE' && (x.year === houseResultsYear || x.year === currentYear))) {
+                if ((x.type === 'GOVERNOR' || x.type === 'SENATE' || x.type === 'HOUSE') && (x.year === resultsYear)) {
                     tempResultsRecords.push(x);
                 }
             }
@@ -136,42 +99,18 @@ const Home = ({ isMobile }) => {
             setGovCount([govDem + 6, govRep + 8]);
         }
 
-        getRecords();
         getResults();
         getRaces();
         getCounts();
 
-        //return (clearInterval(interval));
         return;
 
-    }, [mode, updateInterval]);
-
-    function rankSort(array) {
-        const length = array.length;
-      
-        for (let i = 0; i < length; i++) {
-          for (let j = 0; j < length; j++) {
-            if (array[i].ratingRank > array[j].ratingRank) {
-              const temp = array[i];
-              array[i] = array[j];
-              array[j] = temp;
-            } else if (array[i].ratingRank === array[j].ratingRank) {
-              if (array[i].state < array[j].state) {
-                const temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-              }
-            }
-          }
-        }
-      
-        return array;
-    }
+    }, [mode]);
 
     return (
         <div className="mainPage">
             <h1>THE 2022 US MIDTERM ELECTIONS</h1>
-            <CollapseText isMobile={isMobile}
+            <CollapseText 
                 text={`Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and Governor ` +
                     "election for the 2022 midterms. Check back on November 8th to view results for every election all in one place!"}
                 subtext = { "You can " +
@@ -184,7 +123,7 @@ const Home = ({ isMobile }) => {
                         <h2>{mode} ELECTION TRACKER</h2>
                     </div>
                 </div>
-                <CollapseText isMobile={isMobile}
+                <CollapseText 
                     text={mode === 'SENATE' ? "The U.S. senate elections are shaping up to be an interesting deviation from the typical " +
                         "midterm year. Since Democrats control the White House, Republicans would " +
                         "normally be expected to reclaim the senate. However, the Democrats have a shot at retaining control, despite the pendulum starting to swing back in favor of Republicans " +
@@ -223,8 +162,6 @@ const Home = ({ isMobile }) => {
             {mode !== 'HOUSE' &&
             <hr />
             }
-            {//<SenateTracker records={records} className={'senateTrackerFull'}/>}
-}
             <ResultsRecordList page={page} year={resultsYear} records={resultsRecords} setRecords={setResultsRecords} raceRecords={raceRecords} type={mode}/>
         </div>
     );

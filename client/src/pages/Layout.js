@@ -25,7 +25,7 @@ const Layout = () => {
         <div className='fullBody'>
             <NavBar isMobile={isMobile} />
             <div className='scrollable'>
-                <Outlet isMobile={isMobile}/>
+                <Outlet />
             </div>
             <Footer isMobile={isMobile} />
         </div>

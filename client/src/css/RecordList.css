@@ -16,12 +16,14 @@
     overflow:hidden;
     font-size:1.5rem;
     box-shadow:0px 0px 10px grey;
+    transition: height .25s ease-in-out;
 }
 
 .resultsRecords button {
     font-family: 'Trebuchet MS';
     font-size:1.2rem;
     font-weight:bold;
+    color:white;
     width:fit-content;
     background:none;
     border:none;
