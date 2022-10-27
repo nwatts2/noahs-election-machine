@@ -3,7 +3,7 @@ import '../css/HouseTracker.css';
 import Graph from '../components/Graph';
 import { Popover, Whisper } from 'rsuite';
 import Popup from '../components/Popup';
-import useMousePosition from '../components/useMousePosition';
+import useMousePosition from '../hooks/useMousePosition';
 
 function HouseButton ({resultsYear, updateHouseWidget, setUpdateHouseWidget, page, resultsRecords, state, district, popupState, enablePopups, mouseposition, raceRecords, setPopupState, topHouse}) {
     const candidates = [], names = [], thisState=`${state}-${district}`;

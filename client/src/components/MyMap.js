@@ -3,7 +3,7 @@ import { Popover, Whisper } from 'rsuite';
 import { RadioContext } from 'rsuite/esm/RadioGroup/RadioGroup';
 import Popup from '../components/Popup';
 import Spinner from '../components/Spinner';
-import useMousePosition from '../components/useMousePosition';
+import useMousePosition from '../hooks/useMousePosition';
 import '../css/Map.css';
 
 function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, setSenateCount, govCount, setGovCount, mode, setMode, isLoading}) {
