@@ -126,26 +126,26 @@ const Home = () => {
                 <CollapseText 
                     text={mode === 'SENATE' ? "The U.S. senate elections are shaping up to be an interesting deviation from the typical " +
                         "midterm year. Since Democrats control the White House, Republicans would " +
-                        "normally be expected to reclaim the senate. However, the Democrats have a shot at retaining control, despite the pendulum starting to swing back in favor of Republicans " +
+                        "normally be expected to easily reclaim the senate. However, the Democrats have a decent shot at retaining control, despite the pendulum starting to swing back in favor of Republicans " +
                         "over the last couple weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across several key swing states. " : 
 
                     (mode === 'GOVERNOR' ? "The race for control of the most governorships looks to be following a similar path to the senate elections. " +
-                        "Candidate quality is what seems to matter most here, moreso than the national environment." : 
+                        "Candidate quality is what seems to matter most here, moreso than the overall national environment." : 
 
                         "The 2022 U.S. House of Representatives elections are much more in line with what we would expect for a midterm year " +
                         "when compared to the senate and governorships. Republicans are favored to take back the house this November, primarily due to " +
-                        "the national environment, along with recent redistricting wins in key states.")}
+                        "a favorable national environment, along with recent redistricting wins in key states.")}
                     
-                    subtext={mode === 'SENATE' ? "As it stands, the GOP's keys to the senate will be through Nevada and Georgia, " +
-                        "assuming the Democrats are able to pick up a seat in Pennsylvania, which they are favored to do at time of writing." : 
+                    subtext={mode === 'SENATE' ? "The three narrowest states are expected to be Pennsylvania, Georgia, and Nevada, and whichever party wins at least two will very likely control the chamber. " + 
+                        "Early voting data is looking more promising than initially thought for Democrats, but current polling has been more beneficial for the Republican party. As it stands, the senate is a coin flip. " :
                     
                     (mode === 'GOVERNOR' ? "Republicans are favored to hold the " +
                         "most governorships, as is normally the case, but if things go well for the Democrats, we could possibly see a " +
-                        "25-25 split between the two parties, though this would be quite unlikely. This will ultimately come down to the most competitive races in Wisconsin, " +
+                        "25-25 split between the two parties, though this appears to be increasingly unlikely. This will ultimately come down to the most competitive races in Wisconsin, " +
                         "Oregon, Arizona, and Nevada." :
 
-                        "Still, this is not set in stone, and there are plenty of tight races that Democrats have a shot at winning in states like " +
-                        "New York, Arizona, and California, although a Democratic house is seeming more unlikely as we get closer to election day." )}
+                        "Still, this is not set in stone, and there are plenty of tight races that Democrats have a chance at winning in states like " +
+                        "New York, Arizona, and California, although a Democratic house is becoming more unlikely as we get closer to election day." )}
                 />
             </div>
             <div className='modeButtons'>

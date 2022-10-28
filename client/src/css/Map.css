@@ -77,6 +77,30 @@ path {pointer-events: auto;}
 
 .seatBreakdown h3 {
     font-family:'Trebuchet MS';
+    border-radius:10px 50px 10px 50px;
+    transition: all .3s ease;
+}
+
+.seatBreakdown .dem {
+    background:linear-gradient(to right, rgba(0, 71, 255, 1) 50%, transparent 50%) right;
+    background-size: 200% 100%;
+}
+
+.seatBreakdown .rep {
+    background:linear-gradient(to right, rgb(253, 3, 83) 50%, transparent 50%) right;
+    background-size: 200% 100%;
+}
+
+.seatBreakdown .demWin {
+    background:linear-gradient(to right, rgba(0, 71, 255, 1) 50%, transparent 50%) right;
+    background-size: 200% 100%;
+    background-position:left;
+}
+
+.seatBreakdown .repWin {
+    background:linear-gradient(to right, rgb(253, 3, 83) 50%, transparent 50%) right;
+    background-size: 200% 100%;
+    background-position:left;
 }
 
 @media screen and (max-width: 740px) {

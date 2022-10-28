@@ -719,8 +719,8 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                 <>
                     <h2>SEAT BREAKDOWN</h2>
                     <div className='seatBreakdown'>
-                        <h3>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
-                        <h3>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
+                        <h3 id='demCount' className={((mode === 'SENATE' && senateCount[0] >= 50) || (mode === 'GOVERNOR' && govCount[0] > 25)) && page === 'LIVE' ? 'demWin' : (page === 'LIVE' ? 'dem' : '')}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
+                        <h3 id='repCount' className={((mode === 'SENATE' && senateCount[1] > 50) || (mode === 'GOVERNOR' && govCount[1] > 25)) && page === 'LIVE' ? 'repWin' : (page === 'LIVE' ? 'rep' : '')}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
                     </div>
                 </>
             }
@@ -1451,8 +1451,8 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                 <div>
                     <h2>SEAT BREAKDOWN</h2>
                     <div className='seatBreakdown'>
-                        <h3>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
-                        <h3>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
+                        <h3 id='demCount' className={((mode === 'SENATE' && senateCount[0] >= 50) || (mode === 'GOVERNOR' && govCount[0] > 25) && (page === 'CALLSIM' || page === 'LIVE')) ? 'demWin' : 'dem'}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
+                        <h3 id='repCount' className={((mode === 'SENATE' && senateCount[1] > 50) || (mode === 'GOVERNOR' && govCount[1] > 25) && (page === 'CALLSIM' || page === 'LIVE')) ? 'repWin' : 'rep'}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
                     </div>
                 </div>
             }

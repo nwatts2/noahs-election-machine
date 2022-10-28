@@ -1,0 +1,53 @@
+.notificationContainer, .notificationContainerNegative {
+    position:fixed;
+    top:41px;
+    right:-50rem;
+    width:20%;
+    height:90px;
+    border-radius:20px 0px 0px 20px;
+    display:flex;
+    flex-flow:row nowrap;
+    align-items:center;
+    justify-content:center;
+    background-color:rgba(0, 20, 80, 0.90);
+    overflow:hidden;
+    visibility:hidden;
+}
+
+.notificationContainer span, .notificationContainerNegative span {
+    font-family:'Courier New';
+    font-weight:bold;
+    font-size: 1.3rem;
+}
+
+.notificationContainerNegative {
+    background-color:rgba(80, 10, 25, 0.90);
+}
+
+.notificationContainerNegative span {
+    color: rgb(255, 235, 250)
+}
+
+@keyframes moveRight {
+    from {
+        transform: translateX(-50rem);
+    }
+    to {
+        transform: translateX(0rem);
+    }
+}
+
+@keyframes moveLeft {
+    from {
+        transform: translateX(0rem);
+    }
+    to {
+        transform: translateX(-50rem);
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .notificationContainer, .notificationContainerNegative {
+        width: 90%;
+    }
+}
