@@ -111,10 +111,10 @@ const Home = () => {
         <div className="mainPage">
             <h1>THE 2022 US MIDTERM ELECTIONS</h1>
             <CollapseText 
-                text={`Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and Governor ` +
+                text={`Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and gubernatorial ` +
                     "election for the 2022 midterms. Check back on November 8th to view results for every election all in one place!"}
                 subtext = { "You can " +
-                    "also check out our Call Simulator to see how each race impacts control of the Senate, House, and Governorships, or you can " +
+                    "also check out our Call Simulator to see how each race impacts control of the senate, house, and governorships, or you can " +
                     "visit our Past Results page to view previous election results for every state."} />
             
             <div className='typeInfo'>
@@ -127,25 +127,25 @@ const Home = () => {
                     text={mode === 'SENATE' ? "The U.S. senate elections are shaping up to be an interesting deviation from the typical " +
                         "midterm year. Since Democrats control the White House, Republicans would " +
                         "normally be expected to easily reclaim the senate. However, the Democrats have a decent shot at retaining control, despite the pendulum starting to swing back in favor of Republicans " +
-                        "over the last couple weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across several key swing states. " : 
+                        "over the last couple of weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across several key swing states. " : 
 
-                    (mode === 'GOVERNOR' ? "The race for control of the most governorships looks to be following a similar path to the senate elections. " +
+                    (mode === 'GOVERNOR' ? "The sprint for control of the nation's governorships looks to be taking a similar path to the senate elections. " +
                         "Candidate quality is what seems to matter most here, moreso than the overall national environment." : 
 
-                        "The 2022 U.S. House of Representatives elections are much more in line with what we would expect for a midterm year " +
-                        "when compared to the senate and governorships. Republicans are favored to take back the house this November, primarily due to " +
+                        "This year's elections for the U.S. House of Representatives are much more in line with what we would expect for a midterm year " +
+                        "when compared to the senate and gubernatorial elections. Republicans are favored to take back the house this November, primarily due to " +
                         "a favorable national environment, along with recent redistricting wins in key states.")}
                     
                     subtext={mode === 'SENATE' ? "The three narrowest states are expected to be Pennsylvania, Georgia, and Nevada, and whichever party wins at least two will very likely control the chamber. " + 
-                        "Early voting data is looking more promising than initially thought for Democrats, but current polling has been more beneficial for the Republican party. As it stands, the senate is a coin flip. " :
+                        "Early voting data and higher-than-average youth turnout are promising signs for Democrats, but current polling has been more beneficial for the Republican party. As it stands, the senate is a coin flip." :
                     
                     (mode === 'GOVERNOR' ? "Republicans are favored to hold the " +
                         "most governorships, as is normally the case, but if things go well for the Democrats, we could possibly see a " +
-                        "25-25 split between the two parties, though this appears to be increasingly unlikely. This will ultimately come down to the most competitive races in Wisconsin, " +
+                        "25-25 split between the two parties, though this appears to be increasingly unlikely as the election draws closer. This will ultimately come down to the most competitive races in Wisconsin, " +
                         "Oregon, Arizona, and Nevada." :
 
                         "Still, this is not set in stone, and there are plenty of tight races that Democrats have a chance at winning in states like " +
-                        "New York, Arizona, and California, although a Democratic house is becoming more unlikely as we get closer to election day." )}
+                        "New York, Arizona, and California. However, the possibility of a house majority is falling further and further away from the Democrats as we near election day." )}
                 />
             </div>
             <div className='modeButtons'>

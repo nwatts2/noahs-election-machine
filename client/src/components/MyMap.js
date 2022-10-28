@@ -13,6 +13,8 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
     const [resetCount, setResetCount] = useState(0);
     const [popupState, setPopupState] = useState('');
     const [isSpecial, setIsSpecial] = useState(false);
+    const [senateWinner, setSenateWinner] = useState('');
+    const [govWinner, setGovWinner] = useState('');
     const mouseposition = useMousePosition();
 
     const safeDemColor = 'rgba(0, 71, 255, 0.8)', likelyDemColor = 'rgba(0, 100, 255, 0.85)', leanDemColor = 'rgb(0, 127, 255)', tiltDemColor = 'rgba(180, 210, 255, 0.60)';
@@ -30,6 +32,11 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
     useEffect(() => {
         resetMap();
     }, [mode])
+
+    useEffect(() => {
+        getWinners();
+        
+    }, [JSON.stringify(resultsRecords)])
 
     useEffect(() => {
         const newStates = [];
@@ -391,10 +398,43 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
            
         });
 
+        getWinners();
+
         setStates(newStates);
         setSpecialStates(tempSpecialStates);
 
     }, [raceRecords, resultsRecords, resetCount]);
+
+    function getWinners () {
+        if (resultsYear === 2022) {
+            if (senateCount[0] >= 50) {
+                setSenateWinner('Democratic');
+            } else if (senateCount[1] > 50) {
+                setSenateWinner('Republican');
+            } else if (senateWinner !== '') {
+                setSenateWinner('')
+            }
+
+        } else {
+            if (senateCount[0] > 50) {
+                setSenateWinner('Democratic');
+            } else if (senateCount[1] > 50) {
+                setSenateWinner('Republican');
+            } else if (senateCount[0] === 50) {
+                if (resultsYear === 2000 || resultsYear === 2002 || resultsYear === 2004 || resultsYear === 2006 || resultsYear === 2016 || resultsYear === 2018) {
+                    setSenateWinner('Republican');
+                } else if (resultsYear === 2008 || resultsYear === 2010 || resultsYear === 2012 || resultsYear === 2014 || resultsYear === 2020) {
+                    setSenateWinner('Democratic');
+                }
+
+            } else if (senateWinner !== '') {
+                setSenateWinner('')
+            }
+
+        }
+
+        return;
+    }
 
     function resetMap() {
         const hoverObj = document.getElementById('topObj')
@@ -719,8 +759,8 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                 <>
                     <h2>SEAT BREAKDOWN</h2>
                     <div className='seatBreakdown'>
-                        <h3 id='demCount' className={((mode === 'SENATE' && senateCount[0] >= 50) || (mode === 'GOVERNOR' && govCount[0] > 25)) && page === 'LIVE' ? 'demWin' : (page === 'LIVE' ? 'dem' : '')}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
-                        <h3 id='repCount' className={((mode === 'SENATE' && senateCount[1] > 50) || (mode === 'GOVERNOR' && govCount[1] > 25)) && page === 'LIVE' ? 'repWin' : (page === 'LIVE' ? 'rep' : '')}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
+                        <h3 id='demCount' className={((mode === 'SENATE' && senateWinner === 'Democratic') || (mode === 'GOVERNOR' && govWinner === 'Democratic')) ? 'demWin' : 'dem'}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
+                        <h3 id='repCount' className={((mode === 'SENATE' && senateWinner === 'Republican') || (mode === 'GOVERNOR' && govWinner === 'Republican')) ? 'repWin' : 'rep'}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
                     </div>
                 </>
             }
@@ -1451,8 +1491,8 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                 <div>
                     <h2>SEAT BREAKDOWN</h2>
                     <div className='seatBreakdown'>
-                        <h3 id='demCount' className={((mode === 'SENATE' && senateCount[0] >= 50) || (mode === 'GOVERNOR' && govCount[0] > 25) && (page === 'CALLSIM' || page === 'LIVE')) ? 'demWin' : 'dem'}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
-                        <h3 id='repCount' className={((mode === 'SENATE' && senateCount[1] > 50) || (mode === 'GOVERNOR' && govCount[1] > 25) && (page === 'CALLSIM' || page === 'LIVE')) ? 'repWin' : 'rep'}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
+                        <h3 id='demCount' className={((mode === 'SENATE' && senateWinner === 'Democratic') || (mode === 'GOVERNOR' && govWinner === 'Democratic')) ? 'demWin' : 'dem'}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
+                        <h3 id='repCount' className={((mode === 'SENATE' && senateWinner === 'Republican') || (mode === 'GOVERNOR' && govWinner === 'Republican')) ? 'repWin' : 'rep'}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
                     </div>
                 </div>
             }
