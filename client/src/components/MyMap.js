@@ -31,7 +31,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
     useEffect(() => {
         resetMap();
-    }, [mode])
+    }, [mode]) // Add resultsYear after adding odd year counts
 
     useEffect(() => {
         getWinners();
@@ -433,6 +433,14 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
         }
 
+        if (govCount[0] > 25) {
+            setGovWinner('Democratic');
+        } else if (govCount[1] > 25) {
+            setGovWinner('Republican');
+        } else if (govWinner !== '') {
+            setGovWinner('')
+        }
+
         return;
     }
 
@@ -442,8 +450,14 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
         hoverObj.attributes['calledpath'].value = '';
         hoverObj.attributes['d'].value = '';
 
-        setSenateCount([36, 29]);
-        setGovCount([6, 8]);
+        if (page === 'LIVE' || page === 'CALLSIM') {
+            setSenateCount([36, 29]);
+            setGovCount([6, 8]);
+        } else if (page === 'PAST') {
+            setSenateCount([0, 0]);
+            setGovCount([0, 0]);
+        }
+        
         setResetCount((c) => c + 1);
 
         if (page === 'CALLSIM') {
