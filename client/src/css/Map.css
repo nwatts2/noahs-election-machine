@@ -103,6 +103,19 @@ path {pointer-events: auto;}
     background-position:left;
 }
 
+.enableButtons {
+    height:100%;
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content:flex-end;
+    align-items:center;
+    margin-top:300px;
+}
+
+.enableButtonsSim {
+
+}
+
 @media screen and (max-width: 740px) {
     .seatBreakdown {
         width:100%;
@@ -151,5 +164,15 @@ path {pointer-events: auto;}
 
     .mapButtons button:hover {
         opacity:1;
+    }
+
+    .enableButtons {
+        margin:0;
+    }
+
+    .enableButtonsSim {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content:center;
     }
 }

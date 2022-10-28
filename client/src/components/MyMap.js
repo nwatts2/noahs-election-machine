@@ -753,11 +753,11 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
     function enablePops(e) {
         if (enablePopups) {
             setEnablePopups(false);
-            e.currentTarget.innerHTML = 'ENABLE POPUPS';
+            e.currentTarget.innerHTML = 'ENABLE INFO';
         }
         else {
             setEnablePopups(true);
-            e.currentTarget.innerHTML = 'DISABLE POPUPS';
+            e.currentTarget.innerHTML = 'DISABLE INFO';
         }
     }
 
@@ -1580,9 +1580,15 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                 </div>
             }
             {page === 'CALLSIM' &&
-                <div>
+                <div className='enableButtonsSim'>
                     <button onClick={resetMap}>RESET MAP</button>
-                    <button onClick={(e) => {enablePops(e)}}>DISABLE POPUPS</button>
+                    <button onClick={(e) => {enablePops(e)}}>DISABLE INFO</button>
+                    <button onClick={(e) => {enableRate(e)}}>DISABLE RATINGS</button>
+                </div>
+            }
+            {page === 'LIVE' &&
+                <div className='enableButtons'>
+                    <button onClick={(e) => {enablePops(e)}}>DISABLE INFO</button>
                     <button onClick={(e) => {enableRate(e)}}>DISABLE RATINGS</button>
                 </div>
             }
