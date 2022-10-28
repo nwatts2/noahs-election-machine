@@ -10,6 +10,7 @@ const PastResults = () => {
     const [senateCount, setSenateCount] = useState([0, 0]);
     const [govCount, setGovCount] = useState([0, 0]);
     const [houseCount, setHouseCount] = useState([0, 0]);
+    const [president, setPresident] = useState([0, 0]);
     const [mode, setMode] = useState('SENATE');
     const [resultsYear, setResultsYear] = useState(2020);
 
@@ -116,6 +117,8 @@ const PastResults = () => {
         function updateCount () {    
             let demCount = 0, repCount = 0;
 
+            setPresident(seatHistory[`${resultsYear}`][3]);
+
             if (mode === 'SENATE') {
                 demCount = seatHistory[`${resultsYear}`][0][0];
                 repCount = seatHistory[`${resultsYear}`][0][1];
@@ -198,7 +201,7 @@ const PastResults = () => {
             </div>
 
             {mode !== 'HOUSE' &&
-                <MyMap page={page} isLoading={isLoading} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} setMode={setMode}/>
+                <MyMap page={page} president={president} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} />
             }
             {mode !== 'HOUSE' &&
             <hr />

@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Popover, Whisper } from 'rsuite';
-import { RadioContext } from 'rsuite/esm/RadioGroup/RadioGroup';
 import Popup from '../components/Popup';
-import Spinner from '../components/Spinner';
 import useMousePosition from '../hooks/useMousePosition';
 import '../css/Map.css';
 
-function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, setSenateCount, govCount, setGovCount, mode, setMode, isLoading}) {
+function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, senateCount, setSenateCount, govCount, setGovCount, mode}) {
     const [states, setStates] = useState([]);
     const [specialStates, setSpecialStates] = useState([]);
     const [enablePopups, setEnablePopups] = useState(true);
+    const [enableRatings, setEnableRatings] = useState(true);
     const [resetCount, setResetCount] = useState(0);
     const [popupState, setPopupState] = useState('');
     const [isSpecial, setIsSpecial] = useState(false);
@@ -22,6 +21,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
     const calledDemColor = 'rgba(0, 71, 255, 0.65)', calledRepColor = 'rgba(253, 3, 83, 0.75)';
     const uncalledColor = 'rgba(60, 60, 62, 1)';
     const noRaceColor = 'rgba(36, 36, 37, .1)';
+
     const letterColor = 'white';
     const letterFont = '14px';
     const strokeWidth = 1.5;
@@ -31,7 +31,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
     useEffect(() => {
         resetMap();
-    }, [mode]) // Add resultsYear after adding odd year counts
+    }, [mode, resultsYear])
 
     useEffect(() => {
         getWinners();
@@ -72,6 +72,9 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
             for (let thisState of stateList) {
                 let currentRace = {};
                 const races = [];
+                const stateElement = document.getElementById(thisState);
+
+                stateElement.style.fill = noRaceColor;
     
                 for (let x of raceRecords) {
                     if (x.type === mode && x.state.includes(thisState)) {
@@ -92,7 +95,6 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
 
                         currentRace = {state: x.state, called: called, hasElection: true, ratingRank: x.ratingRank, margin: margin, isSpecial: x.isSpecial};
                         races.push(currentRace);
-                        //break;
                     }
                 }
 
@@ -106,6 +108,12 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                             newStates.push(race);
                         }
                     }
+
+                    if (race.called === 'Democratic') {
+                        stateElement.style.fill = calledDemColor;
+                    } else if (race.called === 'Republican') {
+                        stateElement.style.fill = calledRepColor;
+                    }
                 }
 
                 for (let race of races) {        
@@ -113,15 +121,29 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                         if (race.hasElection) {
                             newStates.push(race);
 
+                            if (race.called === 'Democratic') {
+                                stateElement.style.fill = calledDemColor;
+                            } else if (race.called === 'Republican') {
+                                stateElement.style.fill = calledRepColor;
+                            }
+
                         }
                     } else if (race.isSpecial) {
                         race.state = `${race.state}-SPECIAL`;
                         tempSpecialStates.push(race);
+
+                        const specialElement = document.getElementById(`SPECIAL${tempSpecialStates.indexOf(race) + 1}`);
+
+                        if (race.called === 'Democratic') {
+                            specialElement.style.fill = calledDemColor;
+                        } else if (race.called === 'Republican') {
+                            specialElement.style.fill = calledRepColor;
+                        }
+
                     }
                 }
 
             }
-            //if (mode === 'SENATE') {newStates.push({state: "OK-Special", called: '', hasElection: true, ratingRank: -3})}
 
         } else {
             for (let thisState of stateList) {
@@ -290,28 +312,33 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
             }
         }
 
-        for (let thisState of stateList) {
-            const stateElement = document.getElementById(thisState);
-            if (stateElement) {stateElement.style.fill = noRaceColor;}
+        if (page === 'PAST') {
+            for (let thisState of stateList) {
+                const stateElement = document.getElementById(thisState);
+    
+                if (stateElement) {stateElement.style.fill = noRaceColor;}
+            }
         }
-
+        
         const specialElem1 = document.getElementById('SPECIAL1');
         const specialElem2 = document.getElementById('SPECIAL2');
         const specialElem3 = document.getElementById('SPECIAL3');
         const specialElem4 = document.getElementById('SPECIAL4');
 
-        if (specialElem1) {specialElem1.style.fill = noRaceColor;}
-        if (specialElem2) {specialElem2.style.fill = noRaceColor;}
-        if (specialElem3) {specialElem3.style.fill = noRaceColor;}
-        if (specialElem4) {specialElem4.style.fill = noRaceColor;}
+        if (specialElem1 && page === 'PAST') {specialElem1.style.fill = noRaceColor;}
+        if (specialElem2 && page === 'PAST') {specialElem2.style.fill = noRaceColor;}
+        if (specialElem3 && page === 'PAST') {specialElem3.style.fill = noRaceColor;}
+        if (specialElem4 && page === 'PAST') {specialElem4.style.fill = noRaceColor;}
 
 
         newStates.map((state) => {
             const elem = document.getElementById(state.state.toString());
 
-            if (state.hasElection && elem) {
+            if (state.hasElection && elem && enableRatings) {
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
                     callRace(elem);
+
+                } else if (state.called !== '' && (page === 'LIVE' || page === 'CALLSIM')) {
 
                 } else if (state.ratingRank === 3 && state.hasElection) {
                     elem.style.fill = safeDemColor;
@@ -342,6 +369,14 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                     elem.style.fill = uncalledColor;
 
                 }
+            } else if (state.hasElection && elem) {
+                if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
+                    callRace(elem);
+
+                } else if (state.called === '') {
+                    elem.style.fill = uncalledColor;
+                }
+
             } else if (elem) {
                 elem.style.fill = noRaceColor;
             }
@@ -357,9 +392,11 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
             if (elemText) {elemText.innerHTML = `${state.state.slice(0, 2)} Special`;}
             if (elem) {elem.attributes['data-id'].value = state.state}
 
-            if (state.hasElection && elem) {
+            if (state.hasElection && elem && enableRatings) {
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
                     callRace(elem);
+
+                } else if (state.called !== '' && (page === 'LIVE' || page === 'CALLSIM')) {
 
                 } else if (state.ratingRank === 3 && state.hasElection) {
                     elem.style.fill = safeDemColor;
@@ -390,6 +427,14 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                     elem.style.fill = uncalledColor;
 
                 }
+            } else if (state.hasElection && elem) {
+                if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
+                    callRace(elem);
+
+                } else if (state.called === '') {
+                    elem.style.fill = uncalledColor;
+                }
+
             } else if (elem) {
                 elem.style.fill = noRaceColor;
             }
@@ -403,7 +448,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
         setStates(newStates);
         setSpecialStates(tempSpecialStates);
 
-    }, [raceRecords, resultsRecords, resetCount]);
+    }, [raceRecords, resultsRecords, resetCount, enableRatings]);
 
     function getWinners () {
         if (resultsYear === 2022) {
@@ -421,9 +466,9 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
             } else if (senateCount[1] > 50) {
                 setSenateWinner('Republican');
             } else if (senateCount[0] === 50) {
-                if (resultsYear === 2000 || resultsYear === 2002 || resultsYear === 2004 || resultsYear === 2006 || resultsYear === 2016 || resultsYear === 2018) {
+                if (president[1] === 1) {
                     setSenateWinner('Republican');
-                } else if (resultsYear === 2008 || resultsYear === 2010 || resultsYear === 2012 || resultsYear === 2014 || resultsYear === 2020) {
+                } else if (president[0] === 1) {
                     setSenateWinner('Democratic');
                 }
 
@@ -470,15 +515,15 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
     }
 
     function callRace(target) {
-        let id = target.id, currentState;
+        let id = target.id, currentState, special = false;
 
         if (id === 'SPECIAL1' || id === 'SPECIAL2' || id === 'SPECIAL3' || id === 'SPECIAL4') {
             id = target.attributes['data-id'].value;
             currentState = specialStates.find(item => item.state === id);
+            special = true;
         } else {
             currentState = states.find(item => item.state === id);
         }
-
 
         let demCount, repCount;
         if (mode === 'SENATE') {demCount = 36; repCount = 29;}
@@ -504,12 +549,12 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
             else if (currentState.ratingRank > 0 && currentState.ratingRank < 4 && currentState.called === '') {
                 target.style.fill = calledDemColor;
                 currentState.called = 'Democratic';
-                updateState(currentState);
+                updateState(currentState, special);
 
             } else if (currentState.ratingRank < 0 && currentState.ratingRank > -4 && currentState.called === ''){
                 target.style.fill = calledRepColor;
                 currentState.called = 'Republican';
-                updateState(currentState);
+                updateState(currentState, special);
             } else if (currentState.ratingRank === 0 && currentState.called === '') {
                 if (currentState.margin > 0) {
                     target.style.fill = calledDemColor;
@@ -519,21 +564,21 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                     currentState.called = 'Republican';
                 }
 
-                updateState(currentState);
+                updateState(currentState, special);
 
             } else if (currentState.called === 'Democratic'){
                 target.style.fill = calledRepColor;
                 currentState.called = 'Republican';
-                updateState(currentState);
+                updateState(currentState, special);
             } else if (currentState.called === 'Republican'){
                 target.style.fill = calledDemColor;
                 currentState.called = 'Democratic';
-                updateState(currentState);
+                updateState(currentState, special);
             }
 
             if (page === 'CALLSIM') {
                 for (let record of resultsRecords) {
-                    if (record.state === currentState.state && record.type === mode && record.year === resultsYear) {
+                    if (record.state === currentState.state.slice(0, 2) && record.type === mode && record.year === resultsYear && record.isSpecial === currentState.isSpecial) {
                         if (currentState.called === 'Democratic' && record.caucus === 'Republican') {
                             record.called = '';
 
@@ -545,7 +590,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                 }
 
                 for (let record of resultsRecords) {
-                    if (record.state === currentState.state && record.type === mode && record.year === resultsYear) {
+                    if (record.state === currentState.state.slice(0, 2) && record.type === mode && record.year === resultsYear && record.isSpecial === currentState.isSpecial) {
                         if (currentState.called === 'Democratic' && record.caucus === 'Democratic') {
                             record.called = 'Democratic';
                             break;
@@ -680,16 +725,29 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
         
     }
 
-    const updateState = (newState) => {
-        const newStateArray = states.map(obj => {
-            if (obj.state === newState.state) {
-                return {...obj, called: newState.called};
-            } else {
-                return obj;
-            }
-        });
+    const updateState = (newState, special) => {
+        if (special) {
+            const newStateArray = specialStates.map(obj => {
+                if (obj.state === newState.state) {
+                    return {...obj, called: newState.called};
+                } else {
+                    return obj;
+                }
+            });
+    
+            setSpecialStates(newStateArray);
 
-        setStates(newStateArray);
+        } else {
+            const newStateArray = states.map(obj => {
+                if (obj.state === newState.state) {
+                    return {...obj, called: newState.called};
+                } else {
+                    return obj;
+                }
+            });
+    
+            setStates(newStateArray);
+        }
     };
 
     function enablePops(e) {
@@ -700,6 +758,17 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
         else {
             setEnablePopups(true);
             e.currentTarget.innerHTML = 'DISABLE POPUPS';
+        }
+    }
+
+    function enableRate(e) {
+        if (enableRatings) {
+            setEnableRatings(false);
+            e.currentTarget.innerHTML = 'ENABLE RATINGS';
+        }
+        else {
+            setEnableRatings(true);
+            e.currentTarget.innerHTML = 'DISABLE RATINGS';
         }
     }
 
@@ -1514,6 +1583,7 @@ function MyMap ({resultsYear, page, raceRecords, resultsRecords, senateCount, se
                 <div>
                     <button onClick={resetMap}>RESET MAP</button>
                     <button onClick={(e) => {enablePops(e)}}>DISABLE POPUPS</button>
+                    <button onClick={(e) => {enableRate(e)}}>DISABLE RATINGS</button>
                 </div>
             }
             </div>
