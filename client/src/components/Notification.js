@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import '../css/Notification.css';
 
-function Notification ({ text, isNegative }) {
+function Notification ({ text, isNegative, trigger }) {
     const notification = useRef(null);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ function Notification ({ text, isNegative }) {
 
         return;
 
-    }, [text]);
+    }, [trigger]);
 
     return (
         <div className = {isNegative ? 'notificationContainerNegative' : 'notificationContainer'} ref={notification}>

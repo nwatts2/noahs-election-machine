@@ -3,6 +3,7 @@ import CollapseText from '../components/CollapseText';
 import HouseTracker from '../components/HouseTracker';
 import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
+import LastRefresh from '../components/LastRefresh';
 
 const Home = () => {
     const [raceRecords, setRaceRecords] = useState([]);
@@ -15,8 +16,21 @@ const Home = () => {
 
     const [updateHouseWidget, setUpdateHouseWidget] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [refreshCount, setRefreshCount] = useState(0);
 
     const page = 'LIVE';
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const date = new Date();
+
+            if ((date.getSeconds() >= 30 && date.getSeconds() < 40) || (date.getSeconds() < 10)) {
+                setRefreshCount((c) => c + 1);
+            }
+        }, 10000);
+
+        return () => {clearInterval(interval)};
+    }, [])
 
     useEffect(() => {
         async function getResults() {
@@ -105,7 +119,7 @@ const Home = () => {
 
         return;
 
-    }, [mode]);
+    }, [mode, refreshCount]);
 
     return (
         <div className="mainPage">
@@ -116,6 +130,7 @@ const Home = () => {
                 subtext = { "You can " +
                     "also check out our Call Simulator to see how each race impacts control of the senate, house, and governorships, or you can " +
                     "visit our Past Results page to view previous election results for every state."} />
+
             
             <div className='typeInfo'>
                 <div className="senateTitleBG">
@@ -159,6 +174,7 @@ const Home = () => {
             {mode !== 'HOUSE' &&
                 <MyMap page={page} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} />
             }
+            <LastRefresh refreshCount={refreshCount} setRefreshCount={setRefreshCount} />
             {mode !== 'HOUSE' &&
             <hr />
             }

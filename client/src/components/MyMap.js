@@ -490,7 +490,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
     }
 
     function resetMap() {
-        const hoverObj = document.getElementById('topObj')
+        const hoverObj = document.getElementById('topObj');
 
         hoverObj.attributes['calledpath'].value = '';
         hoverObj.attributes['d'].value = '';
