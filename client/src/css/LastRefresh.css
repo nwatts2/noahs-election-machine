@@ -1,7 +1,7 @@
 .refresh {
     display:flex;
     flex-flow:row nowrap;
-    margin:0;
+    margin:10px 0px;
     justify-content:center;
     align-items:center;
     width:80%;

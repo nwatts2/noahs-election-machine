@@ -247,6 +247,15 @@ export default function ResultsRecordList(props) {
         //setLimitStyle({maxHeight: Number(endHeight.slice(0, endHeight.length-2)) + 100 + 'px'});
 
     }, [updateAnimation]);
+
+    useEffect(() => {
+        if (limit === 1000 && document.getElementById('showMore')) {
+            //if (limitStyle.maxHeight === '1500px' && document.getElementById('showMore')) {
+                //setLimitStyle({maxHeight: '1000px'});
+                showMore(document.getElementById('showMore'));
+        }
+
+    }, [currentState, props.year, props.type]);
     
     useEffect(() => {
         let needSet = false, candidatesList = [];
@@ -265,12 +274,6 @@ export default function ResultsRecordList(props) {
 
         if (needSet) {setNeedRunoff(true)}
         else {setNeedRunoff(false)}
-
-        if (limit === 1000 && document.getElementById('showMore')) {
-        //if (limitStyle.maxHeight === '1500px' && document.getElementById('showMore')) {
-            //setLimitStyle({maxHeight: '1000px'});
-            showMore(document.getElementById('showMore'));
-        }
 
         getNeededStates();
 
@@ -341,6 +344,7 @@ export default function ResultsRecordList(props) {
 
     function recordList() {
         let thisState = '', thisList = [], needsUpdate = false;
+        const printedStates = [];
         const topSenate = ['PA', 'WI', 'NC', 'OH', 'AZ', 'NV', 'GA', 'CO', 'NH', 'FL'];
         const topGovernor = ['PA', 'WI', 'NV', 'AZ', 'KS', 'OR', 'TX'];
         const topHouse = ['AK-1st', 'AZ-2nd', 'CA-22nd', 'CA-27th', 'CO-8th', 'IA-3rd', 'IL-17th', 'KS-3rd', 'MD-6th', 'ME-2nd', 'NC-13th', 'NJ-7th', 'NM-2nd', 'NV-3rd', 'NY-18th', 'NY-19th', 'NY-22nd', 'PA-7th', 'TX-15th', 'VA-2nd'];
@@ -349,8 +353,9 @@ export default function ResultsRecordList(props) {
 
         props.records.map((record) => {
             if (currentState === 'Top Races') {
-                if (record.year === props.year && record.type === props.type && thisState !== `${record.state}-${record.district}`) {
+                if (record.year === props.year && record.type === props.type && thisState !== `${record.state}-${record.district}` && printedStates.includes(`${record.state}-${record.district}`) === false) {
                     thisState = `${record.state}-${record.district}`;
+                    printedStates.push(thisState);
 
                     if (props.type === 'SENATE' && topSenate.includes(record.state)) {
                         thisList.push(record);
@@ -366,8 +371,9 @@ export default function ResultsRecordList(props) {
                    
                 }
             }
-            else if (record.state === currentState && record.year === props.year && record.type === props.type && thisState !== `${record.state}-${record.district}`) {
+            else if (record.state === currentState && record.year === props.year && record.type === props.type && thisState !== `${record.state}-${record.district}` && printedStates.includes(`${record.state}-${record.district}`) === false) {
                 thisState = `${record.state}-${record.district}`;
+                printedStates.push(thisState);
 
                 thisList.push(record);
             }
