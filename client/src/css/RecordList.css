@@ -89,6 +89,17 @@ td {
     box-shadow: 2px 0px 5px black;
 }
 
+.percentLabel {
+    text-align:center;
+    padding:10px;
+    background-color:rgba(36, 36, 37, .45);
+    border:none;
+    border-left:2px solid white;
+    border-top:2px solid white;
+    font-weight:bold;
+    box-shadow: -2px 0px 5px black;
+}
+
 table .notCalled:nth-child(even) td {
     background-color:rgba(36, 36, 37, .95)
 }

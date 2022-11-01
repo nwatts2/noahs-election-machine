@@ -4,6 +4,7 @@ import HouseTracker from '../components/HouseTracker';
 import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
 import LastRefresh from '../components/LastRefresh';
+import ControlBanner from '../components/ControlBanner';
 
 const Home = () => {
     const [raceRecords, setRaceRecords] = useState([]);
@@ -163,6 +164,7 @@ const Home = () => {
                         "New York, Arizona, and California. However, the possibility of a house majority is falling further and further away from the Democrats as we near election day." )}
                 />
             </div>
+            <ControlBanner mode={mode} count={mode === 'SENATE' ? senateCount : (mode === 'HOUSE' ? houseCount : govCount)} />
             <div className='modeButtons'>
                 <button onClick={() => {setMode('SENATE');}}>SENATE</button>
                 <button onClick={() => {setMode('HOUSE')}}>HOUSE</button>

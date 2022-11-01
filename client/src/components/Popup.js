@@ -96,6 +96,7 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
 
     function Table () {
         const names = [], parties = [], votes = [], percents = [], firstroundvotes = [], firstroundpercents = [], runoffvotes = [], runoffpercents = [];
+        let percentIn = 0;
 
         if (mode === 'GOVERNOR' || mode === 'SENATE') {
             resultsRecords.map((record) => {
@@ -108,6 +109,7 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
                     firstroundpercents.push(record.firstRoundPercent !== '' ? record.firstRoundPercent : '-');
                     runoffvotes.push(record.runoffVote !== '' ? record.runoffVote : '-');
                     runoffpercents.push(record.runoffPercent !== '' ? record.runoffPercent : '-');
+                    percentIn = record.percentIn;
                 }
             });
 
@@ -122,11 +124,13 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
                     firstroundpercents.push(record.firstRoundPercent !== '' ? record.firstRoundPercent : '-');
                     runoffvotes.push(record.runoffVote !== '' ? record.runoffVote : '-');
                     runoffpercents.push(record.runoffPercent !== '' ? record.runoffPercent : '-');
+                    percentIn = record.percentIn;
                 }
             });
         }
         
         return (
+            <>
             <table>
                 <tbody>
                     <tr>
@@ -171,6 +175,10 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
                     }
                 </tbody>
             </table>
+            {(page === 'LIVE' || page === 'CALLSIM') &&
+                <span>Percent Reporting: {percentIn}%</span>
+            }
+            </>
         );
     }
 

@@ -1,0 +1,94 @@
+.controlBanner {
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content:center;
+    align-items:center;
+
+    width:50%;
+    padding:20px;
+    margin:0px 0px 20px 0px;
+    border-top:3px solid white;
+    border-bottom:3px solid white;
+    border-radius:20px;
+
+    animation: expand .6s ease-in-out;
+    transition:max-height .6s ease-in-out;
+}
+
+.controlBanner h2 {
+    background:none;
+    font-size:2.5rem;
+    animation: expandText .6s ease-in-out;
+}
+
+.controlBanner h3 {
+    text-decoration:none;
+    text-align:center;
+    font-size:1.5rem;
+    width:70%;
+    animation: expandText .6s ease-in-out;
+}
+
+.Democratic {
+    background:linear-gradient(to bottom, rgba(0, 71, 255, .05), rgba(0, 71, 255, .5));
+    box-shadow: 0px 0px 5px 5px rgba(0, 71, 255, .25);
+}
+
+.Republican {
+    background:linear-gradient(to bottom, rgba(253, 3, 83, .05), rgba(253, 3, 83, .5));
+    box-shadow: 0px 0px 5px 5px rgba(253, 3, 83, .25);
+}
+
+.Democratic h2 {
+    text-shadow: 2px 2px 0px rgba(0, 71, 255, 1), 4px 4px 0px rgb(0, 127, 255);
+}
+
+.Republican h2 {
+    text-shadow: 2px 2px 0px rgb(249, 90, 112), 4px 4px 0px rgb(253, 3, 83);
+}
+
+@keyframes expand {
+    0% {
+        max-height: 1px;
+        opacity: 0;
+    }
+
+    65% {
+        opacity: 1;
+    }
+
+    100% {
+        max-height: 300px;
+    }
+}
+
+@keyframes expandText {
+    0% {
+        opacity: 0;
+    }
+
+    55% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width:740px) {
+    .controlBanner {
+        width:90%;
+        padding:5px 0px;
+    }
+
+    .controlBanner h2 {
+        font-size:1.6rem;
+        width:100%;
+    }
+
+    .controlBanner h3 {
+        font-size:1.2rem;
+        width:90%;
+    }
+}

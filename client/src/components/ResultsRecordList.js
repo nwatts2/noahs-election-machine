@@ -143,6 +143,9 @@ const ResultRecord = (props) => {
                                 {candidate.runoffPercent === '' ? <td>-</td>: <td>{candidate.runoffPercent}</td>}
                             </>
                             }
+                            {(props.page === 'LIVE' || props.page === 'CALLSIM') &&
+                                <td className={`${'percentLabel'}`} rowSpan={stateSpecialCandidates.length}>{`${candidate.percentIn}%`}</td>
+                            }
                         </tr>
                         );
                 } else {
@@ -183,6 +186,9 @@ const ResultRecord = (props) => {
                                 {candidate.runoffVote === '' ? <td>-</td>: <td>{candidate.runoffVote}</td>}
                                 {candidate.runoffPercent === '' ? <td>-</td>: <td>{candidate.runoffPercent}</td>}
                             </>
+                            }
+                            {(props.page === 'LIVE' || props.page === 'CALLSIM') &&
+                                <td className={`${'percentLabel'}`} rowSpan={stateCandidates.length}>{`${candidate.percentIn}%`}</td>
                             }
                         </tr>
                         );
@@ -399,7 +405,7 @@ export default function ResultsRecordList(props) {
                     if (numRecords < limit) {
                         numRecords += 1;
                         if (numRecords === limit - 1 && updateAnimation !== numRecords) {setUpdateAnimation(numRecords);}
-                        return <ResultRecord updateHouseWidget={props.updateHouseWidget} states={neededStates} records={props.records} setRecords={props.setRecords} district={record.district} state={record.state} type={props.type} needRunoff={needRunoff} year={props.year}/>
+                        return <ResultRecord page={props.page} updateHouseWidget={props.updateHouseWidget} states={neededStates} records={props.records} setRecords={props.setRecords} district={record.district} state={record.state} type={props.type} needRunoff={needRunoff} year={props.year}/>
     
                     }
                    
@@ -413,7 +419,7 @@ export default function ResultsRecordList(props) {
                     if (numRecords === limit - 1 && updateAnimation !== numRecords) {setUpdateAnimation(numRecords);}
 
                     return (
-                        <ResultRecord updateHouseWidget={props.updateHouseWidget} states={neededStates} records={props.records} setRecords={props.setRecords} district={record.district} state={record.state} type={props.type} needRunoff={needRunoff} year={props.year}/>
+                        <ResultRecord page={props.page} updateHouseWidget={props.updateHouseWidget} states={neededStates} records={props.records} setRecords={props.setRecords} district={record.district} state={record.state} type={props.type} needRunoff={needRunoff} year={props.year}/>
                     );
                 }
             } else {
@@ -453,6 +459,9 @@ export default function ResultsRecordList(props) {
                             <th>Runoff Vote</th>
                             <th>Runoff Percent</th>
                         </>
+                        }
+                        {(props.page === 'LIVE' || props.page === 'CALLSIM') &&
+                            <th>% In</th>
                         }
                     </tr>
                 </thead>

@@ -3,6 +3,7 @@ import CollapseText from '../components/CollapseText';
 import HouseTracker from '../components/HouseTracker';
 import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
+import ControlBanner from '../components/ControlBanner';
 
 const CallSimulator = () => {
     const [raceRecords, setRaceRecords] = useState([]);
@@ -129,6 +130,7 @@ const CallSimulator = () => {
                 <button onClick={() => {setMode('HOUSE')}}>HOUSE</button>
                 <button onClick={() => {setMode('GOVERNOR')}}>GOVERNORS</button>
             </div>
+            <ControlBanner mode={mode} count={mode === 'SENATE' ? senateCount : (mode === 'HOUSE' ? houseCount : govCount)} />
             {mode === 'HOUSE' &&
                 <HouseTracker mode={mode} resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} page={page} resultsRecords={simulatedResults} setResultsRecords={setSimulatedResults} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
             }

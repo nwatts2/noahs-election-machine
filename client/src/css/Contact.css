@@ -17,8 +17,6 @@
 .contactPage p {
     width:85%;
     box-shadow:none;
-    border-top:3px solid white;
-    border-bottom:3px solid white;
     background-image:linear-gradient(to right, transparent 2%,  rgba(36, 36, 37, .45) 15% 85%, transparent 98%);
 }
 
