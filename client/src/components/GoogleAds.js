@@ -9,11 +9,9 @@ class GoogleAds extends Component {
     render () {
         return (
             <ins class="adsbygoogle"
-                style={{display: 'block'}}
+                style={{display:'inline-block', width:'728px', height:"90px"}}
                 data-ad-client="ca-pub-8280885557380428"
-                data-ad-slot="9124687802"
-                data-ad-format="auto"
-                data-full-width-responsive="true">
+                data-ad-slot="9124687802">    
             </ins>
         );
     }
