@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Notification from '../components/Notification';
+import GoogleAds from '../components/GoogleAds';
 import '../css/Contact.css';
 
 const Contact = () => {
@@ -75,6 +76,7 @@ const Contact = () => {
 
                 <div className='buttonContainer'><button type='submit'>Submit</button></div>
             </form>
+            <GoogleAds />
         </div>
     );
 }

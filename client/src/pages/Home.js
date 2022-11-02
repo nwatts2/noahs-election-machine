@@ -5,6 +5,7 @@ import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
 import LastRefresh from '../components/LastRefresh';
 import ControlBanner from '../components/ControlBanner';
+import GoogleAds from '../components/GoogleAds';
 
 const Home = () => {
     const [raceRecords, setRaceRecords] = useState([]);
@@ -124,6 +125,7 @@ const Home = () => {
 
     return (
         <div className="mainPage">
+            <GoogleAds />
             <h1>THE 2022 US MIDTERM ELECTIONS</h1>
             <CollapseText 
                 text={`Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and gubernatorial ` +
@@ -132,7 +134,6 @@ const Home = () => {
                     "also check out our Call Simulator to see how each race impacts control of the senate, house, and governorships, or you can " +
                     "visit our Past Results page to view previous election results for every state."} />
 
-            
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">
@@ -181,6 +182,7 @@ const Home = () => {
             <hr />
             }
             <ResultsRecordList page={page} year={resultsYear} records={resultsRecords} setRecords={setResultsRecords} raceRecords={raceRecords} type={mode}/>
+            <GoogleAds />
         </div>
     );
 }

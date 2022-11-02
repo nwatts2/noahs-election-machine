@@ -4,6 +4,7 @@ import HouseTracker from '../components/HouseTracker';
 import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
 import ControlBanner from '../components/ControlBanner';
+import GoogleAds from '../components/GoogleAds';
 
 const CallSimulator = () => {
     const [raceRecords, setRaceRecords] = useState([]);
@@ -115,6 +116,7 @@ const CallSimulator = () => {
 
     return (
         <div className="mainPage">
+            <GoogleAds />
             <h1>NOAH'S CALL SIMULATOR</h1>
             <CollapseText text={"Welcome to the Call Simulator! Here you can play around with different scenarios for the 2022 US midterm elections. Click on a state to call that race, or click it again to switch parties. " +
                 "The call buttons below will automatically call a race based on its FiveThirtyEight rating."}/>
@@ -141,6 +143,7 @@ const CallSimulator = () => {
             <hr />
             }
             <ResultsRecordList updateHouseWidget={updateHouseWidget} page={page} year={resultsYear} records={simulatedResults} setRecords={setSimulatedResults} raceRecords={raceRecords} type={mode}/>
+            <GoogleAds />
         </div>
     );
 }

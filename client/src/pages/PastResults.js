@@ -3,6 +3,7 @@ import CollapseText from '../components/CollapseText';
 import HouseTracker from '../components/HouseTracker';
 import ResultsRecordList from '../components/ResultsRecordList';
 import MyMap from '../components/MyMap';
+import GoogleAds from '../components/GoogleAds';
 
 const PastResults = () => {
     const [raceRecords, setRaceRecords] = useState([]);
@@ -153,6 +154,7 @@ const PastResults = () => {
 
     return (
         <div className="mainPage">
+            <GoogleAds />
             <h1>PAST ELECTIONS</h1>
             <CollapseText 
                 text={"Here you can view results from past November elections for the US Senate, House of Representatives, and governorships."}
@@ -210,6 +212,7 @@ const PastResults = () => {
                 <HouseTracker page={page} resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} resultsRecords={resultsRecords} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
             }
             <ResultsRecordList page={page} year={resultsYear} records={resultsRecords} setRecords={setResultsRecords} type={mode}/>
+            <GoogleAds />
         </div>
     );
 }

@@ -26,9 +26,7 @@ const Layout = () => {
         <div className='fullBody'>
             <NavBar isMobile={isMobile} />
             <div className='scrollable'>
-                <GoogleAds />
                 <Outlet />
-                <GoogleAds />
             </div>
             <Footer isMobile={isMobile} />
         </div>
