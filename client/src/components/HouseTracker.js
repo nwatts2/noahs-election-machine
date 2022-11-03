@@ -367,7 +367,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
             {page === 'CALLSIM' &&
                 <div className='houseCallButtons'>
                     <h2>CALL RACES</h2>
-                    <div style={{width: '100%', display:'flex', flexFlow: 'row nowrap', alignItems: 'center', justifyContent:'center'}}>
+                    <div className='predictionText'>
                         <span className={'spanText'}>Call races based on predictions from</span>
                         <select ref={prediction}>
                             <option>FiveThirtyEight</option>

@@ -845,7 +845,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
     return (
         <>
         {(page === 'CALLSIM' || page === 'LIVE') &&
-            <div>
+            <div className='predictionText'>
                 <span className={'spanText'}>Showing predictions from</span>
                 <select ref={prediction}>
                     <option>FiveThirtyEight</option>

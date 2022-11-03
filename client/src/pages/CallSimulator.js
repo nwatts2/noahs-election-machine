@@ -119,7 +119,8 @@ const CallSimulator = () => {
             <GoogleAds />
             <h1>NOAH'S CALL SIMULATOR</h1>
             <CollapseText text={"Welcome to the Call Simulator! Here you can play around with different scenarios for the 2022 US midterm elections. Click on a state to call that race, or click it again to switch parties. " +
-                "The call buttons below will automatically call a race based on its FiveThirtyEight rating."}/>
+                `You can also use the 'Call Races' buttons to automatically call groups of elections based on their ratings. Ratings are pulled from FiveThirtyEight by default, but you can select "Noah's brain" from the ` + 
+                `dropdown below to see how Noah thinks the midterms will go.`}/>
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">

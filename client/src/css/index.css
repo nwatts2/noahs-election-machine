@@ -78,6 +78,11 @@ hr {
     width:70%;
 }
 
+option {
+    color:white;
+    background-color: rgb(30, 30, 31);
+}
+
 .mainPage {
     display:flex;
     flex-flow: column nowrap;
@@ -193,6 +198,16 @@ hr {
 .modeButtons button:hover {
     opacity:.7;
     transition: all .2s;
+}
+
+.predictionText {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    text-align:center;
+    margin:5px 0px;
 }
 
 .popup {
