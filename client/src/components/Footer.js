@@ -38,7 +38,7 @@ function Footer ({isMobile}) {
                             </a>
                         </li>
                         <li>
-                            <a href='https://twitter.com/ElectionNoah' target='_blank'>
+                            <a href='https://twitter.com/NoahsElections' target='_blank'>
                                 <svg 
                                     x="0px" y="0px"
                                     width={isMobile ? "25" : "35"}
