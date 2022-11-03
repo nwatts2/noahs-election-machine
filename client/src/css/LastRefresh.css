@@ -19,6 +19,8 @@
 .refresh span {
     text-align:center;
     font-size:.9rem;
+    font-family:'Trebuchet MS';
+    color:white;
 }
 
 @media screen and (max-width: 740px) {

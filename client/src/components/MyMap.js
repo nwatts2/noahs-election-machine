@@ -339,8 +339,9 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
             if (state.hasElection && elem && enableRatings) {
                 let rank, margin;
 
-                if (prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
-                else {rank = state.noahRank; margin = state.noahMargin;}
+                if (prediction.current && prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
+                else if (prediction.current) {rank = state.noahRank; margin = state.noahMargin;}
+                else {rank = state.ratingRank; margin = state.margin;}
 
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
                     callRace(elem);
@@ -402,8 +403,9 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
             if (state.hasElection && elem && enableRatings) {
                 let rank, margin;
 
-                if (prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
-                else {rank = state.noahRank; margin = state.noahMargin;}
+                if (prediction.current && prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
+                else if (prediction.current) {rank = state.noahRank; margin = state.noahMargin;}
+                else {rank = state.ratingRank; margin = state.margin;}
 
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
                     callRace(elem);

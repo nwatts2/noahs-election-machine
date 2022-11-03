@@ -16,6 +16,7 @@
 
 .notificationContainer span, .notificationContainerNegative span {
     font-family:'Courier New';
+    color:white;
     font-weight:bold;
     font-size: 1.3rem;
 }

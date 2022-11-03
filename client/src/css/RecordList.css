@@ -6,11 +6,9 @@
     justify-content:center;
     align-items:center;
     margin:0px 0px 50px 0px;
-    transition: max-height .50s ease-in-out;
-}
-
-.resultsRecords option {
+    font-family:'Trebuchet MS';
     color:white;
+    transition: max-height .50s ease-in-out;
 }
 
 .resultsRecords table {
