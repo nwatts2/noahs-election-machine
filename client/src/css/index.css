@@ -81,6 +81,8 @@ hr {
 option {
     color:white;
     background-color: rgb(30, 30, 31);
+    font-family: system-ui;
+    font-size:16px;
 }
 
 .mainPage {
