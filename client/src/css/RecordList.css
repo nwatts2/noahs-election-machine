@@ -9,6 +9,10 @@
     transition: max-height .50s ease-in-out;
 }
 
+.resultsRecords option {
+    color:white;
+}
+
 .resultsRecords table {
     width:70%;
     height:auto;

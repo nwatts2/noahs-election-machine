@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../css/HouseTracker.css';
 import Graph from '../components/Graph';
 import { Popover, Whisper } from 'rsuite';
@@ -145,6 +145,8 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
     const [enablePopups, setEnablePopups] = useState(true);
     const [widgetLoaded, setWidgetLoaded] = useState(false);
 
+    const prediction = useRef(null);
+
     const mouseposition = useMousePosition();
 
     let topHouse = '';
@@ -169,6 +171,10 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
         ]);
     }, [houseCount]);
 
+    useEffect(() => {
+        resetRaces();
+    }, [prediction.current ? prediction.current.value : ''])
+
     function resetRaces() {
         for (let record of resultsRecords) {
             if (record.type === 'HOUSE') {record.called = '';}
@@ -184,8 +190,8 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
                 for (let race of raceRecords) {
                     if (race.type === 'HOUSE') {
                         if (race.year === record.year && race.state === record.state && Number(race.district) === Number(record.district.slice(0, record.district.length - 2))) {
-                            record.ratingRank = race.ratingRank;
-                            record.margin = race.margin;
+                            if (prediction.current.value === 'FiveThirtyEight') {record.ratingRank = race.ratingRank; record.margin = race.margin;}
+                            else {record.ratingRank = race.noahRank; record.margin = race.noahMargin;}                            
                         }
                     }
                 }
@@ -361,6 +367,13 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
             {page === 'CALLSIM' &&
                 <div className='houseCallButtons'>
                     <h2>CALL RACES</h2>
+                    <div style={{width: '100%', display:'flex', flexFlow: 'row nowrap', alignItems: 'center', justifyContent:'center'}}>
+                        <span className={'spanText'}>Call races based on predictions from</span>
+                        <select ref={prediction}>
+                            <option>FiveThirtyEight</option>
+                            <option>Noah's brain</option>
+                        </select>
+                    </div>
                     <div width='100%'>
                         <button onClick={() => {autoCallRaces('ALL')}}>ALL</button>
                         <button onClick={() => {autoCallRaces('SOLID')}}>SOLID</button>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Popover, Whisper } from 'rsuite';
 import Popup from '../components/Popup';
 import useMousePosition from '../hooks/useMousePosition';
@@ -16,6 +16,8 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
     const [govWinner, setGovWinner] = useState('');
     const mouseposition = useMousePosition();
 
+    const prediction = useRef(null);
+
     const safeDemColor = 'rgba(0, 71, 255, 0.8)', likelyDemColor = 'rgba(0, 100, 255, 0.85)', leanDemColor = 'rgb(0, 127, 255)', tiltDemColor = 'rgba(180, 210, 255, 0.60)';
     const safeRepColor = 'rgba(253, 3, 83, 0.9)', likelyRepColor = 'rgb(249, 90, 112)', leanRepColor = 'rgb(249, 140, 162)', tiltRepColor = 'rgba(255, 180, 195, 1)';
     const calledDemColor = 'rgba(0, 71, 255, 0.65)', calledRepColor = 'rgba(253, 3, 83, 0.75)';
@@ -31,7 +33,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
 
     useEffect(() => {
         resetMap();
-    }, [mode, resultsYear])
+    }, [mode, resultsYear, prediction.current ? prediction.current.value : ''])
 
     useEffect(() => {
         getWinners();
@@ -93,7 +95,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                             }
                         }
 
-                        currentRace = {state: x.state, called: called, hasElection: true, ratingRank: x.ratingRank, margin: margin, isSpecial: x.isSpecial};
+                        currentRace = {state: x.state, called: called, hasElection: true, ratingRank: x.ratingRank, margin: margin, isSpecial: x.isSpecial, noahRank: x.noahRank, noahMargin: x.noahMargin};
                         races.push(currentRace);
                     }
                 }
@@ -335,33 +337,38 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
             const elem = document.getElementById(state.state.toString());
 
             if (state.hasElection && elem && enableRatings) {
+                let rank, margin;
+
+                if (prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
+                else {rank = state.noahRank; margin = state.noahMargin;}
+
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
                     callRace(elem);
 
                 } else if (state.called !== '' && (page === 'LIVE' || page === 'CALLSIM')) {
 
-                } else if (state.ratingRank === 3 && state.hasElection) {
+                } else if (rank === 3 && state.hasElection) {
                     elem.style.fill = safeDemColor;
 
-                } else if (state.ratingRank === 2 && state.hasElection) {
+                } else if (rank === 2 && state.hasElection) {
                     elem.style.fill = likelyDemColor;
 
-                } else if (state.ratingRank === 1 && state.hasElection) {
+                } else if (rank === 1 && state.hasElection) {
                     elem.style.fill = leanDemColor;
 
-                } else if (state.ratingRank === -1 && state.hasElection) {
+                } else if (rank === -1 && state.hasElection) {
                     elem.style.fill = leanRepColor;
 
-                } else if (state.ratingRank === -2 && state.hasElection) {
+                } else if (rank === -2 && state.hasElection) {
                     elem.style.fill = likelyRepColor;
 
-                } else if (state.ratingRank === -3 && state.hasElection) {
+                } else if (rank === -3 && state.hasElection) {
                     elem.style.fill = safeRepColor;
 
-                } else if (state.ratingRank === 0 && state.hasElection) {
-                    if (state.margin && state.margin > 0) {
+                } else if (rank === 0 && state.hasElection) {
+                    if (margin && margin > 0) {
                         elem.style.fill = tiltDemColor;
-                    } else if (state.margin && state.margin < 0) {
+                    } else if (margin && margin < 0) {
                         elem.style.fill = tiltRepColor;
                     }
 
@@ -393,33 +400,38 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
             if (elem) {elem.attributes['data-id'].value = state.state}
 
             if (state.hasElection && elem && enableRatings) {
+                let rank, margin;
+
+                if (prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
+                else {rank = state.noahRank; margin = state.noahMargin;}
+
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
                     callRace(elem);
 
                 } else if (state.called !== '' && (page === 'LIVE' || page === 'CALLSIM')) {
 
-                } else if (state.ratingRank === 3 && state.hasElection) {
+                } else if (rank === 3 && state.hasElection) {
                     elem.style.fill = safeDemColor;
 
-                } else if (state.ratingRank === 2 && state.hasElection) {
+                } else if (rank === 2 && state.hasElection) {
                     elem.style.fill = likelyDemColor;
 
-                } else if (state.ratingRank === 1 && state.hasElection) {
+                } else if (rank === 1 && state.hasElection) {
                     elem.style.fill = leanDemColor;
 
-                } else if (state.ratingRank === -1 && state.hasElection) {
+                } else if (rank === -1 && state.hasElection) {
                     elem.style.fill = leanRepColor;
 
-                } else if (state.ratingRank === -2 && state.hasElection) {
+                } else if (rank === -2 && state.hasElection) {
                     elem.style.fill = likelyRepColor;
 
-                } else if (state.ratingRank === -3 && state.hasElection) {
+                } else if (rank === -3 && state.hasElection) {
                     elem.style.fill = safeRepColor;
 
-                } else if (state.ratingRank === 0 && state.hasElection) {
-                    if (state.margin && state.margin > 0) {
+                } else if (rank === 0 && state.hasElection) {
+                    if (margin && margin > 0) {
                         elem.style.fill = tiltDemColor;
-                    } else if (state.margin && state.margin < 0) {
+                    } else if (margin && margin < 0) {
                         elem.style.fill = tiltRepColor;
                     }
 
@@ -525,6 +537,11 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
             currentState = states.find(item => item.state === id);
         }
 
+        let rank, margin;
+
+        if (prediction.current.value === 'FiveThirtyEight') {rank = currentState.ratingRank; margin = currentState.margin;}
+        else {rank = currentState.noahRank; margin = currentState.noahMargin;}
+
         let demCount, repCount;
         if (mode === 'SENATE') {demCount = 36; repCount = 29;}
         else if (mode === 'GOVERNOR') {demCount = 6; repCount = 8;}
@@ -546,17 +563,17 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                     
                 }
             }
-            else if (currentState.ratingRank > 0 && currentState.ratingRank < 4 && currentState.called === '') {
+            else if (rank > 0 && rank < 4 && currentState.called === '') {
                 target.style.fill = calledDemColor;
                 currentState.called = 'Democratic';
                 updateState(currentState, special);
 
-            } else if (currentState.ratingRank < 0 && currentState.ratingRank > -4 && currentState.called === ''){
+            } else if (rank < 0 && rank > -4 && currentState.called === ''){
                 target.style.fill = calledRepColor;
                 currentState.called = 'Republican';
                 updateState(currentState, special);
-            } else if (currentState.ratingRank === 0 && currentState.called === '') {
-                if (currentState.margin > 0) {
+            } else if (rank === 0 && currentState.called === '') {
+                if (margin > 0) {
                     target.style.fill = calledDemColor;
                     currentState.called = 'Democratic';
                 } else {
@@ -826,6 +843,16 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
    
     
     return (
+        <>
+        {(page === 'CALLSIM' || page === 'LIVE') &&
+            <div>
+                <span className={'spanText'}>Showing predictions from</span>
+                <select ref={prediction}>
+                    <option>FiveThirtyEight</option>
+                    <option>Noah's brain</option>
+                </select>
+            </div>
+        }
         <div className='map'>
         <div className='mapButtons'>
             {page === 'CALLSIM' &&
@@ -1450,7 +1477,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                     d="m 159.03532,548.77728 0.0971,-0.19413 -0.19413,-0.0971 0.0971,0.29119 z m -2.42658,-0.87357 -3.39721,3.00895 2.42658,-0.19412 2.81483,-2.23245 z m 6.11498,1.06769 -0.67945,-0.19412 0.48532,0.38825 z m 1.35888,0.0971 -1.0677,-0.29118 -0.19412,0.0971 1.26182,0.19412 z m -3.6884,-1.35888 h -1.06769 l 1.8442,0.48532 z m 4.4649,0.97063 -0.0971,-0.19412 -0.38825,0.0971 0.48531,0.0971 z m -2.91189,-1.16476 -0.38825,-0.19412 v 1.06769 z m 8.25037,-3.10606 -2.42658,0.48532 -2.13539,2.81483 z m 3.88252,-0.97063 0.77651,-0.19412 h -0.0971 l -0.67944,0.19412 z m 123.46429,-10.09456 -1.26182,3.59133 1.26182,-0.7765 z m -9.60925,0.38825 2.81483,4.27078 6.3091,3.97959 -1.45594,-3.39721 -6.01792,-5.14435 z m 3.30015,-1.65007 -0.38826,1.45595 0.67945,-0.48532 z m 2.03832,0 -0.0971,0.97063 0.87357,0.29119 -0.77651,-1.26182 z m -3.59133,-1.94126 0.48531,1.8442 0.97063,-0.58238 z m -4.17372,0.7765 0.48532,4.4649 0.97063,-0.97063 z m 0.48532,-1.45595 2.23245,3.10602 -0.29119,-2.03832 z m -6.89148,0.77651 -0.58238,1.8442 0.7765,-1.26182 z m 0.19412,-1.45595 3.88253,6.40617 -0.58238,-4.36784 z m -64.44991,3.59134 0.0971,-0.29119 h -0.38825 l 0.29119,0.29119 z m -0.97063,0 -2.52364,1.65007 -3.10602,4.07665 1.55301,1.65008 7.18267,-5.33848 z m 61.24683,-6.3091 -0.67944,-0.38826 v 0.58238 z m -61.82921,5.14434 0.0971,0.38825 0.67945,0.38826 -0.77651,-0.77651 z m 63.67341,-6.98854 -1.94126,0.97063 1.84419,0.58238 0.0971,-1.55301 z m -1.26182,0 -0.19413,-0.19413 -0.0971,0.19413 h 0.29119 z m 5.92085,-1.55301 -0.77651,-0.29119 -0.19412,0.58238 z m -4.17372,0.67944 -0.67944,-0.0971 v 0.19413 l 0.67944,-0.0971 z m 2.13539,-0.77651 3.97959,5.82379 -1.06769,-5.33847 z m -64.06166,6.30911 -2.32951,1.74713 1.06769,1.16476 3.10602,-2.32952 z m 28.4395,-9.3181 1.16475,-1.45595 -0.38825,0.29119 z m -11.8417,-0.19413 0.38825,-0.29119 0.0971,-0.38825 -0.48531,0.67944 z m 0,-1.06769 -0.38826,0.29118 0.67945,-0.19412 -0.29119,-0.0971 z m -0.38826,-0.0971 -0.38825,0.38825 -0.19412,0.38826 z m 10.67695,-1.16476 h 0.0971 0.0971 -0.19412 z m 0.48531,0 -0.19412,-0.0971 v 0.0971 z m -1.16475,-0.0971 0.0971,0.0971 v -0.0971 z m -7.95918,0.58238 0.38825,-0.38825 -0.48531,0.38825 h 0.0971 z m 1.16476,-0.87357 -2.32952,3.78546 3.00896,-3.49427 z m -3.00896,0.48532 -0.29119,-0.38825 -0.0971,0.19412 0.38825,0.19413 z m 9.90044,-0.67944 v -0.67945 l -0.19413,0.29119 z m -71.24433,-7.47386 -4.65903,-0.19413 3.20308,3.39721 z m 62.41158,6.79438 -0.29119,2.13539 0.48532,-1.35888 z m -0.97063,-1.35888 0.0971,0.29119 0.19412,-0.0971 -0.29119,-0.19413 z m -0.48531,0.38825 -0.19413,-0.58238 -0.29119,0.19413 z m 0.19412,-1.74713 v 0.97063 l 0.29119,-0.67944 z m -7.37679,-1.16476 v -0.29119 0 z m -50.66695,-12.03583 0.19412,-0.58238 -0.0971,0.0971 -0.0971,0.48531 z m 4.56196,-3.30014 v -0.0971 0 z m 1.74714,-2.9119 v 0 h -0.0971 z m 0.58238,0.19413 -0.38825,-0.19413 v 0.0971 l 0.38825,0.0971 z m -17.27724,-7.18267 -0.7765,-0.97063 0.58238,0.7765 z m 24.16872,4.95018 -1.06769,0.0971 0.58238,0.29119 0.48531,-0.38825 z m -26.78942,-9.41513 -0.77651,2.9119 2.42658,0.38825 3.20309,3.30015 1.94126,-0.87357 z m 84.63904,-28.05131 -0.38825,-0.29119 -0.67944,-0.29119 z m -50.86107,-2.13539 0.87356,-1.16475 -0.48531,0.38825 z m 1.16475,-1.35888 0.38826,-0.58238 -0.19413,0.19413 z m 0.58238,-0.7765 0.67944,-0.58238 -0.38825,0.19412 z m 30.57488,0.19412 0.48532,0.48532 h 0.29119 z m -15.62716,-6.40616 -3.97959,3.30014 -2.42657,-0.67944 -5.62966,3.20308 -1.0677,-0.67944 -6.40616,7.18267 -6.50323,1.45595 0.58237,3.49427 2.9119,3.97959 5.43553,5.24141 -0.87356,2.03832 4.07665,1.74714 -2.13539,0.38825 -2.62071,-2.03832 1.35889,3.00895 -1.74714,1.0677 -5.5326,-5.04728 -4.36784,0.7765 -7.47386,2.81483 3.39721,3.78546 -0.48531,2.32952 2.23245,2.71776 7.37679,2.9119 5.33848,-2.71777 0.87356,2.03833 -1.45594,6.11497 h -4.46491 l -5.2414,2.32952 -0.29119,-1.65008 -2.71777,1.0677 -1.26182,2.81483 -4.46491,3.39721 v 4.95022 l 1.74714,0.7765 -1.35888,4.17372 5.82378,5.04728 3.6884,-1.55301 -0.7765,6.21204 1.06769,1.35888 4.46491,0.97063 1.65007,1.8442 3.88252,0.29119 1.8442,1.94127 3.97959,-1.16476 -1.8442,2.52364 -1.45595,5.14434 -11.8417,7.66799 -1.55301,1.55301 -2.23245,-0.87357 -3.59133,0.87357 -5.14435,3.39721 8.05624,-2.32952 1.16476,1.74714 10.38575,-3.39721 0.29119,1.35889 4.07665,-4.07666 8.54156,-5.92085 0.67944,0.38826 7.47386,-5.92085 -1.94126,-2.32952 2.52364,-4.17371 6.60029,-7.86212 5.04728,-0.97063 1.55301,1.0677 -6.11497,1.74713 -1.65008,6.50323 0.19413,3.49428 2.13539,-0.19413 10.28869,-6.21204 0.7765,-2.32952 -0.87356,-3.59133 3.10601,0.7765 2.23246,-1.45594 6.40616,3.88252 -0.48531,1.0677 14.55946,1.8442 3.39721,-1.0677 0.97064,1.45595 12.6182,6.01791 2.13539,-1.26182 0.19413,-7.27973 1.65007,3.30014 8.1533,5.92085 0.67944,2.42658 7.08561,3.97959 1.8442,5.14434 1.74714,-3.97958 3.59133,6.98854 2.42658,-3.97959 -1.94126,-4.95022 -7.47386,-0.7765 -11.45345,-10.96813 -6.21204,-4.56197 -4.75609,4.65903 h -2.81483 l -6.50323,-4.27078 -6.40617,-0.29119 -9.12393,-57.55843 -1.55301,-2.71776 -3.6884,-2.23246 -5.5326,1.0677 -4.27078,-0.87357 -5.43553,-2.13539 -5.72673,0.38825 -1.45594,-2.71776 -4.56197,-0.67945 -0.7765,-1.65007 -2.03833,2.32952 z"
                     style={{strokeWidth:strokeWidth}} /></Whisper>
                 
-                    <Whisper trigger='hover'  speaker={<Popover className={(popupState === 'SPECIAL1' || specialStates.length === 0 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
+                    <Whisper trigger='hover'  speaker={<Popover className={(stateList.includes(popupState) === false || specialStates.length === 0 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
                 <path
                         className={specialStates.length > 0 ? "visible mapState" : 'invisible mapState'}
                         onClick={(e) => {handleClick(e)}}
@@ -1461,7 +1488,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                         data-id="SPECIAL-1"
                         d='m 950,250 30,0 0,15 -30,0 0,-15 z'
                         style={{strokeWidth:strokeWidth}} /></Whisper>
-                    <Whisper trigger='hover'  speaker={<Popover className={(popupState === 'SPECIAL2' || specialStates.length <= 1 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
+                    <Whisper trigger='hover'  speaker={<Popover className={(stateList.includes(popupState) === false || specialStates.length <= 1 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
                 <path
                         className={specialStates.length > 1 ? "visible mapState" : 'invisible mapState'}
                         onClick={(e) => {handleClick(e)}}
@@ -1472,7 +1499,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                         data-id="SPECIAL-2"
                         d='m 950,280 30,0 0,15 -30,0 0,-15 z'
                         style={{strokeWidth:strokeWidth}} /></Whisper>
-                    <Whisper trigger='hover'  speaker={<Popover className={(popupState === 'SPECIAL3' || specialStates.length <= 2 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
+                    <Whisper trigger='hover'  speaker={<Popover className={(stateList.includes(popupState) === false || specialStates.length <= 2 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
                 <path
                         className={specialStates.length > 2 ? "visible mapState" : 'invisible mapState'}
                         onClick={(e) => {handleClick(e)}}
@@ -1483,7 +1510,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                         data-id="SPECIAL-3"
                         d='m 950,310 30,0 0,15 -30,0 0,-15 z'
                         style={{strokeWidth:strokeWidth}} /></Whisper>
-                    <Whisper trigger='hover'  speaker={<Popover className={(popupState === 'SPECIAL4' || specialStates.length <= 3 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
+                    <Whisper trigger='hover'  speaker={<Popover className={(stateList.includes(popupState) === false || specialStates.length <= 3 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
                 <path
                         className={specialStates.length > 3 ? "visible mapState" : 'invisible mapState'}
                         onClick={(e) => {handleClick(e)}}
@@ -1593,7 +1620,8 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                 </div>
             }
             </div>
-        </div>        
+        </div>
+        </>      
 
     );
 }
