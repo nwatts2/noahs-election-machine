@@ -11,7 +11,6 @@
     height:fit-content;
     align-items:center;
     justify-content:center;
-    font-family:'Trebuchet MS';
 }
 
 .mapState {
@@ -69,6 +68,7 @@ path {pointer-events: auto;}
 }
 
 .stateText {
+    font-family:'Trebuchet MS';
     text-shadow:2px 2px 5px rgba(36, 36, 37, .25);
 }
 
@@ -111,10 +111,6 @@ path {pointer-events: auto;}
     justify-content:flex-end;
     align-items:center;
     margin-top:300px;
-}
-
-.enableButtonsSim {
-
 }
 
 @media screen and (max-width: 740px) {
