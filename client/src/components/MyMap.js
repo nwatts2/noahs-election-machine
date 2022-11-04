@@ -18,7 +18,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
 
     const prediction = useRef(null);
 
-    const safeDemColor = 'rgba(0, 71, 255, 0.8)', likelyDemColor = 'rgba(0, 100, 255, 0.85)', leanDemColor = 'rgb(0, 127, 255)', tiltDemColor = 'rgba(180, 210, 255, 0.60)';
+    const safeDemColor = 'rgba(0, 71, 255, 0.8)', likelyDemColor = 'rgba(0, 100, 255, 1)', leanDemColor = 'rgb(0, 150, 255)', tiltDemColor = 'rgba(180, 210, 255, 0.60)';
     const safeRepColor = 'rgba(253, 3, 83, 0.9)', likelyRepColor = 'rgb(249, 90, 112)', leanRepColor = 'rgb(249, 140, 162)', tiltRepColor = 'rgba(255, 180, 195, 1)';
     const calledDemColor = 'rgba(0, 71, 255, 0.65)', calledRepColor = 'rgba(253, 3, 83, 0.75)';
     const uncalledColor = 'rgba(60, 60, 62, 1)';
@@ -317,8 +317,14 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
         if (page === 'PAST') {
             for (let thisState of stateList) {
                 const stateElement = document.getElementById(thisState);
+                let altElem;
+
+                if (thisState === 'RI' || thisState === 'CT' || thisState === 'MA' || thisState === 'NJ' || thisState === 'DE') {
+                    altElem = document.getElementById(`${thisState}2`);
+                }
     
                 if (stateElement) {stateElement.style.fill = noRaceColor;}
+                if (altElem) {altElem.style.fill = noRaceColor;}
             }
         }
         
@@ -335,6 +341,11 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
 
         newStates.map((state) => {
             const elem = document.getElementById(state.state.toString());
+            let altElem;
+
+            if (state.state === 'RI' || state.state === 'CT' || state.state === 'MA' || state.state === 'NJ' || state.state === 'DE') {
+                altElem = document.getElementById(`${state.state}2`);
+            }
 
             if (state.hasElection && elem && enableRatings) {
                 let rank, margin;
@@ -377,6 +388,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                     elem.style.fill = uncalledColor;
 
                 }
+
             } else if (state.hasElection && elem) {
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
                     callRace(elem);
@@ -387,6 +399,10 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
 
             } else if (elem) {
                 elem.style.fill = noRaceColor;
+            }
+
+            if (altElem) {
+                altElem.style.fill = elem.style.fill;
             }
 
             return;
@@ -529,12 +545,20 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
     }
 
     function callRace(target) {
-        let id = target.id, currentState, special = false;
+        let id = target.id, currentState, special = false, altElem;
 
         if (id === 'SPECIAL1' || id === 'SPECIAL2' || id === 'SPECIAL3' || id === 'SPECIAL4') {
             id = target.attributes['data-id'].value;
             currentState = specialStates.find(item => item.state === id);
             special = true;
+        } else if (id === 'RI2' || id === 'CT2' || id === 'MA2' || id === 'NJ2' || id === 'DE2') {
+            currentState = states.find(item => item.state === id.slice(0, 2));
+            altElem = document.getElementById(id.slice(0, 2));
+            
+        } else if (id === 'RI' || id === 'CT' || id === 'MA' || id === 'NJ' || id === 'DE') {
+            currentState = states.find(item => item.state === id);
+            altElem = document.getElementById(`${id}2`);
+            
         } else {
             currentState = states.find(item => item.state === id);
         }
@@ -553,6 +577,11 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
 
             if (!hoverObj.attributes['calledpath'].value.includes(target.attributes['d'].value)) {
                 hoverObj.attributes['calledpath'].value += target.attributes['d'].value + ` M 0,0 z `;
+                hoverObj.attributes['d'].value = hoverObj.attributes['calledpath'].value;
+            }
+
+            if (altElem && !hoverObj.attributes['calledpath'].value.includes(altElem.attributes['d'].value)) {
+                hoverObj.attributes['calledpath'].value += altElem.attributes['d'].value + ` M 0,0 z `;
                 hoverObj.attributes['d'].value = hoverObj.attributes['calledpath'].value;
             }
             
@@ -621,6 +650,10 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                         }
                     }
                 }
+            }
+
+            if (altElem) {
+                altElem.style.fill = target.style.fill;
             }
         }
 
@@ -802,22 +835,22 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
         setPopupState('');
         const id = e.currentTarget.id;
 
-        for (let state of states) {
-            if (state.state === e.currentTarget.id && state.hasElection) {
-                const hoverObj = document.getElementById('topObj');
-                hoverObj.attributes['d'].value = hoverObj.attributes['calledpath'].value + e.currentTarget.attributes['d'].value;
+        if (id === 'RI2' || id === 'CT2' || id === 'MA2' || id === 'NJ2' || id === 'DE2') {
+            for (let state of states) {
+                if (state.state === id.slice(0,2) && state.hasElection) {
+                    const hoverObj = document.getElementById('topObj');
+                    const thisState = document.getElementById(id.slice(0, 2));
 
-                if (state.state === e.currentTarget.id) {
+                    hoverObj.attributes['d'].value = hoverObj.attributes['calledpath'].value + e.currentTarget.attributes['d'].value + 'M 0,0 ' + thisState.attributes['d'].value;
+    
                     if (state.isSpecial === false && isSpecial !== false) {setIsSpecial(false)}
                     else if (state.isSpecial === true && isSpecial !== true) {setIsSpecial(true)}
+                    
+    
+                    if (page === "LIVE" || page === 'PAST' || page === 'CALLSIM') {setPopupState(id.slice(0, 2));}
                 }
-                
-
-                if (page === "LIVE" || page === 'PAST' || page === 'CALLSIM') {setPopupState(e.currentTarget.id);}
             }
-        }
-
-        if (id === 'SPECIAL1' || id === 'SPECIAL2' || id === 'SPECIAL3' || id === 'SPECIAL4') {
+        } else if (id === 'SPECIAL1' || id === 'SPECIAL2' || id === 'SPECIAL3' || id === 'SPECIAL4') {
             for (let state of specialStates) {
                 const thisState = e.currentTarget.attributes['data-id'].value;
                 if (state.state === thisState && state.hasElection) {
@@ -829,6 +862,21 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                     }
     
                     if (page === "LIVE" || page === 'PAST' || page === 'CALLSIM') {setPopupState(state.state.slice(0,2));}
+                }
+            }
+        } else {
+            for (let state of states) {
+                if (state.state === e.currentTarget.id && state.hasElection) {
+                    const hoverObj = document.getElementById('topObj');
+                    hoverObj.attributes['d'].value = hoverObj.attributes['calledpath'].value + e.currentTarget.attributes['d'].value;
+    
+                    if (state.state === e.currentTarget.id) {
+                        if (state.isSpecial === false && isSpecial !== false) {setIsSpecial(false)}
+                        else if (state.isSpecial === true && isSpecial !== true) {setIsSpecial(true)}
+                    }
+                    
+    
+                    if (page === "LIVE" || page === 'PAST' || page === 'CALLSIM') {setPopupState(e.currentTarget.id);}
                 }
             }
         }        
@@ -1488,7 +1536,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                         id="SPECIAL1"
                         data-name="Special 1"
                         data-id="SPECIAL-1"
-                        d='m 950,250 30,0 0,15 -30,0 0,-15 z'
+                        d='m 950,250 m 5,12 5,5 c 5,5 5,5 10,0 l 5,-5 c 5,-5 5,-5 0,-10 l -5,-5 c -5,-5 -5,-5 -10,0 l -5,5 c -5,5 -5,5 0,10 z'
                         style={{strokeWidth:strokeWidth}} /></Whisper>
                     <Whisper trigger='hover'  speaker={<Popover className={(stateList.includes(popupState) === false || specialStates.length <= 1 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
                 <path
@@ -1499,7 +1547,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                         id="SPECIAL2"
                         data-name="Special 2"
                         data-id="SPECIAL-2"
-                        d='m 950,280 30,0 0,15 -30,0 0,-15 z'
+                        d='m 950,285 m 5,12 5,5 c 5,5 5,5 10,0 l 5,-5 c 5,-5 5,-5 0,-10 l -5,-5 c -5,-5 -5,-5 -10,0 l -5,5 c -5,5 -5,5 0,10 z'
                         style={{strokeWidth:strokeWidth}} /></Whisper>
                     <Whisper trigger='hover'  speaker={<Popover className={(stateList.includes(popupState) === false || specialStates.length <= 2 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
                 <path
@@ -1510,7 +1558,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                         id="SPECIAL3"
                         data-name="Special 3"
                         data-id="SPECIAL-3"
-                        d='m 950,310 30,0 0,15 -30,0 0,-15 z'
+                        d='m 950,320 m 3, -1 h23 a 5,5 0 0,1 5,5 v8 a 5, 5 0 0,1 -5, 5 h-23 a 5, 5 0 0,1 -5, -5 v-8 a 5,5 0 0,1 5, -5 z'
                         style={{strokeWidth:strokeWidth}} /></Whisper>
                     <Whisper trigger='hover'  speaker={<Popover className={(stateList.includes(popupState) === false || specialStates.length <= 3 || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
                 <path
@@ -1521,7 +1569,63 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                         id="SPECIAL4"
                         data-name="Special 4"
                         data-id="SPECIAL-4"
-                        d='m 950,340 30,0 0,15 -30,0 0,-15 z'
+                        d='m 950,355 m 3, -1 h23 a 5,5 0 0,1 5,5 v8 a 5, 5 0 0,1 -5, 5 h-23 a 5, 5 0 0,1 -5, -5 v-8 a 5,5 0 0,1 5, -5 z'
+                        style={{strokeWidth:strokeWidth}} /></Whisper>
+
+                <Whisper trigger='hover'  speaker={<Popover className={(popupState !== 'RI' || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
+                <path
+                        className='mapState'
+                        onClick={(e) => {handleClick(e)}}
+                        onMouseEnter={(e) => {handleMouseEnter(e)}}
+                        onMouseOut={(e) => {handleMouseLeave(e)}}
+                        id="RI2"
+                        data-name="RI2"
+                        data-id="RI-2"
+                        d='m 995,80 m 3, -1 h23 a 5,5 0 0,1 5,5 v8 a 5, 5 0 0,1 -5, 5 h-23 a 5, 5 0 0,1 -5, -5 v-8 a 5,5 0 0,1 5, -5 z'
+                        style={{strokeWidth:strokeWidth}} /></Whisper>
+                <Whisper trigger='hover'  speaker={<Popover className={(popupState !== 'CT' || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
+                <path
+                        className='mapState'
+                        onClick={(e) => {handleClick(e)}}
+                        onMouseEnter={(e) => {handleMouseEnter(e)}}
+                        onMouseOut={(e) => {handleMouseLeave(e)}}
+                        id="CT2"
+                        data-name="CT2"
+                        data-id="CT-2"
+                        d='m 995,110 m 3, -1 h23 a 5,5 0 0,1 5,5 v8 a 5, 5 0 0,1 -5, 5 h-23 a 5, 5 0 0,1 -5, -5 v-8 a 5,5 0 0,1 5, -5 z'
+                        style={{strokeWidth:strokeWidth}} /></Whisper>
+                <Whisper trigger='hover'  speaker={<Popover className={(popupState !== 'MA' || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
+                <path
+                        className='mapState'
+                        onClick={(e) => {handleClick(e)}}
+                        onMouseEnter={(e) => {handleMouseEnter(e)}}
+                        onMouseOut={(e) => {handleMouseLeave(e)}}
+                        id="MA2"
+                        data-name="MA2"
+                        data-id="MA-2"
+                        d='m 995,140 m 3, -1 h23 a 5,5 0 0,1 5,5 v8 a 5, 5 0 0,1 -5, 5 h-23 a 5, 5 0 0,1 -5, -5 v-8 a 5,5 0 0,1 5, -5 z'
+                        style={{strokeWidth:strokeWidth}} /></Whisper>
+                <Whisper trigger='hover'  speaker={<Popover className={(popupState !== 'NJ' || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
+                <path
+                        className='mapState'
+                        onClick={(e) => {handleClick(e)}}
+                        onMouseEnter={(e) => {handleMouseEnter(e)}}
+                        onMouseOut={(e) => {handleMouseLeave(e)}}
+                        id="NJ2"
+                        data-name="NJ2"
+                        data-id="NJ-2"
+                        d='m 995,170 m 3, -1 h23 a 5,5 0 0,1 5,5 v8 a 5, 5 0 0,1 -5, 5 h-23 a 5, 5 0 0,1 -5, -5 v-8 a 5,5 0 0,1 5, -5 z'
+                        style={{strokeWidth:strokeWidth}} /></Whisper>
+                <Whisper trigger='hover'  speaker={<Popover className={(popupState !== 'DE' || enablePopups === false) ? 'invisible' : 'visible'}><Popup isSpecial={isSpecial} resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={mode} state={popupState} mouseposition={mouseposition}/></Popover>}>
+                <path
+                        className='mapState'
+                        onClick={(e) => {handleClick(e)}}
+                        onMouseEnter={(e) => {handleMouseEnter(e)}}
+                        onMouseOut={(e) => {handleMouseLeave(e)}}
+                        id="DE2"
+                        data-name="DE2"
+                        data-id="DE-2"
+                        d='m 995,200 m 3, -1 h23 a 5,5 0 0,1 5,5 v8 a 5, 5 0 0,1 -5, 5 h-23 a 5, 5 0 0,1 -5, -5 v-8 a 5,5 0 0,1 5, -5 z'
                         style={{strokeWidth:strokeWidth}} /></Whisper>
                 
                 <path id='topObj' className='highlighted' d='' calledpath=''/>
@@ -1578,18 +1682,24 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                 <text id='MDtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={925} y={250}>MD</text>
 
                 <text id='SPECIAL1-text' textAnchor='middle' className={specialStates.length > 0 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={262}>SPECIAL-1</text>
-                <text id='SPECIAL2-text' textAnchor='middle' className={specialStates.length > 1 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={292}>SPECIAL-2</text>
-                <text id='SPECIAL3-text' textAnchor='middle' className={specialStates.length > 2 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={322}>SPECIAL-3</text>
-                <text id='SPECIAL4-text' textAnchor='middle' className={specialStates.length > 3 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={352}>SPECIAL-4</text>
+                <text id='SPECIAL2-text' textAnchor='middle' className={specialStates.length > 1 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={297}>SPECIAL-2</text>
+                <text id='SPECIAL3-text' textAnchor='middle' className={specialStates.length > 2 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={332}>SPECIAL-3</text>
+                <text id='SPECIAL4-text' textAnchor='middle' className={specialStates.length > 3 ? "stateText visible" : 'stateText invisible'} style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1020} y={367}>SPECIAL-4</text>
 
-                <path d='m 700,25 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: safeDemColor}} />
-                <path d='m 700,45 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: safeRepColor}} />
-                <path d='m 750,25 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: likelyDemColor}} />
-                <path d='m 750,45 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: likelyRepColor}} />
-                <path d='m 800,25 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: leanDemColor}} />
-                <path d='m 800,45 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: leanRepColor}} />
-                <path d='m 850,25 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: tiltDemColor}} />
-                <path d='m 850,45 30,0 0,15 -30,0 0,-15 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: tiltRepColor}} />
+                <text id='MA2title' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1040} y={152}>MA</text>
+                <text id='CT2title' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1040} y={122}>CT</text>
+                <text id='RI2title' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1040} y={92}>RI</text>
+                <text id='NJ2title' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1040} y={182}>NJ</text>
+                <text id='DE2title' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1040} y={212}>DE</text>
+
+                <path d='m 700,25 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: safeDemColor}} />
+                <path d='m 700,55 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: safeRepColor}} />
+                <path d='m 750,25 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: likelyDemColor}} />
+                <path d='m 750,55 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: likelyRepColor}} />
+                <path d='m 800,25 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: leanDemColor}} />
+                <path d='m 800,55 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: leanRepColor}} />
+                <path d='m 850,25 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: tiltDemColor}} />
+                <path d='m 850,55 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: tiltRepColor}} />
 
                 <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={715} y={15}>SOLID</text>
                 <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={765} y={15}>LIKELY</text>

@@ -3,15 +3,18 @@ import '../css/CollapseText.css';
 
 function CollapseText ({ text, subtext }) {
     const [isExpanded, setIsExpanded] = useState(true);
+    const [contStyle, setContStyle] = useState({});
     const [style, setStyle] = useState({});
     const getIsMobile = () => window.innerWidth <= 740;
     const [isMobile, setIsMobile] = useState(getIsMobile());
 
     useEffect(() => {
         if (isMobile) {
-            setStyle({padding: '0px 10px 0px 10px', maxHeight: '50px', color: 'transparent', textShadow: 'none'})
+            setContStyle({padding: '0px 10px 0px 10px', maxHeight: '50px'});
+            setStyle({color: 'transparent', textShadow: 'none'});
         } else {
-            setStyle({padding: '0px 70px 0px 70px', maxHeight: '50px', color: 'transparent', textShadow: 'none'})
+            setContStyle({padding: '0px 70px 0px 70px', maxHeight: '50px'});
+            setStyle({color: 'transparent', textShadow: 'none'});
         }
         
     }, [isMobile])
@@ -30,20 +33,24 @@ function CollapseText ({ text, subtext }) {
     }, [])
 
     function expand () {
-        if (isExpanded) {setIsExpanded(false)}
-        else {setIsExpanded(true)}
+        if (isExpanded) {
+            setIsExpanded(false);
+        }
+        else {
+            setIsExpanded(true);
+        }
     }
 
     return (
-        <div className='collapseTextContainer' style={isExpanded ? {} : style}>
+        <div className='collapseTextContainer' style={isExpanded ? {} : contStyle}>
             <button className='expandButton' onClick={expand}>{isExpanded ? '-' : '+'}</button>
             &emsp;
-            <span className='collapseText'>{text}</span>
+            <span className='collapseText' style={isExpanded ? {} : style}>{text}</span>
             {subtext &&
                 <>
                     <br /> <br />
                     &emsp;
-                    <span className='collapseText'>{subtext}</span>
+                    <span className='collapseText' style={isExpanded ? {} : style}>{subtext}</span>
                 </>
             }
         </div>
