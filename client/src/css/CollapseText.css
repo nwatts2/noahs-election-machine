@@ -38,6 +38,22 @@
     transition: color .25s ease-in-out, text-shadow .25s ease-in-out;
 }
 
+@media screen and (max-width:1300px) {
+    .collapseTextContainer {
+        width: 80%;
+        padding: 40px 40px 20px 40px
+    }
+
+    .typeInfo .collapseTextContainer {
+        width:85%;
+    }
+
+    .collapseTextContainer button {
+        right:8px;
+        top:-10px;
+    }
+}
+
 @media screen and (max-width: 740px) {
     .collapseTextContainer {
         width: 95%;

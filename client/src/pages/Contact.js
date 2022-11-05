@@ -76,7 +76,6 @@ const Contact = () => {
 
                 <div className='buttonContainer'><button type='submit'>Submit</button></div>
             </form>
-            <GoogleAds />
         </div>
     );
 }

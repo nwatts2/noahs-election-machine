@@ -137,6 +137,26 @@
     display:none;
 }
 
+@media screen and (max-width: 1300px) {
+    .houseTracker {
+        width:95%;
+    }
+
+    .houseButton {
+        width:25%;
+    }
+
+    .houseButton label {
+        font-size:1rem;
+    }
+
+    .graphSection {
+        margin:0px 20px 0px 0px;
+        align-self:center;
+    }
+
+}
+
 @media screen and (max-width: 740px) {
     .houseTracker {
         width:95%;

@@ -6,7 +6,7 @@ import GoogleAds from '../components/GoogleAds';
 import '../css/index.css';
 
 const Layout = () => {
-    const getIsMobile = () => window.innerWidth <= 740;
+    const getIsMobile = () => window.innerWidth <= 1020;
     const [isMobile, setIsMobile] = useState(getIsMobile());
 
     useEffect(() => {

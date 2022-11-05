@@ -76,6 +76,22 @@
     }
 }
 
+@media screen and (max-width:1300px) {
+    .controlBanner {
+        width:70%;
+    }
+
+    .controlBanner h2 {
+        font-size:2.2rem;
+        width:100%;
+    }
+
+    .controlBanner h3 {
+        font-size:1.4rem;
+        width:90%;
+    }
+}
+
 @media screen and (max-width:740px) {
     .controlBanner {
         width:90%;

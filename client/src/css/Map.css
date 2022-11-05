@@ -34,6 +34,7 @@ path {pointer-events: auto;}
 .mapButtons h2 {
     background:none;
     text-decoration:underline;
+    width:100%;
 }
 
 .mapButtons h3 {
@@ -113,6 +114,74 @@ path {pointer-events: auto;}
     margin-top:300px;
 }
 
+@media screen and (max-width: 1300px) {
+    .seatBreakdown {
+        width:100%;
+        margin:10px 0px 10px 0px;
+        display:flex;
+        flex-flow:row nowrap;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .map {
+        display:flex;
+        flex-flow:column nowrap;
+        width:100%;
+        height:auto;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .mapContainer {
+        width:100%;
+        overflow-x:auto;
+    }
+
+    .mapButtons {
+        flex-flow:row wrap;
+        align-items:center;
+        justify-content:center;
+        width:90%;
+        height:auto;
+        margin:10px 0px 10px 0px;
+        padding:5px;
+    }
+        
+    .mapButtons button {
+        margin:5px;
+        font-size:1.2rem;
+        width:auto;
+    }
+
+    .enableButtons {
+        margin:0px;
+        display: flex;
+        flex-flow: row wrap;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .enableButtons button {
+        font-size:1.2rem;
+    }
+
+    .enableButtonsSim {
+        width:100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content:center;
+        height:auto;
+    }
+}
+
+@media screen and (max-width:1020px) {
+    .map svg {
+        width:100%;
+        align-self:center;
+    }
+}
+
 @media screen and (max-width: 740px) {
     .seatBreakdown {
         width:100%;
@@ -137,11 +206,6 @@ path {pointer-events: auto;}
         overflow-x:auto;
     }
 
-    .map svg {
-        width: 200%;
-        align-self:flex-start;
-    }
-    
     .mapButtons {
         flex-flow:row wrap;
         align-items:center;
@@ -157,6 +221,11 @@ path {pointer-events: auto;}
         min-width:fit-content;
         width:13%;
         font-size:0.8rem;
+    }
+
+    .map svg {
+        width: 200%;
+        align-self:flex-start;
     }
 
     .mapButtons button:hover {

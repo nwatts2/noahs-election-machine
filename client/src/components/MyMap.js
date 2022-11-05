@@ -4,7 +4,7 @@ import Popup from '../components/Popup';
 import useMousePosition from '../hooks/useMousePosition';
 import '../css/Map.css';
 
-function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, senateCount, setSenateCount, govCount, setGovCount, mode}) {
+function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resultsRecords, senateCount, setSenateCount, govCount, setGovCount, mode}) {
     const [states, setStates] = useState([]);
     const [specialStates, setSpecialStates] = useState([]);
     const [enablePopups, setEnablePopups] = useState(true);
@@ -14,6 +14,8 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
     const [isSpecial, setIsSpecial] = useState(false);
     const [senateWinner, setSenateWinner] = useState('');
     const [govWinner, setGovWinner] = useState('');
+    const [outlineSelected, setOutlineSelected] = useState(false);
+    const [previousState, setPreviousState] = useState('');
     const mouseposition = useMousePosition();
 
     const prediction = useRef(null);
@@ -29,7 +31,15 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
     const strokeWidth = 1.5;
     const strokeColor = 'darkgrey';
 
+    const senateYears = [2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014, 2016, 2018, 2020];
+
     const stateList = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
+
+    useEffect(() => {
+        if (mode === 'SENATE' && senateYears.includes(resultsYear) === false  && page === 'PAST') {
+            setResultsYear(2020);
+        }
+    }, [mode])
 
     useEffect(() => {
         resetMap();
@@ -832,8 +842,16 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
     }
 
     function handleMouseEnter(e) {
-        setPopupState('');
         const id = e.currentTarget.id;
+        
+        if (id !== 'topObj') {
+            setPopupState('');
+            if (outlineSelected) {setOutlineSelected(false);}
+
+        } else {
+            if (outlineSelected === false) {setOutlineSelected(true);}
+            setPopupState(previousState);
+        }
 
         if (id === 'RI2' || id === 'CT2' || id === 'MA2' || id === 'NJ2' || id === 'DE2') {
             for (let state of states) {
@@ -864,7 +882,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                     if (page === "LIVE" || page === 'PAST' || page === 'CALLSIM') {setPopupState(state.state.slice(0,2));}
                 }
             }
-        } else {
+        } else if (id !== 'topObj') {
             for (let state of states) {
                 if (state.state === e.currentTarget.id && state.hasElection) {
                     const hoverObj = document.getElementById('topObj');
@@ -884,14 +902,15 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
 
     function handleMouseLeave(e) {
         if (page === "LIVE" || page === 'PAST' || page === 'CALLSIM') {
-            setPopupState('');
-            const hoverObj = document.getElementById('topObj');
-            hoverObj.attributes['d'].value = hoverObj.attributes['calledpath'].value;
+            if (e.currentTarget.id !== 'topObj' && outlineSelected === false) {
+                setPreviousState(popupState);
+                setPopupState('');
+                const hoverObj = document.getElementById('topObj');
+                hoverObj.attributes['d'].value = hoverObj.attributes['calledpath'].value;
+            }
         }
     }
 
-   
-    
     return (
         <>
         {(page === 'CALLSIM' || page === 'LIVE') &&
@@ -1628,7 +1647,8 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                         d='m 995,200 m 3, -1 h23 a 5,5 0 0,1 5,5 v8 a 5, 5 0 0,1 -5, 5 h-23 a 5, 5 0 0,1 -5, -5 v-8 a 5,5 0 0,1 5, -5 z'
                         style={{strokeWidth:strokeWidth}} /></Whisper>
                 
-                <path id='topObj' className='highlighted' d='' calledpath=''/>
+                <path id='topObj' onMouseEnter={(e) => {handleMouseEnter(e)}}
+                        onMouseOut={(e) => {handleMouseLeave(e)}} className='highlighted' d='' calledpath=''/>
 
                 <text id='WAtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={250} y={80}>WA</text>
                 <text id='ORtitle' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={220} y={140}>OR</text>
@@ -1692,6 +1712,7 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                 <text id='NJ2title' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1040} y={182}>NJ</text>
                 <text id='DE2title' className='stateText' textAnchor='middle' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={1040} y={212}>DE</text>
 
+                <path d='m 630,40 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: noRaceColor}} />
                 <path d='m 700,25 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: safeDemColor}} />
                 <path d='m 700,55 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: safeRepColor}} />
                 <path d='m 750,25 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: likelyDemColor}} />
@@ -1701,10 +1722,11 @@ function MyMap ({resultsYear, page, president, raceRecords, resultsRecords, sena
                 <path d='m 850,25 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: tiltDemColor}} />
                 <path d='m 850,55 m 3, 10 a 12,12 0 1,0 24,0 a 12,12 0 1,0 -24,0 z' style={{stroke: "white", strokeWidth:strokeWidth, fill: tiltRepColor}} />
 
-                <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={715} y={15}>SOLID</text>
-                <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={765} y={15}>LIKELY</text>
-                <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={815} y={15}>LEAN</text>
-                <text id='MDtitle' textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={865} y={15}>TILT</text>
+                <text textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={645} y={30}>NO ELECTION</text>
+                <text textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={715} y={15}>SOLID</text>
+                <text textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={765} y={15}>LIKELY</text>
+                <text textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={815} y={15}>LEAN</text>
+                <text textAnchor='middle' className='stateText' style={{fontSize: letterFont, fill: letterColor, stroke: letterColor}} x={865} y={15}>TILT</text>
 
             </svg>
         </div>

@@ -116,7 +116,6 @@ const CallSimulator = () => {
 
     return (
         <div className="mainPage">
-            <GoogleAds />
             <h1>NOAH'S CALL SIMULATOR</h1>
             <CollapseText text={"Welcome to the Call Simulator! Here you can play around with different scenarios for the 2022 US midterm elections. Click on a state to call that race, or click it again to switch parties. " +
                 `You can also use the 'Call Races' buttons to automatically call groups of elections based on their ratings. Ratings are pulled from FiveThirtyEight by default, but you can select "Noah's brain" from the ` + 
@@ -138,13 +137,12 @@ const CallSimulator = () => {
                 <HouseTracker mode={mode} resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} page={page} resultsRecords={simulatedResults} setResultsRecords={setSimulatedResults} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
             }
             {mode !== 'HOUSE' &&
-                <MyMap page={page} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={simulatedResults} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} />
+                <MyMap page={page} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={simulatedResults} setResultsYear={setResultsYear} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} />
             }
             {mode !== 'HOUSE' &&
             <hr />
             }
             <ResultsRecordList updateHouseWidget={updateHouseWidget} page={page} year={resultsYear} records={simulatedResults} setRecords={setSimulatedResults} raceRecords={raceRecords} type={mode}/>
-            <GoogleAds />
         </div>
     );
 }

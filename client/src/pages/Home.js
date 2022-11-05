@@ -125,7 +125,6 @@ const Home = () => {
 
     return (
         <div className="mainPage">
-            <GoogleAds />
             <h1>THE 2022 US MIDTERM ELECTIONS</h1>
             <CollapseText 
                 text={`Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and gubernatorial ` +
@@ -141,16 +140,16 @@ const Home = () => {
                     </div>
                 </div>
                 <CollapseText 
-                    text={mode === 'SENATE' ? "The U.S. senate elections are shaping up to be an interesting deviation from the typical " +
-                        "midterm year. Since Democrats control the White House, Republicans would " +
-                        "normally be expected to easily reclaim the senate. However, the Democrats have a decent shot at retaining control, despite the pendulum starting to swing back in favor of Republicans " +
-                        "over the last couple of weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across several key swing states. " : 
+                    text={mode === 'SENATE' ? "The U.S. senate elections are shaping up to be extremely competitive this midterm season. " +
+                        "Since Democrats control the White House, Republicans would " +
+                        "normally be expected to reclaim the senate without much trouble. However, the Democrats have a reasonable shot at retaining control, despite the pendulum swinging back in favor of Republicans " +
+                        "over the last several weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across key swing states. " : 
 
                     (mode === 'GOVERNOR' ? "The sprint for control of the nation's governorships looks to be taking a similar path to the senate elections. " +
                         "Candidate quality is what seems to matter most here, moreso than the overall national environment." : 
 
-                        "This year's elections for the U.S. House of Representatives are much more in line with what we would expect for a midterm year " +
-                        "when compared to the senate and gubernatorial elections. Republicans are favored to take back the house this November, primarily due to " +
+                        "This year's elections for the U.S. House of Representatives are much more in line with what we would expect for a midterm year. " +
+                        "Republicans are favored to take back the house this November, primarily due to " +
                         "a favorable national environment, along with recent redistricting wins in key states.")}
                     
                     subtext={mode === 'SENATE' ? "The three narrowest states are expected to be Pennsylvania, Georgia, and Nevada, and whichever party wins at least two will very likely control the chamber. " + 
@@ -175,14 +174,13 @@ const Home = () => {
                 <HouseTracker page={page} resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} resultsRecords={resultsRecords} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
             }
             {mode !== 'HOUSE' &&
-                <MyMap page={page} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} />
+                <MyMap page={page} resultsYear={resultsYear} setResultsYear={setResultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} />
             }
             <LastRefresh refreshCount={refreshCount} setRefreshCount={setRefreshCount} />
             {mode !== 'HOUSE' &&
             <hr />
             }
             <ResultsRecordList page={page} year={resultsYear} records={resultsRecords} setRecords={setResultsRecords} raceRecords={raceRecords} type={mode}/>
-            <GoogleAds />
         </div>
     );
 }

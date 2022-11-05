@@ -357,6 +357,46 @@ option {
     margin:0;
 }
 
+@media screen and (max-width: 1300px) {
+    h1 {
+        font-size:3rem;
+    }
+
+    hr {
+        width:85%;
+    }
+
+    .senateTitleBG {
+        width:95%;
+        margin:20px 0px;
+    }
+
+    .senateTitle {
+        padding:5px;
+    }
+
+    .senateTitle h2 {
+        font-size:2rem;
+    }
+
+    .modeButtons {
+        justify-content:space-around;
+        width:75%;
+    }
+
+    .modeButtons button {
+        font-size: 1.6rem;
+        margin:0px 0px;
+    }
+
+    .yearSelector {
+        display:flex;
+        flex-flow:row wrap;
+        justify-content:center;
+        align-items:center;
+    }
+}
+
 @media screen and (max-width: 740px) {
     .scrollable {
         margin-bottom:0px;

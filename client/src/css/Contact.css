@@ -69,6 +69,54 @@
     width:100%;
 }
 
+@media screen and (max-width: 1300px) {
+    .contactPage {
+        width:85%;
+    }
+
+    .contactPage form {
+        padding:20px 20px;
+        margin:20px 0px;
+    }
+    
+    .contactPage p {
+        width:90%;
+        font-size:1rem;
+        text-align:center;
+        padding: 25px 10px 10px 10px
+    }
+    
+    .contactPage label {
+        padding:10px;
+        font-size:1.2rem;
+    }
+
+    .contactPage label:hover {
+        opacity:1;
+    }
+    
+    .contactPage input, .contactPage textarea {
+        padding:10px;
+        margin:0px 0px 15px 0px;
+        font-size:1rem;
+    }
+    
+    .contactPage .buttonContainer {
+        width:50%;
+        padding:5px;
+        margin:10px 0px 5px 0px;
+    }
+
+    .contactPage .buttonContainer:hover {
+        opacity:1;
+    }
+    
+    .contactPage .buttonContainer button {
+        font-size:1.2rem;
+        height:auto;
+    }
+}
+
 @media screen and (max-width: 740px) {
     .contactPage {
         width:95%;

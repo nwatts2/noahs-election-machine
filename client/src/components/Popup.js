@@ -1,4 +1,9 @@
+import { useRef, useState } from 'react';
+
 const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode, state, mouseposition}) => {
+    const popup = useRef(null);
+    const [prevSize, setPrevSize] = useState(['0px', '0px']);
+
     let title = '-', raceInfo = '-', favoriteStatement;
     let thisRace = {}, separatedState = '', district = '';
 
@@ -78,19 +83,46 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
     }
 
     function calculatePopupPosition() {
-        if (mouseposition.y > (.5 * window.screen.height) && mouseposition.x <= .5 * window.screen.width) {
-            return {bottom: `${100 * (window.screen.height - mouseposition.y - 130) / window.screen.height}%`, left:`${mouseposition.x + 10}px`};
+        let height = prevSize[1], width = prevSize[0], top, left, newHeight, newWidth;
 
-        } else if (mouseposition.y > (.5 * window.screen.height) && mouseposition.x > .5 * window.screen.width) {
-            return {bottom: `${100 * (window.screen.height - mouseposition.y - 130) / window.screen.height}%`, right:`${100 * (window.screen.width - mouseposition.x + 5) / window.screen.width}%`};
+        if (popup.current) {
+            newHeight = window.getComputedStyle(popup.current).height;
+            newWidth = window.getComputedStyle(popup.current).width;
 
-        } else if (mouseposition.y <= (.5 * window.screen.height) && mouseposition.x > .5 * window.screen.width) {
-            return {top: `${mouseposition.y + 10}px`, right:`${100 * (window.screen.width - mouseposition.x + 5) / window.screen.width}%`};
-
-        } else if (mouseposition.y <= (.5 * window.screen.height) && mouseposition.x <= .5 * window.screen.width) {
-            return {top: `${mouseposition.y + 10}px`, left:`${mouseposition.x + 10}px`};
-
+            if (prevSize[1] !== newHeight || prevSize[0] !== newWidth) {
+                setPrevSize([newWidth, newHeight]);
+                height = newHeight;
+                width = newWidth;
+            }
         }
+
+        if (Number(window.innerHeight) - 40 - (Number(mouseposition.y) + Number(height.slice(0, height.length - 2))) <= 0) {
+            if (Number(window.innerWidth) - 10 - (Number(mouseposition.x) + Number(width.slice(0, width.length - 2))) <= 0) {
+                top = mouseposition.y - height.slice(0, height.length - 2) - 10;
+                left = mouseposition.x - width.slice(0, width.length - 2) - 10;
+
+            } else {
+                top = mouseposition.y - height.slice(0, height.length - 2) - 10;
+                left = mouseposition.x + 10;
+            }
+        } else {
+            if (Number(window.innerWidth) - 10 - (Number(mouseposition.x) + Number(width.slice(0, width.length - 2))) <= 0) {
+                top = mouseposition.y + 10;
+                left = mouseposition.x - width.slice(0, width.length - 2) - 10;
+
+            } else {
+                top = mouseposition.y + 10;
+                left = mouseposition.x + 10;
+            }
+        }
+
+        if (popup.current) {
+            return {top: `${top}px`, left:`${left}px`};
+
+        } else {
+            return {};
+        }
+
     }
 
 
@@ -184,7 +216,7 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
 
     if (page === 'LIVE' || page === 'CALLSIM') {
         return (
-            <div className='popup' style={calculatePopupPosition()}>
+            <div className='popup' ref={popup} style={calculatePopupPosition()}>
                 <div className='popupElement'>
                     <h3>{title}</h3>
                     <hr />
@@ -199,7 +231,7 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
         );
     } else if (page === 'PAST') {
         return (
-            <div className='popup' style={calculatePopupPosition()}>
+            <div className='popup' ref={popup} style={calculatePopupPosition()}>
                 <div className='popupElement'>
                     <hr />
                     <h3>{tableTitle}</h3>

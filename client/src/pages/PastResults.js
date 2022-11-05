@@ -154,7 +154,6 @@ const PastResults = () => {
 
     return (
         <div className="mainPage">
-            <GoogleAds />
             <h1>PAST ELECTIONS</h1>
             <CollapseText 
                 text={"Here you can view results from past November elections for the US Senate, House of Representatives, and governorships."}
@@ -182,8 +181,8 @@ const PastResults = () => {
                             }
                             return (<option>{thisYear}</option>);
                         })
-
-                    } { mode === 'GOVERNOR' &&
+                    }
+                    { mode === 'GOVERNOR' &&
                         govYears.map((thisYear) => {
                             if (thisYear === resultsYear) {
                                 return (<option selected='selected'>{thisYear}</option>);
@@ -198,12 +197,13 @@ const PastResults = () => {
                             return (<option>{thisYear}</option>);
                         })
                     }
+
                 </select>
                 <span>election cycle</span>
             </div>
 
             {mode !== 'HOUSE' &&
-                <MyMap page={page} president={president} resultsYear={resultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} />
+                <MyMap page={page} president={president} resultsYear={resultsYear} setResultsYear={setResultsYear} raceRecords={raceRecords} resultsRecords={resultsRecords} senateCount={senateCount} setSenateCount={setSenateCount} govCount={govCount} setGovCount={setGovCount} mode={mode} />
             }
             {mode !== 'HOUSE' &&
             <hr />
@@ -212,7 +212,6 @@ const PastResults = () => {
                 <HouseTracker page={page} resultsYear={resultsYear} updateHouseWidget={updateHouseWidget} setUpdateHouseWidget={setUpdateHouseWidget} resultsRecords={resultsRecords} raceRecords={raceRecords} houseCount={houseCount} setHouseCount={setHouseCount}/>
             }
             <ResultsRecordList page={page} year={resultsYear} records={resultsRecords} setRecords={setResultsRecords} type={mode}/>
-            <GoogleAds />
         </div>
     );
 }
