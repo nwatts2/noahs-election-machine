@@ -224,6 +224,7 @@ option {
 
 .popup {
     position:fixed;
+    visibility:hidden;
 }
 
 .popupElement {

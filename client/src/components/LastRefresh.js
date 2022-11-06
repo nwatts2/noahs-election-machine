@@ -14,7 +14,7 @@ function LastRefresh({ refreshCount, setRefreshCount }) {
         setCurrentTime(date);
 
         refreshButton.current.style.animation = 'rotate .75s ease-in-out 0s infinite';
-        setTimeout(() => {refreshButton.current.style.animation = ''}, 1499);
+        setTimeout(() => {if (refreshButton.current) {refreshButton.current.style.animation = ''}}, 1499);
 
     }, [refreshCount])
     

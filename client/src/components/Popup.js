@@ -1,8 +1,15 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode, state, mouseposition}) => {
     const popup = useRef(null);
-    const [prevSize, setPrevSize] = useState(['0px', '0px']);
+    const [popStyle, setPopStyle] = useState({top: '0px', left: '0px'});
+
+    useEffect(() => {
+        if (popup.current) {
+            calculatePopupPosition();
+        }
+
+    }, [mouseposition.x, mouseposition.y]);
 
     let title = '-', raceInfo = '-', favoriteStatement;
     let thisRace = {}, separatedState = '', district = '';
@@ -83,44 +90,36 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
     }
 
     function calculatePopupPosition() {
-        let height = prevSize[1], width = prevSize[0], top, left, newHeight, newWidth;
+        let height = '0px', width = '0px', top, left, visibility = 'hidden';
 
         if (popup.current) {
-            newHeight = window.getComputedStyle(popup.current).height;
-            newWidth = window.getComputedStyle(popup.current).width;
-
-            if (prevSize[1] !== newHeight || prevSize[0] !== newWidth) {
-                setPrevSize([newWidth, newHeight]);
-                height = newHeight;
-                width = newWidth;
-            }
+            height = window.getComputedStyle(popup.current).height;
+            width = window.getComputedStyle(popup.current).width;
+            visibility = 'visible';
         }
 
         if (Number(window.innerHeight) - 40 - (Number(mouseposition.y) + Number(height.slice(0, height.length - 2))) <= 0) {
             if (Number(window.innerWidth) - 10 - (Number(mouseposition.x) + Number(width.slice(0, width.length - 2))) <= 0) {
-                top = mouseposition.y - height.slice(0, height.length - 2) - 10;
-                left = mouseposition.x - width.slice(0, width.length - 2) - 10;
+                top = Number(mouseposition.y) - Number(height.slice(0, height.length - 2)) - 10;
+                left = Number(mouseposition.x) - Number(width.slice(0, width.length - 2)) - 10;
 
             } else {
-                top = mouseposition.y - height.slice(0, height.length - 2) - 10;
-                left = mouseposition.x + 10;
+                top = Number(mouseposition.y) - Number(height.slice(0, height.length - 2)) - 10;
+                left = Number(mouseposition.x) + 10;
             }
         } else {
             if (Number(window.innerWidth) - 10 - (Number(mouseposition.x) + Number(width.slice(0, width.length - 2))) <= 0) {
-                top = mouseposition.y + 10;
-                left = mouseposition.x - width.slice(0, width.length - 2) - 10;
+                top = Number(mouseposition.y) + 10;
+                left = Number(mouseposition.x) - Number(width.slice(0, width.length - 2)) - 10;
 
             } else {
-                top = mouseposition.y + 10;
-                left = mouseposition.x + 10;
+                top = Number(mouseposition.y) + 10;
+                left = Number(mouseposition.x) + 10;
             }
         }
 
-        if (popup.current) {
-            return {top: `${top}px`, left:`${left}px`};
-
-        } else {
-            return {};
+        if (popup.current && (`${top}px` !== popStyle.top || `${left}px` !== popStyle.left)) {
+            setPopStyle({top: `${top}px`, left:`${left}px`, visibility: visibility});
         }
 
     }
@@ -216,7 +215,7 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
 
     if (page === 'LIVE' || page === 'CALLSIM') {
         return (
-            <div className='popup' ref={popup} style={calculatePopupPosition()}>
+            <div className='popup' ref={popup} style={popStyle}>
                 <div className='popupElement'>
                     <h3>{title}</h3>
                     <hr />
@@ -231,7 +230,7 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
         );
     } else if (page === 'PAST') {
         return (
-            <div className='popup' ref={popup} style={calculatePopupPosition()}>
+            <div className='popup' ref={popup} style={popStyle}>
                 <div className='popupElement'>
                     <hr />
                     <h3>{tableTitle}</h3>

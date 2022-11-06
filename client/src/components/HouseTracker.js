@@ -8,6 +8,7 @@ import useMousePosition from '../hooks/useMousePosition';
 function HouseButton ({resultsYear, updateHouseWidget, setUpdateHouseWidget, page, resultsRecords, state, district, popupState, enablePopups, mouseposition, raceRecords, setPopupState, topHouse}) {
     const candidates = [], names = [], thisState=`${state}-${district}`;
     const demColor = 'rgba(0, 71, 255, 1)', repColor = 'rgb(253, 3, 83)', indColor = 'green';
+    const [prevCandidate, setPrevCandidate] = useState({});
 
     useEffect(() => {
         setHouseFill();
@@ -115,21 +116,22 @@ function HouseButton ({resultsYear, updateHouseWidget, setUpdateHouseWidget, pag
     return (
         <div className='houseButton'>
             <h3>{thisState.slice(0, thisState.length - 2)}</h3>
-            {candidates.map((candidate) => {
-                return (
-                    <>
-                    <input type='radio' onClick={() => {handleClick(candidate, candidates)}} id={`radio-${thisState}-${candidate.name}`} name={`radio-${thisState}`} className={`candidate${candidate.caucus}`} defaultChecked={candidate.called !== '' ? 'checked':false}/>
-                    <Whisper trigger='hover' speaker={
-                        <Popover className={(popupState !== thisState || enablePopups === false) ? 'invisible' : 'visible'}>
-                            <Popup resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={'HOUSE'} state={popupState} mouseposition={mouseposition}/>
-                        </Popover>
-                    }>
-                        <label for={`radio-${thisState}-${candidate.name}`} style={candidate.style} id={thisState} onMouseOver={(e) => {handleMouseEnter(e)}} onMouseLeave={(e) => {handleMouseLeave(e)}}>{candidate.lname}</label>
-                    </Whisper>
-                    </>
-                );
-                
-            })}
+            <Whisper trigger='hover' speaker={
+                <Popover className={(popupState !== thisState || enablePopups === false) ? 'invisible' : 'visible'}>
+                    <Popup resultsYear={resultsYear} page={page} raceRecords={raceRecords} resultsRecords={resultsRecords} mode={'HOUSE'} state={popupState} mouseposition={mouseposition}/>
+                </Popover>
+            }>
+                <div className='buttonSet'>
+                    {candidates.map((candidate) => {
+                        return (
+                            <>
+                            <input type='radio' onClick={() => {handleClick(candidate, candidates)}} id={`radio-${thisState}-${candidate.name}`} name={`radio-${thisState}`} className={`candidate${candidate.caucus}`} defaultChecked={candidate.called !== '' ? 'checked':false}/>
+                            <label for={`radio-${thisState}-${candidate.name}`} style={candidate.style} id={thisState} onMouseOver={(e) => {handleMouseEnter(e)}} onMouseLeave={(e) => {handleMouseLeave(e)}}>{candidate.lname}</label>
+                            </>
+                        );
+                    })}
+                </div>
+            </Whisper>
         </div>
     );
 }

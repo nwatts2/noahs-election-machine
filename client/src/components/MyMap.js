@@ -20,7 +20,7 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
 
     const prediction = useRef(null);
 
-    const safeDemColor = 'rgba(0, 71, 255, 0.8)', likelyDemColor = 'rgba(0, 100, 255, 1)', leanDemColor = 'rgb(0, 150, 255)', tiltDemColor = 'rgba(180, 210, 255, 0.60)';
+    const safeDemColor = 'rgba(0, 71, 255, 0.8)', likelyDemColor = 'rgba(0, 100, 255, 1)', leanDemColor = 'rgb(0, 140, 255)', tiltDemColor = 'rgba(180, 210, 255, 0.60)';
     const safeRepColor = 'rgba(253, 3, 83, 0.9)', likelyRepColor = 'rgb(249, 90, 112)', leanRepColor = 'rgb(249, 140, 162)', tiltRepColor = 'rgba(255, 180, 195, 1)';
     const calledDemColor = 'rgba(0, 71, 255, 0.65)', calledRepColor = 'rgba(253, 3, 83, 0.75)';
     const uncalledColor = 'rgba(60, 60, 62, 1)';
@@ -29,12 +29,12 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
     const letterColor = 'white';
     const letterFont = '14px';
     const strokeWidth = 1.5;
-    const strokeColor = 'darkgrey';
+    const strokeColor = 'rgba(200, 200, 200, 1)';
 
     const senateYears = [2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014, 2016, 2018, 2020];
 
     const stateList = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
-
+    
     useEffect(() => {
         if (mode === 'SENATE' && senateYears.includes(resultsYear) === false  && page === 'PAST') {
             setResultsYear(2020);

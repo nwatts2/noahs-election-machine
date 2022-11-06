@@ -107,6 +107,13 @@
     align-items:center;
 }
 
+.buttonSet {
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:center;
+    align-items:center;
+}
+
 .houseButton {
     width:20%;
     display:flex;
