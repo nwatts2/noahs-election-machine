@@ -428,7 +428,7 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
                             margin = Math.abs(margin);
                         }
 
-                        if (resultsYear === 2022 && mode === 'SENATE' && state.state === 'AK') {
+                        if (resultsYear === 2022 && mode === 'SENATE' && state.state === 'AK' && votes[0] !== 0) {
                             margin = -16;
                         }
     
