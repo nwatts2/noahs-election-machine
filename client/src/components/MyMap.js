@@ -16,9 +16,11 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
     const [govWinner, setGovWinner] = useState('');
     const [outlineSelected, setOutlineSelected] = useState(false);
     const [previousState, setPreviousState] = useState('');
+    const [showPredictions, setShowPredictions] = useState(true);
     const mouseposition = useMousePosition();
 
     const prediction = useRef(null);
+    const showPredictionsRef = useRef(null);
 
     const safeDemColor = 'rgba(0, 71, 255, 0.8)', likelyDemColor = 'rgba(0, 100, 255, 1)', leanDemColor = 'rgb(0, 140, 255)', tiltDemColor = 'rgba(180, 210, 255, 0.60)';
     const safeRepColor = 'rgba(253, 3, 83, 0.9)', likelyRepColor = 'rgb(249, 90, 112)', leanRepColor = 'rgb(249, 140, 162)', tiltRepColor = 'rgba(255, 180, 195, 1)';
@@ -360,9 +362,95 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
             if (state.hasElection && elem && enableRatings) {
                 let rank, margin;
 
-                if (prediction.current && prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
-                else if (prediction.current) {rank = state.noahRank; margin = state.noahMargin;}
-                else {rank = state.ratingRank; margin = state.margin;}
+                if (showPredictions) {
+                    if (prediction.current && prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
+                    else if (prediction.current) {rank = state.noahRank; margin = state.noahMargin;}
+                    else {rank = state.ratingRank; margin = state.margin;}
+
+                } else {
+                    const candidates = [], votes = [];
+                    for (let candidate of resultsRecords) {
+                        if (candidate.state === state.state && candidate.year === resultsYear && candidate.type === mode) {
+                            candidates.push(candidate);
+                        }
+                    }
+
+                    if (candidates.length > 0) {
+                        for (let candidate of candidates) {
+                            let tempString = '', tempArray = [];
+    
+                            if (candidate.vote !== '') {
+                                tempArray = candidate.vote.split(',');
+                                
+                            } else {
+                                tempArray = candidate.firstRoundVote.split(',');
+                            }
+    
+                            for (let x of tempArray) {
+                                tempString += x;
+                            }
+    
+                            if (tempString === '') {tempString = '0';}
+                            
+                            votes.push(Number(tempString))
+                        }
+    
+                        let i = 0, j = 0;
+                        while (i < candidates.length) {
+                            while (j < candidates.length) {
+                                if (votes[i] < votes[j] && i < j) {
+                                    const tempVote = votes[i];
+                                    votes[i] = votes[j];
+                                    votes[j] = tempVote;
+    
+                                    const tempCandidate = candidates[i];
+                                    candidates[i] = candidates[j];
+                                    candidates[j] = tempCandidate;
+                                }
+                                
+                                j++;
+                            }
+                            
+                            i++;
+                        }
+    
+                        let totalVotes = 0;
+    
+                        for (let vote of votes) {
+                            totalVotes += vote;
+                        }
+    
+                        margin = (votes[0] - votes[1]) / totalVotes * 100;
+                        
+                        if (candidates[0].caucus === 'Republican') {
+                            margin = Math.abs(margin) * -1;
+                        } else if (candidates[0].caucus === 'Democratic') {
+                            margin = Math.abs(margin);
+                        }
+
+                        if (resultsYear === 2022 && mode === 'SENATE' && state.state === 'AK') {
+                            margin = -16;
+                        }
+    
+                        if (margin > 15) {
+                            rank = 3;
+                        } else if (margin > 5 && margin <= 15) {
+                            rank = 2;
+                        } else if (margin > 1 && margin <= 5) {
+                            rank = 1;
+                        } else if (margin <= 1 && margin >= -1) {
+                            rank = 0;
+                        } else if (margin < -1 && margin >= -5) {
+                            rank = -1;
+                        } else if (margin < -5 && margin >= -15) {
+                            rank = -2;
+                        } else if (margin < -15) {
+                            rank = -3;
+                        }
+                    }
+                    
+                }
+                
 
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
                     callRace(elem);
@@ -429,9 +517,91 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
             if (state.hasElection && elem && enableRatings) {
                 let rank, margin;
 
-                if (prediction.current && prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
-                else if (prediction.current) {rank = state.noahRank; margin = state.noahMargin;}
-                else {rank = state.ratingRank; margin = state.margin;}
+                if (showPredictions) {
+                    if (prediction.current && prediction.current.value === 'FiveThirtyEight') {rank = state.ratingRank; margin = state.margin;}
+                    else if (prediction.current) {rank = state.noahRank; margin = state.noahMargin;}
+                    else {rank = state.ratingRank; margin = state.margin;}
+
+                } else {
+                    const candidates = [], votes = [];
+                    for (let candidate of resultsRecords) {
+                        if (candidate.state === state.state && candidate.year === resultsYear && candidate.type === mode) {
+                            candidates.push(candidate);
+                        }
+                    }
+
+                    if (candidates.length > 0) {
+                        for (let candidate of candidates) {
+                            let tempString = '', tempArray = [];
+    
+                            if (candidate.vote !== '') {
+                                tempArray = candidate.vote.split(',');
+                                
+                            } else {
+                                tempArray = candidate.firstRoundVote.split(',');
+                            }
+    
+                            for (let x of tempArray) {
+                                tempString += x;
+                            }
+    
+                            if (tempString === '') {tempString = '0';}
+                            
+                            votes.push(Number(tempString))
+                        }
+    
+                        let i = 0, j = 0;
+                        while (i < candidates.length) {
+                            while (j < candidates.length) {
+                                if (votes[i] < votes[j] && i < j) {
+                                    const tempVote = votes[i];
+                                    votes[i] = votes[j];
+                                    votes[j] = tempVote;
+    
+                                    const tempCandidate = candidates[i];
+                                    candidates[i] = candidates[j];
+                                    candidates[j] = tempCandidate;
+                                }
+                                
+                                j++;
+                            }
+                            
+                            i++;
+                        }
+    
+                        let totalVotes = 0;
+    
+                        for (let vote of votes) {
+                            totalVotes += vote;
+                        }
+    
+                        margin = (votes[0] - votes[1]) / totalVotes * 100;
+                        
+                        if (candidates[0].caucus === 'Republican') {
+                            margin = Math.abs(margin) * -1;
+                        } else if (candidates[0].caucus === 'Democratic') {
+                            margin = Math.abs(margin);
+                        }
+    
+                        if (margin > 15) {
+                            rank = 3;
+                        } else if (margin > 5 && margin <= 15) {
+                            rank = 2;
+                        } else if (margin > 1 && margin <= 5) {
+                            rank = 1;
+                        } else if (margin <= 1 && margin >= -1) {
+                            rank = 0;
+                        } else if (margin < -1 && margin >= -5) {
+                            rank = -1;
+                        } else if (margin < -5 && margin >= -15) {
+                            rank = -2;
+                        } else if (margin < -15) {
+                            rank = -3;
+                        }
+                    }
+
+                    
+                }
 
                 if ((state.called === 'Democratic' || state.called === 'Republican') && page === 'LIVE') {
                     callRace(elem);
@@ -575,7 +745,7 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
 
         let rank, margin;
 
-        if (prediction.current.value === 'FiveThirtyEight') {rank = currentState.ratingRank; margin = currentState.margin;}
+        if (prediction.current && prediction.current.value === 'FiveThirtyEight') {rank = currentState.ratingRank; margin = currentState.margin;}
         else {rank = currentState.noahRank; margin = currentState.noahMargin;}
 
         let demCount, repCount;
@@ -834,6 +1004,14 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
         }
     }
 
+    function switchPrediction () {
+        if (showPredictionsRef.current && showPredictionsRef.current.checked) {
+            if (showPredictions !== true) {setShowPredictions(true);}
+        } else if (showPredictionsRef.current) {
+            if (showPredictions !== false) {setShowPredictions(false);}
+        }
+    }
+
     function handleClick(e) {
         if (page === 'CALLSIM') {
             let id = e.currentTarget.id;
@@ -913,7 +1091,16 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
 
     return (
         <>
-        {(page === 'CALLSIM' || page === 'LIVE') &&
+        {(page === 'LIVE') &&
+            <div className='predictionButtons'>
+                <input type='radio' id='predictions' name='predictions' ref={showPredictionsRef} onChange={switchPrediction} defaultChecked={true} />
+                <label for='predictions'>PREDICTIONS</label>
+
+                <input type='radio' id='liveresults' name='predictions' onChange={switchPrediction} />
+                <label for='liveresults'>LIVE RESULTS</label>
+            </div>
+        }
+        {((page === 'CALLSIM' || page === 'LIVE') && showPredictions) &&
             <div className='predictionText'>
                 <span className={'spanText'}>Showing predictions from</span>
                 <select ref={prediction}>
@@ -1750,7 +1937,6 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
             {page === 'LIVE' &&
                 <div className='enableButtons'>
                     <button onClick={(e) => {enablePops(e)}}>DISABLE INFO</button>
-                    <button onClick={(e) => {enableRate(e)}}>DISABLE RATINGS</button>
                 </div>
             }
             </div>
