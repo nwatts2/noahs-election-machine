@@ -353,7 +353,7 @@ export default function ResultsRecordList(props) {
         const printedStates = [];
         const topSenate = ['PA', 'WI', 'NC', 'OH', 'AZ', 'NV', 'GA', 'CO', 'NH', 'FL'];
         const topGovernor = ['PA', 'WI', 'NV', 'AZ', 'KS', 'OR', 'TX'];
-        const topHouse = ['AK-1st', 'AZ-2nd', 'CA-22nd', 'CA-27th', 'CO-8th', 'IA-3rd', 'IL-17th', 'KS-3rd', 'MD-6th', 'ME-2nd', 'NC-13th', 'NJ-7th', 'NM-2nd', 'NV-3rd', 'NY-18th', 'NY-19th', 'NY-22nd', 'PA-7th', 'TX-15th', 'VA-2nd'];
+        const topHouse = ['AK-1st', 'AZ-2nd', 'CA-22nd', 'CA-27th', 'IA-3rd', 'IL-17th', 'ME-2nd', 'MI-3rd', 'NH-1st', 'NV-1st','NY-19th', 'NY-22nd', 'OR-5th', 'PA-7th', 'PA-17th', 'RI-2nd', 'TX-15th', 'TX-34th', 'VA-2nd', 'VA-7th'];
 
         let numRecords = 0;
 
