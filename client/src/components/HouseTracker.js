@@ -29,6 +29,10 @@ function HouseButton ({resultsYear, updateHouseWidget, setUpdateHouseWidget, pag
                 if (record.caucus === 'Republican' || record.name === 'Jared Golden') {
                     candidates.push(record);
                 }
+            } else if (thisState === 'RI-2nd' && resultsYear === 2022) {
+                if (record.caucus === 'Republican' || record.name === 'Seth Magaziner') {
+                    candidates.push(record);
+                }
             } else {
                 candidates.push(record);
 
@@ -154,7 +158,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
     let topHouse = '';
 
     if (page === 'LIVE' || page === 'CALLSIM') {
-        topHouse = ['AK-1st', 'AZ-2nd', 'CA-22nd', 'CA-27th', 'CO-8th', 'IA-3rd', 'IL-17th', 'KS-3rd', 'MD-6th', 'ME-2nd', 'NC-13th', 'NJ-7th', 'NM-2nd', 'NV-3rd', 'NY-18th', 'NY-19th', 'NY-22nd', 'PA-7th', 'TX-15th', 'VA-2nd'];
+        topHouse = ['AK-1st', 'AZ-2nd', 'CA-22nd', 'CA-27th', 'IA-3rd', 'IL-17th', 'ME-2nd', 'MI-3rd', 'NH-1st', 'NV-1st','NY-19th', 'NY-22nd', 'OR-5th', 'PA-7th', 'PA-17th', 'RI-2nd', 'TX-15th', 'TX-34th', 'VA-2nd', 'VA-7th'];
     } else if (page === 'PAST') {
         topHouse = ['IA-2nd', 'NY-22nd', 'CA-25th', 'CA-21st', 'UT-4th', 'CA-39th', 'NJ-7th', 'SC-1st', 'TX-24th', 'IL-14th', 'IA-3rd', 'VA-7th', 'CA-48th', 'MN-2nd', 'PA-17th', 'MI-11th', 'IA-1st', 'WI-3rd', 'FL-27th', 'GA-7th'];
     }

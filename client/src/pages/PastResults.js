@@ -157,8 +157,8 @@ const PastResults = () => {
             <h1>PAST ELECTIONS</h1>
             <CollapseText 
                 text={"Here you can view results from past November elections for the US Senate, House of Representatives, and governorships."}
-                subtext={"You can currently view senate and gubernatorial results dating back to the year 2000, but more data will " +
-                    "become available in the future, including presidential results and expanded house data."}/>
+                subtext={"You can currently view Senate and gubernatorial results dating back to the year 2000, but more data will " +
+                    "become available in the future, including presidential results and expanded House data."}/>
             <div className='typeInfo'>
                 <div className="senateTitleBG">
                     <div className="senateTitle">

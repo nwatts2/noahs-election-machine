@@ -130,7 +130,7 @@ const Home = () => {
                 text={`Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and gubernatorial ` +
                     "election for the 2022 midterms. Check back on November 8th to view results for every election all in one place!"}
                 subtext = { "You can " +
-                    "also check out our Call Simulator to see how each race impacts control of the senate, house, and governorships, or you can " +
+                    "also check out our Call Simulator to see how each race impacts control of the Senate, House, and governorships, or you can " +
                     "visit our Past Results page to view previous election results for every state."} />
 
             <div className='typeInfo'>
@@ -140,20 +140,20 @@ const Home = () => {
                     </div>
                 </div>
                 <CollapseText 
-                    text={mode === 'SENATE' ? "The U.S. senate elections are shaping up to be extremely competitive this midterm season. " +
+                    text={mode === 'SENATE' ? "The U.S. Senate elections are shaping up to be extremely competitive this midterm season. " +
                         "Since Democrats control the White House, Republicans would " +
-                        "normally be expected to reclaim the senate without much trouble. However, the Democrats have a reasonable shot at retaining control, despite the pendulum swinging back in favor of Republicans " +
+                        "normally be expected to reclaim the Senate without much trouble. However, the Democrats have a reasonable shot at retaining control, despite the pendulum swinging back in favor of Republicans " +
                         "over the last several weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across key swing states. " : 
 
-                    (mode === 'GOVERNOR' ? "The sprint for control of the nation's governorships looks to be taking a similar path to the senate elections. " +
+                    (mode === 'GOVERNOR' ? "The sprint for control of the nation's governorships looks to be taking a similar path to the Senate elections. " +
                         "Candidate quality is what seems to matter most here, moreso than the overall national environment." : 
 
                         "This year's elections for the U.S. House of Representatives are much more in line with what we would expect for a midterm year. " +
-                        "Republicans are favored to take back the house this November, primarily due to " +
+                        "Republicans are favored to take back the House this November, primarily due to " +
                         "a favorable national environment, along with recent redistricting wins in key states.")}
                     
                     subtext={mode === 'SENATE' ? "The three narrowest states are expected to be Pennsylvania, Georgia, and Nevada, and whichever party wins at least two will very likely control the chamber. " + 
-                        "Early voting data and higher-than-average youth turnout are promising signs for Democrats, but current polling has been more beneficial for the Republican party. As it stands, the senate is a coin flip." :
+                        "Early voting data and higher-than-average youth turnout are promising signs for Democrats, but current polling has been more beneficial for the Republican party. As it stands, the Senate is a coin flip." :
                     
                     (mode === 'GOVERNOR' ? "Republicans are favored to hold the " +
                         "most governorships, as is normally the case, but if things go well for the Democrats, we could possibly see a " +
@@ -161,7 +161,7 @@ const Home = () => {
                         "Oregon, Arizona, and Nevada." :
 
                         "Still, this is not set in stone, and there are plenty of tight races that Democrats have a chance at winning in states like " +
-                        "New York, Arizona, and California. However, the possibility of a house majority is falling further and further away from the Democrats as we near election day." )}
+                        "New York, Arizona, and California. However, the possibility of a House majority is falling further and further away from the Democrats as we near election day." )}
                 />
             </div>
             <ControlBanner mode={mode} count={mode === 'SENATE' ? senateCount : (mode === 'HOUSE' ? houseCount : govCount)} />
