@@ -125,12 +125,12 @@ path {pointer-events: auto;}
 }
 
 .seatBreakdown .dem {
-    background:linear-gradient(to right, rgba(0, 71, 255, 1) 50%, transparent 50%) right;
+    background:linear-gradient(to right, rgba(0, 71, 255, 0) 50%, transparent 50%) right;
     background-size: 200% 100%;
 }
 
 .seatBreakdown .rep {
-    background:linear-gradient(to right, rgb(253, 3, 83) 50%, transparent 50%) right;
+    background:linear-gradient(to right, rgba(253, 3, 83, 0) 50%, transparent 50%) right;
     background-size: 200% 100%;
 }
 
@@ -141,7 +141,7 @@ path {pointer-events: auto;}
 }
 
 .seatBreakdown .repWin {
-    background:linear-gradient(to right, rgb(253, 3, 83) 50%, transparent 50%) right;
+    background:linear-gradient(to right, rgba(253, 3, 83, 1) 50%, transparent 50%) right;
     background-size: 200% 100%;
     background-position:left;
 }
@@ -177,6 +177,10 @@ path {pointer-events: auto;}
     .mapContainer {
         width:100%;
         overflow-x:auto;
+        display:flex;
+        flex-flow:column nowrap;
+        align-items:center;
+        justify-content:center;
     }
 
     .mapButtons {
