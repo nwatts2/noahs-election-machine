@@ -118,6 +118,11 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
             }
         }
 
+        if (window.innerWidth <= 740) {
+            top = 60;
+            left = 40;
+        }
+
         if (popup.current && (`${top}px` !== popStyle.top || `${left}px` !== popStyle.left)) {
             setPopStyle({top: `${top}px`, left:`${left}px`, visibility: visibility});
         }
