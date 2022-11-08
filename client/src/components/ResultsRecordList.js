@@ -144,7 +144,7 @@ const ResultRecord = (props) => {
                             </>
                             }
                             {(props.page === 'LIVE' || props.page === 'CALLSIM') &&
-                                <td className={`${'percentLabel'}`} rowSpan={stateSpecialCandidates.length}>{`${candidate.percentIn}%`}</td>
+                                <td className={`${'percentLabel'}`} rowSpan={stateSpecialCandidates.length}>{`${candidate.percentIn === 0 ? '- ' : candidate.percentIn}%`}</td>
                             }
                         </tr>
                         );
