@@ -212,7 +212,7 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
                 </tbody>
             </table>
             {(page === 'LIVE' || page === 'CALLSIM') &&
-                <span>Percent Reporting: {percentIn}%</span>
+                <span>Percent Reporting: {percentIn === 0 ? '- ' : percentIn}%</span>
             }
             </>
         );
