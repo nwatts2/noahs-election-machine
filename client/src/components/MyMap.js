@@ -745,8 +745,8 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
 
         let rank, margin;
 
-        if (prediction.current && prediction.current.value === 'FiveThirtyEight') {rank = currentState.ratingRank; margin = currentState.margin;}
-        else {rank = currentState.noahRank; margin = currentState.noahMargin;}
+        if (prediction.current && currentState && prediction.current.value === 'FiveThirtyEight') {rank = currentState.ratingRank; margin = currentState.margin;}
+        else if (currentState) {rank = currentState.noahRank; margin = currentState.noahMargin;}
 
         let demCount, repCount;
         if (mode === 'SENATE') {demCount = 36; repCount = 29;}
