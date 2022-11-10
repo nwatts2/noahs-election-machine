@@ -167,7 +167,7 @@ function HouseTracker ({mode, page, resultsRecords, resultsYear, setResultsRecor
     useEffect(() => {
         getHouseCount();
         return;
-    }, [updateHouseWidget]);
+    }, [updateHouseWidget, JSON.stringify(resultsRecords)]);
 
     useEffect(() => {
         setGraphData([
