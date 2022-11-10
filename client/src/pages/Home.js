@@ -164,7 +164,7 @@ const Home = () => {
                         "New York, Arizona, and California. However, the possibility of a House majority is falling further and further away from the Democrats as we near election day." )}
                 />
             </div>
-            <ControlBanner mode={mode} count={mode === 'SENATE' ? senateCount : (mode === 'HOUSE' ? houseCount : govCount)} />
+            {/*<ControlBanner mode={mode} count={mode === 'SENATE' ? senateCount : (mode === 'HOUSE' ? houseCount : govCount)} />*/}
             <div className='modeButtons'>
                 <button onClick={() => {setMode('SENATE');}}>SENATE</button>
                 <button onClick={() => {setMode('HOUSE')}}>HOUSE</button>

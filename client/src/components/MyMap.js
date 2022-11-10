@@ -50,7 +50,7 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
     useEffect(() => {
         getWinners();
         
-    }, [JSON.stringify(resultsRecords)])
+    }, [JSON.stringify(resultsRecords), JSON.stringify(senateCount), JSON.stringify(govCount), mode])
 
     useEffect(() => {
         const newStates = [];
@@ -1125,8 +1125,8 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
                 <>
                     <h2>SEAT BREAKDOWN</h2>
                     <div className='seatBreakdown'>
-                        <h3 id='demCount' className={((mode === 'SENATE' && senateWinner === 'Democratic') || (mode === 'GOVERNOR' && govWinner === 'Democratic')) ? 'demWin' : 'dem'}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
-                        <h3 id='repCount' className={((mode === 'SENATE' && senateWinner === 'Republican') || (mode === 'GOVERNOR' && govWinner === 'Republican')) ? 'repWin' : 'rep'}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
+                        <h3 id='demCount' className={((mode === 'SENATE' && senateWinner === 'Democratic' && page === 'PAST') || (mode === 'GOVERNOR' && govWinner === 'Democratic' && page === 'PAST')) ? 'demWin' : 'dem'}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
+                        <h3 id='repCount' className={((mode === 'SENATE' && senateWinner === 'Republican' && page === 'PAST') || (mode === 'GOVERNOR' && govWinner === 'Republican' && page === 'PAST')) ? 'repWin' : 'rep'}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
                     </div>
                 </>
             }
