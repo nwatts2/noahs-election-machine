@@ -16,7 +16,7 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
     const [govWinner, setGovWinner] = useState('');
     const [outlineSelected, setOutlineSelected] = useState(false);
     const [previousState, setPreviousState] = useState('');
-    const [showPredictions, setShowPredictions] = useState(true);
+    const [showPredictions, setShowPredictions] = useState(false);
     const mouseposition = useMousePosition();
 
     const prediction = useRef(null);
@@ -1093,10 +1093,10 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
         <>
         {(page === 'LIVE') &&
             <div className='predictionButtons'>
-                <input type='radio' id='predictions' name='predictions' ref={showPredictionsRef} onChange={switchPrediction} defaultChecked={true} />
+                <input type='radio' id='predictions' name='predictions' ref={showPredictionsRef} onChange={switchPrediction} />
                 <label for='predictions'>PREDICTIONS</label>
 
-                <input type='radio' id='liveresults' name='predictions' onChange={switchPrediction} />
+                <input type='radio' id='liveresults' name='predictions' onChange={switchPrediction} defaultChecked={true} />
                 <label for='liveresults'>LIVE RESULTS</label>
             </div>
         }
