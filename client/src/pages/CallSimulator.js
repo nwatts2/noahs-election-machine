@@ -45,7 +45,13 @@ const CallSimulator = () => {
             setResultsRecords(resultsRecords);
 
             if (simulatedResults.length !== resultsRecords) {
-                setSimulatedResults(resultsRecords);
+                const simulatedResultsTemp = [];
+
+                for (let record of resultsRecords) {
+                    simulatedResultsTemp.push({...record, called: ''});
+                }
+
+                setSimulatedResults(simulatedResultsTemp);
             }
 
         }
