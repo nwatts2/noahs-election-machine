@@ -81,12 +81,36 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
 
     title = `${fullState.toUpperCase()} ${favorite.isSpecial ? 'SPECIAL ': ''}${mode} RACE`;
 
-    if (mode === 'SENATE' || mode === 'GOVERNOR') {
-        raceInfo = `${favorite.name} is running for ${typeText} in the state of ${fullState} against ${altCandidate.name}. ${favorite.name} is a member of the ${favorite.party} party and is ${favoriteStatement} to win this race.`
+    if (favorite && altCandidate && favorite.called === '' && altCandidate.called === '') {
+        if (mode === 'SENATE' || mode === 'GOVERNOR') {
+            raceInfo = `${favorite.name} is running for ${typeText} in the state of ${fullState} against ${altCandidate.name}. ${favorite.name} is a member of the ${favorite.party} party and is ${favoriteStatement} to win this race.`
 
-    } else if (mode === 'HOUSE') {
-        raceInfo = `${favorite.name} is running for ${typeText} in the ${district} district of ${fullState} against ${altCandidate.name}. ${favorite.name} is a member of the ${favorite.party} party and is ${favoriteStatement} to win this race.`
+        } else if (mode === 'HOUSE') {
+            raceInfo = `${favorite.name} is running for ${typeText} in the ${district} district of ${fullState} against ${altCandidate.name}. ${favorite.name} is a member of the ${favorite.party} party and is ${favoriteStatement} to win this race.`
 
+        }
+    } else if (favorite && altCandidate && favorite.called !== '') {
+        if (mode === 'SENATE') {
+            raceInfo = `${favorite.name} ${favorite.caucus === 'Democratic' ? '(D)' : '(R)'} is projected to win the state of ${fullState} in ${typeText}. ${favorite.name} ran against ${altCandidate.name} for this seat and was initially ${favoriteStatement} to win this race.`
+    
+        } else if (mode === 'GOVERNOR') {
+            raceInfo = `${favorite.name} ${favorite.caucus === 'Democratic' ? '(D)' : '(R)'} is projected to win the governorship for the state of ${fullState}. ${favorite.name} ran against ${altCandidate.name} for this seat and was initially ${favoriteStatement} to win this race.`
+    
+        } else if (mode === 'HOUSE') {
+            raceInfo = `${favorite.name} ${favorite.caucus === 'Democratic' ? '(D)' : '(R)'} is projected to win the ${district} district of ${fullState} in ${typeText}. ${favorite.name} ran against ${altCandidate.name} for this seat and was initially ${favoriteStatement} to win this race.`
+    
+        }
+    } else if (favorite && altCandidate && altCandidate.called !== '') {
+        if (mode === 'SENATE') {
+            raceInfo = `${altCandidate.name} ${altCandidate.caucus === 'Democratic' ? '(D)' : '(R)'} is projected to win the state of ${fullState} in ${typeText}. ${altCandidate.name} ran against ${favorite.name} for this seat, though ${favorite.name} was initially ${favoriteStatement} to win this race.`
+    
+        } else if (mode === 'GOVERNOR') {
+            raceInfo = `${altCandidate.name} ${altCandidate.caucus === 'Democratic' ? '(D)' : '(R)'} is projected to win the governorship for the state of ${fullState}. ${altCandidate.name} ran against ${favorite.name} for this seat, though ${favorite.name} was initially ${favoriteStatement} to win this race.`
+    
+        } else if (mode === 'HOUSE') {
+            raceInfo = `${altCandidate.name} ${altCandidate.caucus === 'Democratic' ? '(D)' : '(R)'} is projected to win the ${district} district of ${fullState} in ${typeText}. ${altCandidate.name} ran against ${favorite.name} for this seat, though ${favorite.name} was initially ${favoriteStatement} to win this race.`
+    
+        }
     }
 
     function calculatePopupPosition() {
@@ -192,19 +216,19 @@ const Popup = ({ isSpecial, resultsYear, page, raceRecords, resultsRecords, mode
                     {firstroundvotes[0] !== '-' &&
                     <>
                         <tr>
-                            <th>First Round Votes</th>
+                            <th rowSpan={2}>First Round</th>
                             {firstroundvotes.map((vote) => {return <td>{vote}</td>})}
                         </tr>
                         <tr>
-                            <th>First Round Percent</th>
+                            {/*<th style={{whiteSpace: 'nowrap'}}>First Round Percent</th>*/}
                             {firstroundpercents.map((percent) => {return <td>{percent}</td>})}
                         </tr>
                         <tr>
-                            <th>Runoff Votes</th>
+                            <th rowSpan={2}>Runoff</th>
                             {runoffvotes.map((vote) => {return <td>{vote}</td>})}
                         </tr>
                         <tr>
-                            <th>Runoff Percent</th>
+                            {/*<th style={{whiteSpace: 'nowrap'}}>Runoff Percent</th>*/}
                             {runoffpercents.map((percent) => {return <td>{percent}</td>})}
                         </tr>
                     </>

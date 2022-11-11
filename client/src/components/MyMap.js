@@ -371,8 +371,16 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
                     else if (prediction.current) {rank = state.noahRank; margin = state.noahMargin;}
                     else {rank = state.ratingRank; margin = state.margin;}
 
+                } else if (page === 'PAST') {
+                    rank = state.ratingRank; margin = state.margin;
+                    
                 } else {
                     const candidates = [], votes = [];
+
+                    if (state === 'GA' && state.isSpecial === false) {
+                        window.alert(state.margin);
+                    }
+
                     for (let candidate of resultsRecords) {
                         if (candidate.state === state.state && candidate.year === resultsYear && candidate.type === mode) {
                             candidates.push(candidate);
@@ -528,6 +536,11 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
 
                 } else {
                     const candidates = [], votes = [];
+
+                    if (page === 'PAST') {
+                        rank = state.ratingRank; margin = state.margin;
+                    }
+
                     for (let candidate of resultsRecords) {
                         if (candidate.state === state.state && candidate.year === resultsYear && candidate.type === mode) {
                             candidates.push(candidate);
@@ -749,8 +762,10 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
 
         let rank, margin;
 
-        if (prediction.current && currentState && prediction.current.value === 'FiveThirtyEight') {rank = currentState.ratingRank; margin = currentState.margin;}
-        else if (currentState) {rank = currentState.noahRank; margin = currentState.noahMargin;}
+        if (page === 'LIVE' || page === 'CALLSIM') {
+            if (prediction.current && currentState && prediction.current.value === 'FiveThirtyEight') {rank = currentState.ratingRank; margin = currentState.margin;}
+            else if (currentState) {rank = currentState.noahRank; margin = currentState.noahMargin;}
+        }
 
         let demCount, repCount;
         if (mode === 'SENATE') {demCount = 36; repCount = 29;}
