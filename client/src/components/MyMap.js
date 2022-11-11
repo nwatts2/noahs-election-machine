@@ -56,6 +56,10 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
         const newStates = [];
         const tempSpecialStates = [];
 
+        if (page === 'CALLSIM' && showPredictions === false) {
+            setShowPredictions(true);
+        }
+
         for (let record of resultsRecords) {
             if (record.year === resultsYear && record.type === mode) {
                 for (let race of raceRecords) {
