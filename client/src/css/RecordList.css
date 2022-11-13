@@ -1,0 +1,199 @@
+.resultsRecords {
+    width:100%;
+    height:auto;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:center;
+    align-items:center;
+    margin:0px 0px 50px 0px;
+    color:white;
+    transition: max-height .50s ease-in-out;
+}
+
+.resultsRecords table {
+    width:70%;
+    height:auto;
+    min-width:700px;
+    border-collapse:collapse;
+    border-radius:10px;
+    overflow:hidden;
+    font-size:1.5rem;
+    font-family:'Trebuchet MS';
+    box-shadow:0px 0px 10px grey;
+}
+
+.resultsRecords button {
+    font-family: 'Trebuchet MS';
+    font-size:1.2rem;
+    font-weight:bold;
+    color:white;
+    width:fit-content;
+    background:none;
+    border:none;
+    margin:0;
+}
+
+.resultsRecords h3 {
+    font-size:2rem;
+    width:100%;
+    text-align:center;
+}
+
+select {
+    background:none;
+    border:none;
+    border-bottom: 2px solid white;
+    color: white;
+    font-family:'Trebuchet MS';
+    font-weight: bold;
+    font-size:1rem;
+    padding:5px;
+    margin:10px;
+}
+
+.spanText {
+    font-family:'Trebuchet MS';
+    font-weight:bold;
+    color:white;
+    font-size:1rem;
+}
+
+.resultsRecords tr {width:100%;}
+
+.resultsRecords hr {
+    width:100%;
+    padding:0;
+    margin-top:10px;
+}
+
+th {
+    text-align:center;
+    padding:10px;
+    background-color:rgba(36, 36, 37, .45);
+    border:none;
+    border-bottom:3px solid white;
+}
+
+td {
+    padding:10px;
+    text-align:center;
+    border:none;
+}
+
+.stateLabel {
+    text-align:center;
+    padding:10px;
+    background-color:rgba(36, 36, 37, .45);
+    border:none;
+    border-right:2px solid white;
+    border-top:2px solid white;
+    font-weight:bold;
+    box-shadow: 2px 0px 5px black;
+}
+
+.percentLabel {
+    text-align:center;
+    padding:10px;
+    background-color:rgba(36, 36, 37, .45);
+    border:none;
+    border-left:2px solid white;
+    border-top:2px solid white;
+    font-weight:bold;
+    box-shadow: -2px 0px 5px black;
+}
+
+table .notCalled:nth-child(even) td {
+    background-color:rgba(36, 36, 37, .95)
+}
+
+table .notCalled:nth-child(odd) td {
+    background-color:rgba(36, 36, 37, .65)
+}
+
+.calledDem {
+    background-color:rgba(0, 71, 255, 1);
+}
+
+.calledRep {
+    background-color:rgb(253, 3, 83);
+}
+
+.calledDem td, .calledRep td {background:transparent;}
+
+@media screen and (max-width: 1300px) {
+    .resultsRecords table {
+        width:90%;
+        min-width:0px;
+        font-size:1.3rem;
+    }
+    
+    .resultsRecords button {
+        font-size:1rem;
+    }
+    
+    .resultsRecords h3 {
+        font-size:2.2rem;
+    }
+
+    select {
+        font-size:1rem;
+        padding:5px;
+        margin:10px;
+    }
+    
+    .spanText {
+        font-family:'Trebuchet MS';
+        font-weight:bold;
+        color:white;
+        font-size:1rem;
+    }
+    
+    th {
+        padding:10px;
+    }
+    
+    td {
+        padding:10px;
+    }
+
+    .stateLabel {padding:5px;}
+}
+
+@media screen and (max-width: 740px) {
+    .resultsRecords table {
+        width:95%;
+        min-width:0px;
+        font-size:0.8rem;
+    }
+    
+    .resultsRecords button {
+        font-size:1rem;
+    }
+    
+    .resultsRecords h3 {
+        font-size:1.5rem;
+    }
+
+    select {
+        font-size:0.8rem;
+        padding:5px;
+        margin:10px;
+    }
+    
+    .spanText {
+        font-family:'Trebuchet MS';
+        font-weight:bold;
+        color:white;
+        font-size:0.8rem;
+    }
+    
+    th {
+        padding:5px;
+    }
+    
+    td {
+        padding:5px;
+    }
+
+    .stateLabel {padding:5px;}
+}

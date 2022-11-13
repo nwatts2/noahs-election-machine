@@ -1,0 +1,302 @@
+.highlighted {
+    stroke: yellow;
+    stroke-width: 2;
+    filter: drop-shadow(-2px 2px 6px black);
+}
+
+.predictionButtons {
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content:center;
+    align-items:center;
+    width: 80%;
+    margin: 10px 0px;
+}
+
+.predictionButtons input[type='radio'] {
+    display:none;
+}
+
+.predictionButtons label {
+    border:3px solid white;
+    border-radius:20px;
+    text-align: center;
+    font-size:1.2rem;
+    font-family:'Trebuchet MS';
+    font-weight:bold;
+    color: white;
+    padding:5px 10px;
+    margin: 0px 20px;
+    text-shadow: none;
+    opacity: 1;
+    transition:all .2s ease-in-out;
+}
+
+.predictionButtons label:hover {
+    opacity: 0.7;
+}
+
+.predictionButtons input[type='radio']:checked+label {
+    color: black;
+    background-color: white;
+}
+
+.predictionButtons input[type='radio']:checked+label:hover {
+    opacity: 1;
+}
+
+.map {
+    display:flex;
+    flex-flow:row nowrap;
+    width:100%;
+    height:fit-content;
+    align-items:center;
+    justify-content:center;
+}
+
+.mapState {
+    fill: black;
+    transition: all .12s ease-in-out;
+}
+
+svg {pointer-events: none;}
+path {pointer-events: auto;}
+
+.mapButtons {
+    display:flex;
+    flex-flow:column nowrap;
+    align-items:center;
+    justify-content:center;
+    width:13%;
+    margin:10px 0px 20px 0px;
+    padding:5px;
+}
+
+.mapButtons h2 {
+    background:none;
+    text-decoration:underline;
+    width:100%;
+}
+
+.mapButtons h3 {
+    text-decoration:none;
+    text-align:center;
+}
+
+.mapButtons button {
+    background-color:transparent;
+    border:3px solid white;
+    border-radius:30px;
+    color:white;
+    padding:10px;
+    margin:5px;
+    height:auto;
+    min-width:fit-content;
+    width:90%;
+    font-family:'Trebuchet MS';
+    font-size:1.2rem;
+    font-weight:bold;
+    opacity: 1;
+    transition: all .2s;
+}
+
+.mapButtons button:hover {
+    opacity:.7;
+    transition: all .2s;
+}
+
+.map svg {
+    width:1000px;
+}
+
+.stateText {
+    font-family:'Trebuchet MS';
+    text-shadow:2px 2px 5px rgba(36, 36, 37, .25);
+}
+
+.seatBreakdown {
+    margin-bottom: 130px;
+}
+
+.seatBreakdown h3 {
+    font-family:'Trebuchet MS';
+    border-radius:10px 50px 10px 50px;
+    transition: all .3s ease;
+}
+
+.seatBreakdown .dem {
+    background:linear-gradient(to right, rgba(0, 71, 255, 0) 50%, transparent 50%) right;
+    background-size: 200% 100%;
+}
+
+.seatBreakdown .rep {
+    background:linear-gradient(to right, rgba(253, 3, 83, 0) 50%, transparent 50%) right;
+    background-size: 200% 100%;
+}
+
+.seatBreakdown .demWin {
+    background:linear-gradient(to right, rgba(0, 71, 255, 1) 50%, transparent 50%) right;
+    background-size: 200% 100%;
+    background-position:left;
+}
+
+.seatBreakdown .repWin {
+    background:linear-gradient(to right, rgba(253, 3, 83, 1) 50%, transparent 50%) right;
+    background-size: 200% 100%;
+    background-position:left;
+}
+
+.enableButtons {
+    height:100%;
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content:flex-end;
+    align-items:center;
+    margin-top:300px;
+}
+
+@media screen and (max-width: 1300px) {
+    .seatBreakdown {
+        width:100%;
+        margin:10px 0px 10px 0px;
+        display:flex;
+        flex-flow:row nowrap;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .map {
+        display:flex;
+        flex-flow:column nowrap;
+        width:100%;
+        height:auto;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .mapContainer {
+        width:100%;
+        overflow-x:auto;
+        display:flex;
+        flex-flow:column nowrap;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .mapButtons {
+        flex-flow:row wrap;
+        align-items:center;
+        justify-content:center;
+        width:90%;
+        height:auto;
+        margin:10px 0px 10px 0px;
+        padding:5px;
+    }
+        
+    .mapButtons button {
+        margin:5px;
+        font-size:1.2rem;
+        width:auto;
+    }
+
+    .enableButtons {
+        margin:0px;
+        display: flex;
+        flex-flow: row wrap;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .enableButtons button {
+        font-size:1.2rem;
+    }
+
+    .enableButtonsSim {
+        width:100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content:center;
+        height:auto;
+    }
+}
+
+@media screen and (max-width:1020px) {
+    .map svg {
+        width:100%;
+        align-self:center;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .seatBreakdown {
+        width:100%;
+        margin-bottom:0px;
+        display:flex;
+        flex-flow:row nowrap;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .predictionButtons {
+        width: 100%;
+        justify-content:space-around;
+    }
+    
+    .predictionButtons label {
+        margin: 0px 0px;
+    }
+    
+    .predictionButtons label:hover {
+        opacity: 1;
+    }
+
+    .map {
+        display:flex;
+        flex-flow:column nowrap;
+        width:100%;
+        height:auto;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .mapContainer {
+        width:100%;
+        overflow-x:auto;
+    }
+
+    .mapButtons {
+        flex-flow:row wrap;
+        align-items:center;
+        justify-content:center;
+        width:100%;
+        margin:10px 0px 10px 0px;
+        padding:5px;
+    }
+        
+    .mapButtons button {
+        padding:5px;
+        margin:5px;
+        min-width:fit-content;
+        width:13%;
+        font-size:0.8rem;
+    }
+
+    .map svg {
+        width: 200%;
+        align-self:flex-start;
+    }
+
+    .mapButtons button:hover {
+        opacity:1;
+    }
+
+    .enableButtons {
+        margin:0;
+    }
+
+    .enableButtonsSim {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content:center;
+    }
+}

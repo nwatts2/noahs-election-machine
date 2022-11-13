@@ -1,0 +1,71 @@
+.collapseTextContainer {
+    padding:40px 70px 20px 70px;
+    margin:10px 0px 10px 0px;
+    align-self: center;
+    width:50%;
+    max-height:800px;
+    color: white;
+    border-radius:10px;
+    border-bottom:7px solid white;
+    background-image:linear-gradient(to bottom right, rgba(36, 36, 37, .95), transparent);
+    box-shadow:0px 0px 10px grey;
+    position:relative;
+    transition: max-height .25s ease-in-out, padding-top .25s ease-in-out, padding-bottom .25s ease-in-out;
+    overflow:hidden;
+}
+
+.typeInfo .collapseTextContainer {
+    width:60%;
+    margin:0px 0px 10px 0px;
+}
+
+.collapseTextContainer button {
+    border:none;
+    color:white;
+    background:none;
+    font-family:'Trebuchet MS';
+    font-size:3rem;
+    position:absolute;
+    right:5px;
+    top:-15px;
+}
+
+.collapseText {
+    color: white;
+    font-family: 'Trebuchet MS';
+    font-size: 1.1rem;
+    line-height:1.5rem;
+    transition: color .25s ease-in-out, text-shadow .25s ease-in-out;
+}
+
+@media screen and (max-width:1300px) {
+    .collapseTextContainer {
+        width: 80%;
+        padding: 40px 40px 20px 40px
+    }
+
+    .typeInfo .collapseTextContainer {
+        width:85%;
+    }
+
+    .collapseTextContainer button {
+        right:8px;
+        top:-10px;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .collapseTextContainer {
+        width: 95%;
+        padding: 25px 10px 10px 10px
+    }
+
+    .typeInfo .collapseTextContainer {
+        width:90%;
+    }
+
+    .collapseTextContainer button {
+        right:0px;
+        top:-10px;
+    }
+}

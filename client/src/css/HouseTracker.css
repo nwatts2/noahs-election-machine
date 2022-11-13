@@ -1,0 +1,229 @@
+.row {
+    display:flex;
+    flex-flow:row nowrap;
+}
+
+.houseTracker {
+    width:70%;
+    border:3px solid white;
+    border-radius:5px;
+    font-family:'Trebuchet MS';
+    color:white;
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding:10px;
+}
+
+.houseTracker h2 {
+    background:none;
+    text-decoration:underline;
+    text-align:center;
+    margin:0;
+}
+
+.houseTracker h3 {
+    font-family:'Trebuchet MS';
+    text-decoration:none;
+    font-size:1.2rem;
+
+}
+
+.houseTracker span {
+    margin:10px 0px;
+    text-align:center;
+    width:100%;
+}
+
+.houseCallButtons {
+    display:flex;
+    flex-flow:row wrap;
+    align-items:center;
+    justify-content:center;
+    height:auto;
+    width:70%;
+    margin:10px 0px 20px 0px;
+    padding:5px;
+}
+
+.houseCallButtons h2 {
+    background:none;
+    text-decoration:underline;
+    width:100%;
+}
+
+.houseCallButtons button {
+    background-color:transparent;
+    border:3px solid white;
+    border-radius:30px;
+    color:white;
+    padding:10px;
+    margin:5px;
+    height:auto;
+    min-width:fit-content;
+    width:13%;
+    font-family:'Trebuchet MS';
+    font-size:1.2rem;
+    font-weight:bold;
+    opacity: 1;
+    transition: all .2s;
+}
+
+.houseCallButtons button:hover {
+    opacity:.7;
+    transition: all .2s;
+}
+
+.graphSection {
+    width:30%;
+    height:100%;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.graphSection h3 {
+    margin:20px 0px;
+}
+
+.graph {
+    width:100%;
+}
+
+.infoSection {
+    width:69%;
+    height:100%;
+    display:flex;
+    flex-flow: column nowrap;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.houseButtonSection {
+    display:flex;
+    flex-flow:row wrap;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.buttonSet {
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:center;
+    align-items:center;
+}
+
+.houseButton {
+    width:20%;
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content:center;
+}
+
+.houseButton label {
+    color:white;
+    background-color:black;
+    border:3px solid white;
+    border-radius:5px;
+    font-size:1rem;
+    padding:1px;
+    margin:2px;
+    opacity: 1;
+    transition: opacity .2s;
+    text-align:center;
+    width:85%;
+}
+
+.houseButton label:hover {
+    opacity: .7;
+    transition: opacity .2s;
+}
+
+.houseButton input[type='radio'] {
+    display:none;
+}
+
+@media screen and (max-width: 1300px) {
+    .houseTracker {
+        width:95%;
+    }
+
+    .houseButton {
+        width:25%;
+    }
+
+    .houseButton label {
+        font-size:1rem;
+    }
+
+    .graphSection {
+        margin:0px 20px 0px 0px;
+        align-self:center;
+    }
+
+}
+
+@media screen and (max-width: 740px) {
+    .houseTracker {
+        width:95%;
+        padding:5px;
+        flex-flow: row wrap;
+        justify-content:center;
+    }
+    
+    .houseTracker h2 {
+        font-size:1.3rem;
+    }
+    
+    .houseTracker h3 {
+        font-size:0.8rem;
+    }
+    
+    .houseCallButtons {
+        flex-flow:row wrap;
+        width:100%;
+        margin:10px 0px 10px 0px;
+        padding:5px;
+    }
+    
+    .houseCallButtons button {
+        padding:5px;
+        width:13%;
+        font-size:0.8rem;
+    }
+
+    .houseCallButtons button:hover {
+        opacity:1;
+    }
+    
+    .graphSection {
+        width:95%;
+    }
+    
+    .graphSection h3 {
+        margin:10px 0px;
+        font-size:1.2rem
+    }
+    
+    .graph {
+        width:100%;
+        margin: 0px 0px 10px 0px;
+    }
+    
+    .infoSection {
+        width:95%;
+    }
+    
+    .houseButton {
+        width:50%;
+    }
+    
+    .houseButton label {
+        font-size:0.8rem;
+    }
+
+    .houseButton label:hover {
+        opacity:1;
+    }
+}
