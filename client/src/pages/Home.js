@@ -32,7 +32,12 @@ const Home = () => {
         }, 10000);
 
         return () => {clearInterval(interval)};
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        getCounts();
+
+    }, [JSON.stringify(resultsRecords), JSON.stringify(senateCount), JSON.stringify(govCount)]);
 
     useEffect(() => {
         async function getResults() {
@@ -83,38 +88,6 @@ const Home = () => {
 
         }
 
-        function getCounts() {
-            let houseDem = 0, houseRep = 0, senateDem = 0, senateRep = 0, govDem = 0, govRep = 0;
-
-            for (let record of resultsRecords) {
-                if (record.called !== '' && record.year === resultsYear) {
-                    if (record.type === 'SENATE') {
-                        if (record.called === 'Democratic') {
-                            senateDem += 1;
-                        } else if (record.called === 'Republican') {
-                            senateRep += 1;
-                        }
-                    } else if (record.type === 'HOUSE') {
-                        if (record.called === 'Democratic') {
-                            houseDem += 1;
-                        } else if (record.called === 'Republican') {
-                            houseRep += 1;
-                        }
-                    } else if (record.type === 'GOVERNOR') {
-                        if (record.called === 'Democratic') {
-                            govDem += 1;
-                        } else if (record.called === 'Republican') {
-                            govRep += 1;
-                        }
-                    }
-                }
-            }
-
-            setHouseCount([houseDem, houseRep]);
-            setSenateCount([senateDem + 36, senateRep + 29]);
-            setGovCount([govDem + 6, govRep + 8]);
-        }
-
         getResults();
         getRaces();
         getCounts();
@@ -122,6 +95,38 @@ const Home = () => {
         return;
 
     }, [mode, refreshCount]);
+
+    function getCounts() {
+        let houseDem = 0, houseRep = 0, senateDem = 0, senateRep = 0, govDem = 0, govRep = 0;
+
+        for (let record of resultsRecords) {
+            if (record.called !== '' && record.year === resultsYear) {
+                if (record.type === 'SENATE') {
+                    if (record.called === 'Democratic') {
+                        senateDem += 1;
+                    } else if (record.called === 'Republican') {
+                        senateRep += 1;
+                    }
+                } else if (record.type === 'HOUSE') {
+                    if (record.called === 'Democratic') {
+                        houseDem += 1;
+                    } else if (record.called === 'Republican') {
+                        houseRep += 1;
+                    }
+                } else if (record.type === 'GOVERNOR') {
+                    if (record.called === 'Democratic') {
+                        govDem += 1;
+                    } else if (record.called === 'Republican') {
+                        govRep += 1;
+                    }
+                }
+            }
+        }
+
+        setHouseCount([houseDem, houseRep]);
+        setSenateCount([senateDem + 36, senateRep + 29]);
+        setGovCount([govDem + 6, govRep + 8]);
+    }
 
     return (
         <div className="mainPage">
