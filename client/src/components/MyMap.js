@@ -1144,8 +1144,8 @@ function MyMap ({resultsYear, setResultsYear, page, president, raceRecords, resu
                 <>
                     <h2>SEAT BREAKDOWN</h2>
                     <div className='seatBreakdown'>
-                        <h3 id='demCount' className={((mode === 'SENATE' && senateWinner === 'Democratic' && (page === 'PAST' || page === 'LIVE')) || (mode === 'GOVERNOR' && govWinner === 'Democratic' && page === 'PAST')) ? 'demWin' : 'dem'}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
-                        <h3 id='repCount' className={((mode === 'SENATE' && senateWinner === 'Republican' && (page === 'PAST' || page === 'LIVE')) || (mode === 'GOVERNOR' && govWinner === 'Republican' && page === 'PAST')) ? 'repWin' : 'rep'}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
+                        <h3 id='demCount' className={((mode === 'SENATE' && senateWinner === 'Democratic' && (page === 'PAST' || page === 'LIVE')) || (mode === 'GOVERNOR' && govWinner === 'Democratic' && (page === 'PAST' || page === 'LIVE'))) ? 'demWin' : 'dem'}>DEMS: {mode === 'SENATE' ? senateCount[0] : govCount[0] }</h3>
+                        <h3 id='repCount' className={((mode === 'SENATE' && senateWinner === 'Republican' && (page === 'PAST' || page === 'LIVE')) || (mode === 'GOVERNOR' && govWinner === 'Republican' && (page === 'PAST' || page === 'LIVE'))) ? 'repWin' : 'rep'}>GOP: {mode === 'SENATE' ? senateCount[1] : govCount[1] }</h3>
                     </div>
                 </>
             }

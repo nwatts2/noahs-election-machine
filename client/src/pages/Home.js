@@ -133,9 +133,9 @@ const Home = () => {
             <h1>THE 2022 US MIDTERM ELECTIONS</h1>
             <CollapseText 
                 text={`Welcome to Noah's Election Machine! Here you can view live election results for every U.S. Senate, House of Representatives, and gubernatorial ` +
-                    "election for the 2022 midterms. Check back on November 8th to view results for every election all in one place!"}
+                    "election for the 2022 midterms. The midterms have passed, but check back on December 6th to view results for the Georgia runoff Senate election!"}
                 subtext = { "You can " +
-                    "also check out our Call Simulator to see how each race impacts control of the Senate, House, and governorships, or you can " +
+                    "also check out our Call Simulator to see how each race impacted control of the Senate, House, and governorships, or you can " +
                     "visit our Past Results page to view previous election results for every state."} />
 
             <div className='typeInfo'>
@@ -145,28 +145,26 @@ const Home = () => {
                     </div>
                 </div>
                 <CollapseText 
-                    text={mode === 'SENATE' ? "The U.S. Senate elections are shaping up to be extremely competitive this midterm season. " +
-                        "Since Democrats control the White House, Republicans would " +
-                        "normally be expected to reclaim the Senate without much trouble. However, the Democrats have a reasonable shot at retaining control, despite the pendulum swinging back in favor of Republicans " +
-                        "over the last several weeks. Republicans' chances have been suppressed largely due to the selection of weak GOP candidates across key swing states. " : 
+                    text={mode === 'SENATE' ? "The U.S. Senate elections ended up being extremely competitive this midterm season. " +
+                        "Since Democrats control the White House, Republicans normally " +
+                        "would have been expected to reclaim the Senate without much trouble. However, the Democrats ultimately outperformed the expectations of most analysts and held on, despite the flood of favorable polling for the Republicans in the last month of the campaign season. " +
+                        "Republicans' chances of victory were suppressed largely due to the selection of weak GOP candidates across key swing states. " : 
 
-                    (mode === 'GOVERNOR' ? "The sprint for control of the nation's governorships looks to be taking a similar path to the Senate elections. " +
-                        "Candidate quality is what seems to matter most here, moreso than the overall national environment." : 
+                    (mode === 'GOVERNOR' ? "The sprint for control of the nation's governorships took a similar path to the Senate elections this year. " +
+                        "Candidate quality is what mattered most here, moreso than the overall national environment." : 
 
-                        "This year's elections for the U.S. House of Representatives are much more in line with what we would expect for a midterm year. " +
-                        "Republicans are favored to take back the House this November, primarily due to " +
-                        "a favorable national environment, along with recent redistricting wins in key states.")}
+                        "This year's elections for the U.S. House of Representatives were expected to be much more favorable for the Republican party, and although they still took back the House, the margin of victory was not impressive. " +
+                        "The Democrats overperformed in most of the nation, with exceptions in states such as Florida and New York. These states seem to be the only places where the red wave ended up manifesting itself, " +
+                        "quite possibly saving the Republicans and giving them just enough seats to flip the House.")}
                     
-                    subtext={mode === 'SENATE' ? "The three narrowest states are expected to be Pennsylvania, Georgia, and Nevada, and whichever party wins at least two will very likely control the chamber. " + 
-                        "Early voting data and higher-than-average youth turnout are promising signs for Democrats, but current polling has been more beneficial for the Republican party. As it stands, the Senate is a coin flip." :
+                    subtext={mode === 'SENATE' ? "Of the three most impactful races, Democrats have already won Pennsylvania and Nevada, and are expected to perform well in the Georgia runoff on December 6th. The GOP would have needed to win two of these three states to take back the Senate, but " + 
+                        "the Democrats were blessed with strong early voting performace and higher-than-average youth turnout. The Democratic Party is officially projected to win the U.S. Senate." :
                     
-                    (mode === 'GOVERNOR' ? "Republicans are favored to hold the " +
-                        "most governorships, as is normally the case, but if things go well for the Democrats, we could possibly see a " +
-                        "25-25 split between the two parties, though this appears to be increasingly unlikely as the election draws closer. This will ultimately come down to the most competitive races in Wisconsin, " +
-                        "Oregon, Arizona, and Nevada." :
+                    (mode === 'GOVERNOR' ? "Democrats held on to four of the five most competitive gubernatorial elections, which brings the total to 24-26, with Republicans just barely holding a majority of the governor's mansions. " +
+                        "This outcome is owed to Democratic overperformance in Wisconsin and Arizona, especially, where Tony Evers and Katie Hobbs won their races. However, despite these wins for the Democrats, the Republican party is officially projected to win the majority of the nation's governorships. " :
 
-                        "Still, this is not set in stone, and there are plenty of tight races that Democrats have a chance at winning in states like " +
-                        "New York, Arizona, and California. However, the possibility of a House majority is falling further and further away from the Democrats as we near election day." )}
+                        "It appears the Dobbs decision and the redistricting process had a great impact on this year's House elections, potentially causing the massive upsets we saw in WA-03, PA-08, and CO-08. However, despite " +
+                        "their performance, it still wasn't enough for the Democrats to hold onto the House. The Republican Party is officially projected to win the U.S. House of Representatives." )}
                 />
             </div>
             <ControlBanner mode={mode} count={mode === 'SENATE' ? senateCount : (mode === 'HOUSE' ? houseCount : govCount)} />

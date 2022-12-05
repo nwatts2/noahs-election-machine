@@ -46,7 +46,7 @@ function ControlBanner ({ mode, count }) {
 
     return (
         <>
-        {(winningClass !== '' && (mode === 'SENATE' || mode === 'HOUSE')) &&
+        {(winningClass !== '' && (mode === 'SENATE' || mode === 'HOUSE' || mode === 'GOVERNOR')) &&
         <div className={`controlBanner ${winningClass}`} ref={container}>
             <h2>{mode} CONTROL: {winningClass.toUpperCase()}</h2>
             <h3>{`The ${winningClass === 'Democratic' ? 'Democrats' : 'Republicans'} are projected to win control of the ${mode === 'SENATE' ? 'U.S. Senate' : (mode === 'HOUSE' ? 'U.S. House of Representatives' : 'most governorships')}`}</h3>
