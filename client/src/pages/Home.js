@@ -157,8 +157,8 @@ const Home = () => {
                         "The Democrats overperformed in most of the nation, with exceptions in states such as Florida and New York. These states seem to be the only places where the red wave ended up manifesting itself, " +
                         "quite possibly saving the Republicans and giving them just enough seats to flip the House.")}
                     
-                    subtext={mode === 'SENATE' ? "Of the three most impactful races, Democrats have already won Pennsylvania and Nevada, and are expected to perform well in the Georgia runoff on December 6th. The GOP would have needed to win two of these three states to take back the Senate, but " + 
-                        "the Democrats were blessed with strong early voting performace and higher-than-average youth turnout. The Democratic Party is officially projected to win the U.S. Senate." :
+                    subtext={mode === 'SENATE' ? "Pennsylvania, Nevada, and Georgia were the three most impactful races going into election night, and the GOP would have needed to win at least two of them to take back the Senate. But, " + 
+                        "the Democrats were blessed with strong early voting performace and higher-than-average youth turnout, which led them to victory in all three states. And so, the Democratic Party is officially projected to win the U.S. Senate." :
                     
                     (mode === 'GOVERNOR' ? "Democrats held on to four of the five most competitive gubernatorial elections, which brings the total to 24-26, with Republicans just barely holding a majority of the governor's mansions. " +
                         "This outcome is owed to Democratic overperformance in Wisconsin and Arizona, especially, where Tony Evers and Katie Hobbs won their races. However, despite these wins for the Democrats, the Republican party is officially projected to win the majority of the nation's governorships. " :
